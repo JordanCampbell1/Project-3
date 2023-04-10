@@ -20,6 +20,8 @@ public class DeleteButtonPanel extends JFrame
         setTitle("Select the respective Checkbox and click Delete to Remove the Tasks");
         setBounds(300, 90, 200, 250);
 
+
+        //sets the datatype for each column
         model = new DefaultTableModel(){
 
             public Class<?> getColumnClass(int column){
@@ -45,6 +47,7 @@ public class DeleteButtonPanel extends JFrame
         table = new JTable(model);
         add(new JScrollPane(table));
 
+        //names the columns
         model.addColumn("Select");
         model.addColumn("Full Name");
         model.addColumn("Task Outline");
