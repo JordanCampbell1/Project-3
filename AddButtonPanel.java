@@ -21,6 +21,7 @@ public class AddButtonPanel extends JFrame
     {
         setTitle("Adding a Task"); 
         setBounds(300, 90, 800, 400);
+        setResizable(false);
 
         //place the textfields and the labels here
 

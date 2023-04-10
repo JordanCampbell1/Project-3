@@ -96,6 +96,7 @@ public class Tasks
         this.ETF = ETF;
     }
 
+    
     public static void addTask(Tasks p)
     {
         ArrofTasks.add(p);

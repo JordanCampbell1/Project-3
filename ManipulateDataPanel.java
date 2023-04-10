@@ -19,6 +19,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
     public ManipulateDataPanel()
     {
         setTitle("Manipulate Data");
+        setBounds(300, 90, 200, 250);
+        setResizable(false);
 
         addTaskButton.addActionListener(new AddTaskButtonListener());
         editTaskButton.addActionListener(new EditTaskButtonListener());
@@ -116,7 +118,7 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
     {
         public void actionPerformed(ActionEvent e)
         {
-
+            EditButtonPanel something = new EditButtonPanel();
         }
     }
 
@@ -124,7 +126,7 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
     {
         public void actionPerformed(ActionEvent e)
         {
-
+            DeleteButtonPanel something = new DeleteButtonPanel();
         }
     }
 
