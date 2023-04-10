@@ -16,12 +16,11 @@ public class AddButtonPanel extends JFrame
 
     private JButton saveButton = new JButton("Save");
 
-    private JPanel p = new JPanel();
-
 
     public AddButtonPanel()
     {
         setTitle("Adding a Task"); 
+        setBounds(300, 90, 800, 400);
 
         //place the textfields and the labels here
 
@@ -35,23 +34,23 @@ public class AddButtonPanel extends JFrame
         startDateTextField = new JTextField(15);
         ETFTextField = new JTextField(5);
 
-        p.add(namelLabel);
-        p.add(nameTextField);
-        p.add(taskOutlinelLabel);
-        p.add(taskOutlineTextField);
-        p.add(startDateLabel);
-        p.add(startDateTextField);
-        p.add(ETFJLabel);
-        p.add(ETFTextField);
+
+        //may need to adjust the size and locations of these components
+        add(namelLabel);
+        add(nameTextField);
+        add(taskOutlinelLabel);
+        add(taskOutlineTextField);
+        add(startDateLabel);
+        add(startDateTextField);
+        add(ETFJLabel);
+        add(ETFTextField);
 
 
         saveButton.addActionListener(new SaveButtonListener());
         //closeButton.addActionListener(new CloseButtonListener()); // i dont think i need a close button since it is default
 
-        p.add(saveButton);
+        add(saveButton);
         //p.add(closeButton);
-
-        add(p);
 
         pack();
 
