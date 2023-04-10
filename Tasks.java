@@ -97,14 +97,16 @@ public class Tasks
     }
 
     
-    public static void addTask(Tasks p)
+    //when we need to edit the arraylist of tasks outside of this class
+
+    public static void addTask(Tasks p) 
     {
         ArrofTasks.add(p);
     }
 
-    public static void deleteTask(Tasks p)
+    public static void deleteTask(int index)
     {
-        ArrofTasks.remove(p);
+        ArrofTasks.remove(index);
     }
    
     
