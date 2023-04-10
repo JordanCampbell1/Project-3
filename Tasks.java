@@ -7,9 +7,9 @@ import java.text.ParseException;
 
 public class Tasks 
 {
-    private static ArrayList<Tasks> ArrofTasks = new ArrayList<Tasks>();
+    public static ArrayList<Tasks> ArrofTasks = new ArrayList<Tasks>();
 
-    private static ArrayList<String> ArrofNames = new ArrayList<String>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
+    public static ArrayList<String> ArrofNames = new ArrayList<String>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
 
     private String name, taskOutline; 
     
@@ -97,17 +97,6 @@ public class Tasks
     }
 
     
-    //when we need to edit the arraylist of tasks outside of this class
-
-    public static void addTask(Tasks p) 
-    {
-        ArrofTasks.add(p);
-    }
-
-    public static void deleteTask(int index)
-    {
-        ArrofTasks.remove(index);
-    }
    
     
 }
