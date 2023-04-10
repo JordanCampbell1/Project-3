@@ -6,11 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JFrame;
+
 
 public class DeleteButtonPanel extends JFrame
 {
-
     private DefaultTableModel model;
     private JTable table;
     private JButton deleteButton;
@@ -79,14 +78,31 @@ public class DeleteButtonPanel extends JFrame
     }
     
 
+    //if the checked data in the table matches the data in the arraylist then it will delete it from the arraylist and close the window
     private class ButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            for(int i = 0; i < table.getRowCount(); i++)
+            for(int row = 0; row < table.getRowCount(); row++)
             {
-                
+                Boolean checked = Boolean.valueOf(table.getValueAt(row, 0).toString());
+
+                if(checked == true)
+                {
+                    for(Tasks t: Tasks.ArrofTasks)
+                    {
+                        if(table.getValueAt(row, 1).toString().matches(t.getName())
+                        && table.getValueAt(row, 2).toString().matches(t.getTaskOutline()))
+                        {
+                            Tasks.ArrofTasks.remove(t); //deletes the task that was checked by the user
+                        }
+                    }
+
+                    
+                }
             }
+
+            setVisible(false); //closes the window
         }
     }
 }
