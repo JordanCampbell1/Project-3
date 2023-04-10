@@ -77,7 +77,7 @@ public class PanelListItems extends JPanel{
         add(progressBar);
     }
 
-    private void showTable() //adds all existing persons', that are in the text file, tasks to the table
+    public void showTable() //adds all existing persons', that are in the text file, tasks to the table
     {
         for(String person : Tasks.ArrofNames)
         {

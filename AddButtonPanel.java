@@ -96,7 +96,7 @@ public class AddButtonPanel extends JFrame
 
                 Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
 
-                Tasks.addTask(P1);
+                Tasks.ArrofTasks.add(P1);
             }
             catch(NumberFormatException error){}
 
