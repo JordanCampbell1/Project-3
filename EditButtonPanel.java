@@ -24,18 +24,27 @@ public class EditButtonPanel extends JFrame implements ItemListener
         userNameDropDown.addItemListener(selectedName);
         String user = (String) userNameDropDown.getSelectedItem();
         userSelected = new JLabel(" no name selected");
+
         //allow for the user to change all types of data access
         changeName = new JLabel("Change Name or leave empty to keep current name: ");
         taskToBeEdited = new JLabel("which task would you like to edit");
         //Combobox for which task to edit and then proceeds to allow for tasktext field entry
         EditButtonPanel selectedTask = new EditButtonPanel();
-        taskDropDown = new JComboBox((ComboBoxModel) Tasks.ArrofTasks);
+
+        //Specific task for that person
+        taskDropDown = new JComboBox();
+        for (Tasks t: Tasks.ArrofTasks){
+            if (t.getName().equals((String) userNameDropDown.getSelectedItem())) {
+                taskDropDown.addItem(t.getTaskOutline());
+            }
+        }
         taskDropDown.addItemListener(selectedTask);
         taskSelected = new JLabel("no task selected");
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
         changeStartDate =  new JLabel("Change Start of task or leave empty to keep current start: ");
         changeEndDate = new JLabel("Change task expected time or leave empty to keep current expectation: ");
 
+        //textfields for options chosen to be changed
         nameTextField = new JTextField(30);
         taskTextField = new JTextField(50);
         startDateTextField = new JTextField(15);
