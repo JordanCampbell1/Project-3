@@ -4,6 +4,10 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PanelListItems extends JPanel{
 
@@ -75,6 +79,45 @@ public class PanelListItems extends JPanel{
         progressBar = new JProgressBar();
 
         add(progressBar);
+    }
+
+    public ArrayList<String> loadNames(String nfile){
+        Scanner nscan = null;
+        ArrayList<String> nlist = new ArrayList<>();
+        try{
+            nscan = new Scanner(new File(nfile));
+            while(nscan.hasNext()){
+                String nextLine = nscan.nextLine();
+                nlist.add(nextLine);
+            }
+            nscan.close();
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return nlist;
+    }
+
+    public ArrayList<Tasks> loadTasks(String tfile){
+        Scanner tscan = null;
+        ArrayList<Tasks> tlist = new ArrayList<>();
+        try{
+            tscan = new Scanner(new File(tfile));
+            while (tscan.hasNext()){
+                String[] nextLine = tscan.nextLine().split(" ");
+                String name = nextLine[0];
+                String taskName = nextLine[1];
+                String startDate = nextLine[2];
+                int estFin = Integer.parseInt(nextLine[3]);
+                Tasks t = new Tasks(name,taskName,startDate,estFin);
+                tlist.add(t);
+            }
+            tscan.close();
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return tlist;
     }
 
     public void showTable() //adds all existing persons', that are in the text file, tasks to the table
