@@ -8,7 +8,7 @@ public class Project3 extends JFrame
     {
         JFrame mainFrame = new JFrame("MainPanel");
 
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         PanelListItems mainPanel = new PanelListItems();
 
