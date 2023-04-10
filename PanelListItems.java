@@ -4,8 +4,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,6 +39,8 @@ public class PanelListItems extends JPanel{
 
         model=new DefaultTableModel(columnNames,0);
         table = new JTable(model);
+        loadNames("names.txt");
+        loadTasks("tasks.txt");
         showTable(); //list of data items to be put in the table in the main panel
 
         table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
@@ -81,26 +82,23 @@ public class PanelListItems extends JPanel{
         add(progressBar);
     }
 
-    public ArrayList<String> loadNames(String nfile){
+    public void loadNames(String nfile){
         Scanner nscan = null;
-        ArrayList<String> nlist = new ArrayList<>();
         try{
             nscan = new Scanner(new File(nfile));
             while(nscan.hasNext()){
                 String nextLine = nscan.nextLine();
-                nlist.add(nextLine);
+                Tasks.ArrofNames.add(nextLine);
             }
             nscan.close();
         }
         catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return nlist;
     }
 
-    public ArrayList<Tasks> loadTasks(String tfile){
+    public void loadTasks(String tfile){
         Scanner tscan = null;
-        ArrayList<Tasks> tlist = new ArrayList<>();
         try{
             tscan = new Scanner(new File(tfile));
             while (tscan.hasNext()){
@@ -110,14 +108,43 @@ public class PanelListItems extends JPanel{
                 String startDate = nextLine[2];
                 int estFin = Integer.parseInt(nextLine[3]);
                 Tasks t = new Tasks(name,taskName,startDate,estFin);
-                tlist.add(t);
+                Tasks.ArrofTasks.add(t);
             }
             tscan.close();
         }
         catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return tlist;
+    }
+
+    public void saveTasks(String tfile){
+
+        try{
+            File dataSaver = new File(tfile);
+            PrintWriter saveTo = new PrintWriter(dataSaver);
+            for (Tasks t : Tasks.ArrofTasks){
+                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime());
+            }
+            saveTo.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void saveNames(String nfile){
+        try{
+            File nameSaver = new File(nfile);
+            PrintWriter saveToName = new PrintWriter(nameSaver);
+            for (String t : Tasks.ArrofNames){
+                saveToName.println(t);
+            }
+            saveToName.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void showTable() //adds all existing persons', that are in the text file, tasks to the table
