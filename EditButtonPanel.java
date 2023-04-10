@@ -56,6 +56,9 @@ public class EditButtonPanel extends JFrame implements ItemListener
         add(endDateTextField);
 
         changeButton.addActionListener(new ChangeButtonListener());
+        add(changeButton);
+        pack();
+        setVisible(true);
     }
 
     private class ChangeButtonListener implements ActionListener{
