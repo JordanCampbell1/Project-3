@@ -97,17 +97,6 @@ public class Tasks
     }
 
     
-    //when we need to edit the arraylist of tasks outside of this class
-
-    public static void addTask(Tasks p) 
-    {
-        ArrofTasks.add(p);
-    }
-
-    public static void deleteTask(int index)
-    {
-        ArrofTasks.remove(index);
-    }
    
     
 }

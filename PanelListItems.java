@@ -29,16 +29,16 @@ public class PanelListItems extends JPanel{
 
         String[] columnNames=  {"First Name",
                 "Last Name", 
-                "Task",
-                "Expected Time to Finish",
+                "Task Outline",
                 "Start Date",
+                "Expected Time to Finish",
                 "End Date"};
 
         model=new DefaultTableModel(columnNames,0);
         table = new JTable(model);
-        showTable(plist); //list of data items
+        showTable(); //list of data items to be put in the table in the main panel
 
-        table.setPreferredScrollableViewportSize(new Dimension(500, plist.size()*15 +50));
+        table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
         table.setFillsViewportHeight(true);
 
         scrollPane = new JScrollPane(table);
@@ -75,6 +75,31 @@ public class PanelListItems extends JPanel{
         progressBar = new JProgressBar();
 
         add(progressBar);
+    }
+
+    public void showTable() //adds all existing persons', that are in the text file, tasks to the table
+    {
+        for(String person : Tasks.ArrofNames)
+        {
+            addToTable(person);
+        }
+    }
+
+    private void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
+    {
+        for(Tasks s : Tasks.ArrofTasks)
+        {
+            if(s.getName().matches(person))
+            {
+                String[] name= s.getName().split(" ");
+                String[] item={name[0], name[1], s.getTaskOutline(), s.getStartDate(), "" + s.getExpectedTime(), s.getEndDate()};
+                model.addRow(item);   
+            }
+
+        }
+
+             
+
     }
 
     //add functionality to these actionlisteners

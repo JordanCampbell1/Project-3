@@ -8,7 +8,9 @@ public class DeleteButtonPanel extends JFrame
 
     public DeleteButtonPanel()
     {
-        //showTable() //method that has to be created in a public class called TasksGUI.java
+
+
+        showTable() //method that has to be created in a public class called TasksGUI.java
     }
     
 }
