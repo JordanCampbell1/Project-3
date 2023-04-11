@@ -96,7 +96,20 @@ public class Tasks
         this.ETF = ETF;
     }
 
-    
+    public static int ratioOfTasksCompleted()
+    {
+        int count = 0;
+
+        for(Tasks t : ArrofTasks)
+        {
+            if(t.get == true)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
    
     
 }

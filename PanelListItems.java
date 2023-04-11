@@ -78,9 +78,34 @@ public class PanelListItems extends JPanel{
 
 
         progressBar = new JProgressBar();
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
 
         add(progressBar);
+
+        fill(Tasks.ratioOfTasksCompleted()); //fill the bar animation based on limit
     }
+
+    // function to dynamically increase progress  
+    private void fill(int limit)  
+    {  
+        int i = 0;  
+        try{  
+            while(i <= 100){  
+                // fill the menu bar to the defined value using   
+                // the setValue( ) method  
+                progressBar.setValue(i) ;  
+   
+                // delay the thread by 100 ms  
+                Thread.sleep(100) ;  
+                // increasing the progress every time by 1%  
+                i += 1 ;  
+            }  
+        }  
+        catch (Exception e) {  
+          System.out.println(e);    
+        }  
+    }  
 
     public void loadNames(String nfile){
         Scanner nscan = null;
