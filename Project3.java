@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-//random comment
+//rnuts
 
 public class Project3 extends JFrame
 {
