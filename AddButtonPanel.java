@@ -94,7 +94,7 @@ public class AddButtonPanel extends JFrame
                 }
 
 
-                Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
+                Tasks P1 = new Tasks(name, taskOutline, startDate, ETF,false);
 
                 Tasks.ArrofTasks.add(P1);
             }

@@ -132,7 +132,8 @@ public class PanelListItems extends JPanel{
                 String taskName = nextLine[1];
                 String startDate = nextLine[2];
                 int estFin = Integer.parseInt(nextLine[3]);
-                Tasks t = new Tasks(name,taskName,startDate,estFin);
+                boolean completed = Boolean.parseBoolean(nextLine[4]);
+                Tasks t = new Tasks(name,taskName,startDate,estFin,completed);
                 Tasks.ArrofTasks.add(t);
             }
             tscan.close();
@@ -148,7 +149,7 @@ public class PanelListItems extends JPanel{
             File dataSaver = new File(tfile);
             PrintWriter saveTo = new PrintWriter(dataSaver);
             for (Tasks t : Tasks.ArrofTasks){
-                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime());
+                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime() + " ");
             }
             saveTo.close();
         }
