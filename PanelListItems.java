@@ -1,11 +1,11 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableColumnModel;
+
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class PanelListItems extends JPanel{
@@ -15,8 +15,6 @@ public class PanelListItems extends JPanel{
     private JCheckBox notifications;
 
     private JProgressBar progressBar;
-
-    private JTable mainTable = new JTable();
 
     private DefaultTableModel model = new DefaultTableModel();
 
