@@ -17,20 +17,19 @@ public class EditButtonPanel extends JFrame implements ItemListener
         setBounds(300, 90, 800, 400);
         setResizable(false);
         //ComboBox for the user-name choice for data to be edited
-        EditButtonPanel selectedName = new EditButtonPanel();
         userToBeEdited = new JLabel("Which user would you like to edit:");
         userNameDropDown = new JComboBox<>();
         for (String t: Tasks.ArrofNames){
                 userNameDropDown.addItem(t);
             }
-        userNameDropDown.addItemListener(selectedName);
+        userNameDropDown.addItemListener(this);
+        userNameDropDown.setBounds(300,90,20 ,10 );
         userSelected = new JLabel(" no name selected");
 
         //allow for the user to change all types of data access
         changeName = new JLabel("Change Name or leave empty to keep current name: ");
         taskToBeEdited = new JLabel("which task would you like to edit");
         //Combobox for which task to edit and then proceeds to allow for tasktext field entry
-        EditButtonPanel selectedTask = new EditButtonPanel();
 
         //Specific task for that person
         taskDropDown = new JComboBox<>();
@@ -39,7 +38,8 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 taskDropDown.addItem(t.getTaskOutline());
             }
         }
-        taskDropDown.addItemListener(selectedTask);
+        taskDropDown.setBounds(300,90,20,10);
+        taskDropDown.addItemListener(this);
         taskSelected = new JLabel("no task selected");
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
         changeStartDate =  new JLabel("Change Start of task or leave empty to keep current start: ");

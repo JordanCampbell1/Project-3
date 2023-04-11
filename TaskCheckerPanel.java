@@ -13,25 +13,23 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         setBounds(300, 90, 800, 200);
         setResizable(false);
         //ComboBox for the user that is completing their task
-        TaskCheckerPanel userSelected = new TaskCheckerPanel();
         pickName = new JLabel("Which user completed a task");
-        nameDropDown = new JComboBox<>();
+        nameDropDown = new JComboBox<String>();
         for (String t: Tasks.ArrofNames){
             nameDropDown.addItem(t);
         }
-        nameDropDown.addItemListener(userSelected);
+        nameDropDown.addItemListener(this);
         selectedUser = new JLabel("no name selected");
 
         //ComboBox to select which task was completed
-        TaskCheckerPanel taskSelected = new TaskCheckerPanel();
         pickTask = new JLabel("Which task was completed");
-        taskDropDown = new JComboBox<>();
+        taskDropDown = new JComboBox<String>();
         for (Tasks t: Tasks.ArrofTasks){
             if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
                 taskDropDown.addItem(t.getTaskOutline());
             }
         }
-        taskDropDown.addItemListener(taskSelected);
+        taskDropDown.addItemListener(this);
         selectedTask = new JLabel("no task selected");
 
         add(pickName);
