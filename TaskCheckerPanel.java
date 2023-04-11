@@ -57,7 +57,6 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
             }
         }
     }
-    //testing my new name.
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == nameDropDown){
