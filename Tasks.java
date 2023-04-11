@@ -12,7 +12,7 @@ public class Tasks
     public static ArrayList<String> ArrofNames = new ArrayList<String>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
 
     private String name, taskOutline;
-    private boolean completed = false;
+    private boolean completed;
     
     private String startDate, endDate; //all dates are stored in the format of MM/DD/YYYY
 
@@ -21,13 +21,25 @@ public class Tasks
 
     public Tasks(){}
 
+    //either need to create another constructor for initializing end
+
+    public Tasks(String name, String taskOutline, String startDate, int ETF)
+    {
+        this.name = name;
+        this.taskOutline = taskOutline;
+        this.startDate = startDate;
+        this.ETF = ETF;
+        setEndDate();
+        this.completed = false;
+    }
+
     public Tasks(String name, String taskOutline, String startDate, int ETF, boolean completed)
     {
         this.name = name;
         this.taskOutline = taskOutline;
         this.startDate = startDate;
-        endDate = "";
         this.ETF = ETF;
+        setEndDate();
         this.completed = completed;
     }
 
@@ -55,8 +67,11 @@ public class Tasks
     {
         return ETF;
     }
-    public boolean getCompleted(){
-        return completed;}
+
+    public boolean getCompleted()
+    {
+        return completed;
+    }
 
     public void setName(String name)
     {
@@ -72,8 +87,10 @@ public class Tasks
     {
         this.startDate = startDate;
     }
-    public void setCompleted(boolean completed){
-           this.completed = completed;
+
+    public void setCompleted(boolean completed)
+    {
+        this.completed = completed;
     }
 
     public void setEndDate() //assumes the start date and the expected time to finish are correctly entered beforehand
@@ -84,7 +101,7 @@ public class Tasks
 
         try
         {  
-           cal.setTime(sdf.parse(startDate));  
+           cal.setTime(sdf.parse(getStartDate()));  
 
         }catch(ParseException e)
         {  
@@ -109,13 +126,13 @@ public class Tasks
 
         for(Tasks t : ArrofTasks)
         {
-            if(t.get == true)
+            if(t.getCompleted() == true)
             {
                 count++;
             }
         }
 
-        return count;
+        return (int) count / ArrofTasks.size(); 
     }
    
     

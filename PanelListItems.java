@@ -78,12 +78,12 @@ public class PanelListItems extends JPanel{
 
 
         progressBar = new JProgressBar();
-        progressBar.setValue(0);
+        progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
 
         add(progressBar);
 
-        fill(Tasks.ratioOfTasksCompleted()); //fill the bar animation based on limit
+        fill(Tasks.ratioOfTasksCompleted()); //fill the progress bar animation based on ratio calculated
     }
 
     // function to dynamically increase progress  
@@ -91,7 +91,7 @@ public class PanelListItems extends JPanel{
     {  
         int i = 0;  
         try{  
-            while(i <= 100){  
+            while(i < limit){  
                 // fill the menu bar to the defined value using   
                 // the setValue( ) method  
                 progressBar.setValue(i) ;  
