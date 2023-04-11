@@ -40,6 +40,9 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         add(selectedTask);
 
         checkButton.addActionListener(new CheckButtonListener());
+        add(checkButton);
+        pack();
+        setVisible(true);
     }
     // iterates through list to find specific task of a specific user then sets that task to completed
     private class CheckButtonListener implements ActionListener{
