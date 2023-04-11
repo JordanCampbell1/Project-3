@@ -218,7 +218,7 @@ public class PanelListItems extends JPanel{
     {
         public void actionPerformed(ActionEvent e)
         {
-            
+            TaskCheckerPanel test = new TaskCheckerPanel();
         }
     }
 
