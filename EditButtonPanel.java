@@ -8,7 +8,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
 {
     private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeStartDate, changeEndDate;
     private JTextField nameTextField, taskTextField, startDateTextField, endDateTextField;
-    private JButton save;
     static JComboBox taskDropDown, userNameDropDown;
     private JButton changeButton = new JButton("Change");
     
@@ -22,7 +21,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
         userToBeEdited = new JLabel("Which user would you like to edit:");
         userNameDropDown = new JComboBox((ComboBoxModel) Tasks.ArrofNames);
         userNameDropDown.addItemListener(selectedName);
-        String user = (String) userNameDropDown.getSelectedItem();
         userSelected = new JLabel(" no name selected");
 
         //allow for the user to change all types of data access
