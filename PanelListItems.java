@@ -33,7 +33,8 @@ public class PanelListItems extends JPanel{
                 "Task Outline",
                 "Start Date",
                 "Expected Time to Finish",
-                "End Date"};
+                "End Date",
+                "Completed"};
 
         model=new DefaultTableModel(columnNames,0);
         table = new JTable(model);
@@ -186,7 +187,14 @@ public class PanelListItems extends JPanel{
             if(s.getName().matches(person))
             {
                 String[] name= s.getName().split(" ");
-                String[] item={name[0], name[1], s.getTaskOutline(), s.getStartDate(), "" + s.getExpectedTime(), s.getEndDate()};
+
+                String complete = "No";
+
+                if(s.getCompleted() == true){
+                    complete = "Yes";
+                }
+
+                String[] item={name[0], name[1], s.getTaskOutline(), s.getStartDate(), "" + s.getExpectedTime(), s.getEndDate(), complete};
                 model.addRow(item);   
             }
 
