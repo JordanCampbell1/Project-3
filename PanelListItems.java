@@ -96,9 +96,9 @@ public class PanelListItems extends JPanel{
                 progressBar.setValue(i) ;  
    
                 // delay the thread by 100 ms  
-                Thread.sleep(100) ;  
+                Thread.sleep(100);  
                 // increasing the progress every time by 1%  
-                i += 1 ;  
+                i += 1 ;  //i++
             }  
         }  
         catch (Exception e) {  
@@ -226,7 +226,7 @@ public class PanelListItems extends JPanel{
     {
         public void actionPerformed(ActionEvent e)
         {
-            
+            SortTimePanel random = new SortTimePanel();
         }
     }
 
@@ -234,7 +234,7 @@ public class PanelListItems extends JPanel{
     {
         public void actionPerformed(ActionEvent e)
         {
-            
+            SortTaskCompletedPanel random = new SortTaskCompletedPanel();
         }
     }
 
@@ -242,7 +242,7 @@ public class PanelListItems extends JPanel{
     {
         public void actionPerformed(ActionEvent e)
         {
-            
+            NotificationPanel random = new NotificationPanel();
         }
     }
 }
