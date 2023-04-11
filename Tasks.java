@@ -11,22 +11,24 @@ public class Tasks
 
     public static ArrayList<String> ArrofNames = new ArrayList<String>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
 
-    private String name, taskOutline; 
+    private String name, taskOutline;
+    private boolean completed = false;
     
-    private String startDate, endDate; //all dates are stored in the format of MM/DD/YYYY 
+    private String startDate, endDate; //all dates are stored in the format of MM/DD/YYYY
 
     private int ETF; //Expected time to finish the tasks in days
 
 
     public Tasks(){}
 
-    public Tasks(String name, String taskOutline, String startDate, int ETF)
+    public Tasks(String name, String taskOutline, String startDate, int ETF, boolean completed)
     {
         this.name = name;
         this.taskOutline = taskOutline;
         this.startDate = startDate;
         endDate = "";
         this.ETF = ETF;
+        this.completed = completed;
     }
 
     public String getName()
@@ -53,6 +55,8 @@ public class Tasks
     {
         return ETF;
     }
+    public boolean getCompleted(){
+        return completed;}
 
     public void setName(String name)
     {
@@ -67,6 +71,9 @@ public class Tasks
     public void setStartDate(String startDate)
     {
         this.startDate = startDate;
+    }
+    public void setCompleted(boolean completed){
+           this.completed = completed;
     }
 
     public void setEndDate() //assumes the start date and the expected time to finish are correctly entered beforehand
