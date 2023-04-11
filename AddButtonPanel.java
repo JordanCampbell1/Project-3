@@ -93,15 +93,28 @@ public class AddButtonPanel extends JFrame
     
                 int ETF = 0;
     
-                if(Integer.parseInt(startDateTextField.getText()) <= 0)
+                if(Integer.parseInt(ETFTextField.getText()) > 0)
                 {
-                    ETF = Integer.parseInt(startDateTextField.getText());
+                    ETF = Integer.parseInt(ETFTextField.getText());
                 }
 
 
-                Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
+                //if data is entered then it will be added to the arraylist
+                if((!(nameTextField.getText().equals("")))&&
+                (!(taskOutlineTextField.getText().equals("")))&&
+                (!(startDateTextField.getText().equals("")))&&
+                (Integer.parseInt(ETFTextField.getText()) > 0))
+                {
+                    Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
 
-                Tasks.ArrofTasks.add(P1);
+                    Tasks.ArrofTasks.add(P1);
+                }
+                else{
+                    PopUpPanel t = new PopUpPanel();
+                }
+
+
+                
             }
             catch(NumberFormatException error){}
 
