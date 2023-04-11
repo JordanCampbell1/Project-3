@@ -27,7 +27,7 @@ public class AddButtonPanel extends JFrame
         namelLabel = new JLabel("Full Name");
         taskOutlinelLabel= new JLabel("Task Outline");
         startDateLabel = new JLabel("Start Date");
-        ETFJLabel = new JLabel("Estimated Time to Finish");
+        ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
 
         nameTextField = new JTextField(30);
         taskOutlineTextField = new JTextField(50);

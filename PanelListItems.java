@@ -147,7 +147,7 @@ public class PanelListItems extends JPanel{
             File dataSaver = new File(tfile);
             PrintWriter saveTo = new PrintWriter(dataSaver);
             for (Tasks t : Tasks.ArrofTasks){
-                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime() + " ");
+                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime() + " " + t.getCompleted());
             }
             saveTo.close();
         }
