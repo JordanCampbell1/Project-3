@@ -78,7 +78,7 @@ public class DeleteButtonPanel extends JFrame
         deleteButton = new JButton("Delete"); //maybe add a confirm delete button with a yes or no functionality
         deleteButton.addActionListener(new ButtonListener());
 
-        //deleteButton.setBounds(); //for further accuracy of where it is placeed and the size of it
+        //deleteButton.setBounds(); //for further accuracy of where it is placed and the size of it
         add(deleteButton);
         
 
