@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
@@ -15,6 +16,8 @@ public class AddButtonPanel extends JFrame
 
     private JButton saveButton = new JButton("Save");
 
+    private JPanel p = new JPanel();
+
 
     public AddButtonPanel()
     {
@@ -22,7 +25,8 @@ public class AddButtonPanel extends JFrame
         setBounds(300, 90, 800, 400);
         setResizable(false);
 
-        //place the textfields and the labels here
+        p.setLayout(null); //to accurately set the componenets on the panel
+
 
         namelLabel = new JLabel("Full Name");
         taskOutlinelLabel= new JLabel("Task Outline");
@@ -36,21 +40,23 @@ public class AddButtonPanel extends JFrame
 
 
         //may need to adjust the size and locations of these components
-        add(namelLabel);
-        add(nameTextField);
-        add(taskOutlinelLabel);
-        add(taskOutlineTextField);
-        add(startDateLabel);
-        add(startDateTextField);
-        add(ETFJLabel);
-        add(ETFTextField);
+        p.add(namelLabel);
+        p.add(nameTextField);
+        p.add(taskOutlinelLabel);
+        p.add(taskOutlineTextField);
+        p.add(startDateLabel);
+        p.add(startDateTextField);
+        p.add(ETFJLabel);
+        p.add(ETFTextField);
 
 
         saveButton.addActionListener(new SaveButtonListener());
         //closeButton.addActionListener(new CloseButtonListener()); // i dont think i need a close button since it is default
 
-        add(saveButton);
+        p.add(saveButton);
         //p.add(closeButton);
+
+        getContentPane().add(p);
 
         pack();
 
@@ -60,7 +66,7 @@ public class AddButtonPanel extends JFrame
     
     private class SaveButtonListener implements ActionListener{
 
-        public void actionPerformed(ActionEvent e) //while loop to check half-filled tasks as to prevent half-filled info to go into the database
+        public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)
         {
             try
             {
