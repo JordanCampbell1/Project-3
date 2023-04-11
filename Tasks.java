@@ -21,8 +21,6 @@ public class Tasks
 
     public Tasks(){}
 
-    //either need to create another constructor for initializing end
-
     public Tasks(String name, String taskOutline, String startDate, int ETF)
     {
         this.name = name;
