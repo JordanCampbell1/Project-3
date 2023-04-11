@@ -4,6 +4,9 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PanelListItems extends JPanel{
 
@@ -36,6 +39,8 @@ public class PanelListItems extends JPanel{
 
         model=new DefaultTableModel(columnNames,0);
         table = new JTable(model);
+        loadNames("names.txt");
+        loadTasks("tasks.txt");
         showTable(); //list of data items to be put in the table in the main panel
 
         table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
@@ -75,6 +80,71 @@ public class PanelListItems extends JPanel{
         progressBar = new JProgressBar();
 
         add(progressBar);
+    }
+
+    public void loadNames(String nfile){
+        Scanner nscan = null;
+        try{
+            nscan = new Scanner(new File(nfile));
+            while(nscan.hasNext()){
+                String nextLine = nscan.nextLine();
+                Tasks.ArrofNames.add(nextLine);
+            }
+            nscan.close();
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadTasks(String tfile){
+        Scanner tscan = null;
+        try{
+            tscan = new Scanner(new File(tfile));
+            while (tscan.hasNext()){
+                String[] nextLine = tscan.nextLine().split(" ");
+                String name = nextLine[0];
+                String taskName = nextLine[1];
+                String startDate = nextLine[2];
+                int estFin = Integer.parseInt(nextLine[3]);
+                Tasks t = new Tasks(name,taskName,startDate,estFin);
+                Tasks.ArrofTasks.add(t);
+            }
+            tscan.close();
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveTasks(String tfile){
+
+        try{
+            File dataSaver = new File(tfile);
+            PrintWriter saveTo = new PrintWriter(dataSaver);
+            for (Tasks t : Tasks.ArrofTasks){
+                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime());
+            }
+            saveTo.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void saveNames(String nfile){
+        try{
+            File nameSaver = new File(nfile);
+            PrintWriter saveToName = new PrintWriter(nameSaver);
+            for (String t : Tasks.ArrofNames){
+                saveToName.println(t);
+            }
+            saveToName.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void showTable() //adds all existing persons', that are in the text file, tasks to the table
