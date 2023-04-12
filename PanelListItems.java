@@ -186,7 +186,7 @@ public class PanelListItems extends JPanel{
         {
             if(s.getName().matches(person))
             {
-                String[] name= s.getName().split(" ");
+                String[] name= s.getName().split(",");
 
                 String complete = "No";
 
