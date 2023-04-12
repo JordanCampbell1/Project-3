@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -11,21 +14,22 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
     private JButton checkButton;
     public TaskCheckerPanel(){
         setTitle("Complete Tasks");
-        taskPanel.setSize(500,200);
+        taskPanel.setSize(500,300);
+        taskPanel.setLayout(new GridLayout(8,1,1,3));
         setResizable(false);
         setLayout(null);
 
         //ComboBox for the user that is completing their task
-        pickName = new JLabel("Which user completed a task");
+        pickName = new JLabel("Which user completed a task:");
         nameDropDown = new JComboBox<String>();
         for (String t: Tasks.ArrofNames){
             nameDropDown.addItem(t);
         }
         nameDropDown.addItemListener(this);
-        selectedUser = new JLabel(nameDropDown.getSelectedItem() + " selected");
+        selectedUser = new JLabel(nameDropDown.getSelectedItem() + " selected",JLabel.CENTER);
 
         //ComboBox to select which task was completed
-        pickTask = new JLabel("Which task was completed");
+        pickTask = new JLabel("Which task was completed:");
         taskDropDown = new JComboBox<String>();
         for (Tasks t: Tasks.ArrofTasks){
             if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
@@ -33,7 +37,7 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
             }
         }
         taskDropDown.addItemListener(this);
-        selectedTask = new JLabel(taskDropDown.getSelectedItem() + " selected");
+        selectedTask = new JLabel(taskDropDown.getSelectedItem() + " selected",JLabel.CENTER);
 
         taskPanel.add(pickName);
         taskPanel.add(nameDropDown);

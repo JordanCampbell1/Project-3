@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,9 +17,10 @@ public class EditButtonPanel extends JFrame implements ItemListener
     public EditButtonPanel()
     {
         this.setTitle("Edit Data");
-        editPanel.setSize(480,300);
+        editPanel.setSize(480,550);
         this.setLayout(null);
         this.setResizable(false);
+        editPanel.setLayout(new GridLayout(16,1,1,5));
         
         
         //ComboBox for the user-name choice for data to be edited
@@ -27,7 +30,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 userNameDropDown.addItem(t);
             }
         userNameDropDown.addItemListener(this);
-        userSelected = new JLabel(userNameDropDown.getSelectedItem() +" selected");
+        userSelected = new JLabel(userNameDropDown.getSelectedItem() +" selected", JLabel.CENTER);
 
         //allow for the user to change all types of data access
         changeName = new JLabel("Change Name or leave empty to keep current name: ");
@@ -42,7 +45,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
             }
         }
         taskDropDown.addItemListener(this);
-        taskSelected = new JLabel(taskDropDown.getSelectedItem() +" selected");
+        taskSelected = new JLabel(taskDropDown.getSelectedItem() +" selected",JLabel.CENTER);
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
         changeStartDate =  new JLabel("Change Start of task or leave empty to keep current start: ");
         changeEndDate = new JLabel("Change task expected time or leave empty to keep current expectation: ");
@@ -60,6 +63,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         editPanel.add(nameTextField);
         editPanel.add(taskToBeEdited);
         editPanel.add(taskDropDown);
+        editPanel.add(taskSelected);
         editPanel.add(changeTasks);
         editPanel.add(taskTextField);
         editPanel.add(changeStartDate);
