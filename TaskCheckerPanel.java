@@ -11,7 +11,9 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
     private JButton checkButton;
     public TaskCheckerPanel(){
         setTitle("Complete Tasks");
-        setBounds(300, 90, 800, 200);
+        taskPanel.setLayout(null);
+
+        setBounds(300, 90, 500, 1000);
         setResizable(false);
         //ComboBox for the user that is completing their task
         pickName = new JLabel("Which user completed a task");
