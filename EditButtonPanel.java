@@ -126,6 +126,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
             for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
                 PanelListItems.model.removeRow(i);
             PanelListItems.showTable();
+            dispose();
         }
     }
 
