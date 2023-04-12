@@ -117,11 +117,11 @@ public class PanelListItems extends JPanel{
             nscan.close();
         }
         catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
     }
 
-    public void loadTasks(String tfile){//may need a function to create a file if file is not found
+    public void loadTasks(String tfile){
         Scanner tscan = null;
         try{
             tscan = new Scanner(new File(tfile));
@@ -138,7 +138,7 @@ public class PanelListItems extends JPanel{
             tscan.close();
         }
         catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
     }
 
@@ -186,7 +186,7 @@ public class PanelListItems extends JPanel{
         {
             if(s.getName().matches(person))
             {
-                String[] name= s.getName().split(",");
+                String[] name= s.getName().split(" ");
 
                 String complete = "No";
 
