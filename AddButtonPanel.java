@@ -22,11 +22,10 @@ public class AddButtonPanel extends JFrame
     public AddButtonPanel()
     {
         setTitle("Adding a Task"); 
-        setSize(750,750);
-        p.setBounds(0, 0, 400, 400);
-        setResizable(false);
-        setLayout(null);
-        p.setLayout(null); //to accurately set the componenets on the panel
+        setBounds(300, 90, 600, 700);
+        //setResizable(false);
+
+        //p.setLayout(null); //to accurately set the componenets on the panel
 
 
         namelLabel = new JLabel("Full Name");
@@ -79,7 +78,9 @@ public class AddButtonPanel extends JFrame
 
                 if(!(nameTextField.getText().equals("")))
                 {
-                    name = nameTextField.getText();
+                    String [] arrofname = nameTextField.getText().split(" ");
+
+                    name = arrofname[0] + "," + arrofname[1]; //allows save task method to work properly since the format for name is "FIRSTNAME,LASTNAME"
                 }
     
                 String taskOutline = "";
@@ -105,6 +106,7 @@ public class AddButtonPanel extends JFrame
 
 
                 //if data is entered then it will be added to the arraylist
+                //maybe a more efficient of way of doing this
                 if((!(nameTextField.getText().equals("")))&&
                 (!(taskOutlineTextField.getText().equals("")))&&
                 (!(startDateTextField.getText().equals("")))&&
