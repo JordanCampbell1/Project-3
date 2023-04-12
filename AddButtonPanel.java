@@ -22,19 +22,24 @@ public class AddButtonPanel extends JFrame
     public AddButtonPanel()
     {
         setTitle("Adding a Task"); 
-        setBounds(300, 90, 800, 400);
+        setSize(750,750);
+        p.setBounds(0, 0, 400, 400);
         setResizable(false);
-
+        setLayout(null);
         p.setLayout(null); //to accurately set the componenets on the panel
 
 
         namelLabel = new JLabel("Full Name");
+        namelLabel.setBounds(0,0,75,75);
         taskOutlinelLabel= new JLabel("Task Outline");
+        taskOutlinelLabel.setBounds(0,150,75,75);
         startDateLabel = new JLabel("Start Date");
         ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
 
         nameTextField = new JTextField(30);
+        nameTextField.setBounds(0,75,75,75);
         taskOutlineTextField = new JTextField(50);
+        taskOutlineTextField.setBounds(0,225,75,75);
         startDateTextField = new JTextField(15);
         ETFTextField = new JTextField(5);
 
