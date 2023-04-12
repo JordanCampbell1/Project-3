@@ -11,8 +11,10 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
     private JButton checkButton;
     public TaskCheckerPanel(){
         setTitle("Complete Tasks");
-        setBounds(300, 90, 800, 200);
+        taskPanel.setSize(500,200);
         setResizable(false);
+        setLayout(null);
+
         //ComboBox for the user that is completing their task
         pickName = new JLabel("Which user completed a task");
         nameDropDown = new JComboBox<String>();
@@ -20,7 +22,7 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
             nameDropDown.addItem(t);
         }
         nameDropDown.addItemListener(this);
-        selectedUser = new JLabel("no name selected");
+        selectedUser = new JLabel(nameDropDown.getSelectedItem() + " selected");
 
         //ComboBox to select which task was completed
         pickTask = new JLabel("Which task was completed");
@@ -31,7 +33,7 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
             }
         }
         taskDropDown.addItemListener(this);
-        selectedTask = new JLabel("no task selected");
+        selectedTask = new JLabel(taskDropDown.getSelectedItem() + " selected");
 
         taskPanel.add(pickName);
         taskPanel.add(nameDropDown);
@@ -43,6 +45,7 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         checkButton.addActionListener(new CheckButtonListener());
         taskPanel.add(checkButton);
         add(taskPanel);
+        setMinimumSize(taskPanel.getSize());
         pack();
         setVisible(true);
     }
@@ -55,12 +58,25 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
                     if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()))
                         t.setCompleted(true);
             }
+            PanelListItems.saveNames("names.txt");
+            PanelListItems.saveTasks("tasks.txt");
+            PanelListItems.table.getRowCount();
+            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                PanelListItems.model.removeRow(i);
+            PanelListItems.showTable();
+            dispose();
         }
     }
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == nameDropDown){
             selectedUser.setText(nameDropDown.getSelectedItem() + " selected");
+            taskDropDown.removeAllItems();;
+            for (Tasks t: Tasks.ArrofTasks){
+                if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
+                    taskDropDown.addItem(t.getTaskOutline());
+                }
+            }
         }
         if (e.getSource() == taskDropDown){
             selectedTask.setText(taskDropDown.getSelectedItem() + " selected");

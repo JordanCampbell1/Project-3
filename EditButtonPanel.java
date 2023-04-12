@@ -14,9 +14,12 @@ public class EditButtonPanel extends JFrame implements ItemListener
     
     public EditButtonPanel()
     {
-        setTitle("Edit Data");
-        setBounds(300, 90, 800, 400);
-        setResizable(false);
+        this.setTitle("Edit Data");
+        editPanel.setSize(480,300);
+        this.setLayout(null);
+        this.setResizable(false);
+        
+        
         //ComboBox for the user-name choice for data to be edited
         userToBeEdited = new JLabel("Which user would you like to edit:");
         userNameDropDown = new JComboBox<>();
@@ -24,7 +27,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 userNameDropDown.addItem(t);
             }
         userNameDropDown.addItemListener(this);
-        userSelected = new JLabel(" no name selected");
+        userSelected = new JLabel(userNameDropDown.getSelectedItem() +" selected");
 
         //allow for the user to change all types of data access
         changeName = new JLabel("Change Name or leave empty to keep current name: ");
@@ -38,16 +41,15 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 taskDropDown.addItem(t.getTaskOutline());
             }
         }
-        taskDropDown.setBounds(300,90,20,10);
         taskDropDown.addItemListener(this);
-        taskSelected = new JLabel("no task selected");
+        taskSelected = new JLabel(taskDropDown.getSelectedItem() +" selected");
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
         changeStartDate =  new JLabel("Change Start of task or leave empty to keep current start: ");
         changeEndDate = new JLabel("Change task expected time or leave empty to keep current expectation: ");
 
         //textfields for options chosen to be changed
         nameTextField = new JTextField(30);
-        taskTextField = new JTextField(50);
+        taskTextField = new JTextField(30);
         startDateTextField = new JTextField(15);
         endDateTextField = new JTextField(15);
 
@@ -67,15 +69,18 @@ public class EditButtonPanel extends JFrame implements ItemListener
         changeButton = new JButton("Change");
         changeButton.addActionListener(new ChangeButtonListener());
         editPanel.add(changeButton);
-        pack();
-        setVisible(true);
+        getContentPane().add(editPanel);
+        this.setMinimumSize(editPanel.getSize());
+        this.pack();
+        this.setVisible(true);
     }
 
     private class ChangeButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try
             {
-                if(!(nameTextField.getText().equals("")))
+                if (e.getSource() == changeButton){
+                    if(!(nameTextField.getText().equals("")))
                 {
                     for (Tasks t: Tasks.ArrofTasks){
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
@@ -110,16 +115,33 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                 t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
                     }
                 }
+                
+            }
 
             }
             catch(NumberFormatException error){}
+            PanelListItems.saveNames("names.txt");
+            PanelListItems.saveTasks("tasks.txt");
+            PanelListItems.table.getRowCount();
+            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                PanelListItems.model.removeRow(i);
+            PanelListItems.showTable();
+            dispose();
         }
     }
 
     public void itemStateChanged(ItemEvent e) {
+        userSelected.setText(userNameDropDown.getSelectedItem() + " selected");
         if (e.getSource() == userNameDropDown){
             userSelected.setText(userNameDropDown.getSelectedItem() + " selected");
+            taskDropDown.removeAllItems();;
+            for (Tasks t: Tasks.ArrofTasks){
+                if (t.getName().equals((String) userNameDropDown.getSelectedItem())) {
+                    taskDropDown.addItem(t.getTaskOutline());
+                }
+            }
         }
+        taskSelected.setText(taskDropDown.getSelectedItem() + " selected");
         if (e.getSource() == taskDropDown){
             taskSelected.setText(taskDropDown.getSelectedItem() + " selected");
         }

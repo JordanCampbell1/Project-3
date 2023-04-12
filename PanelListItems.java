@@ -16,9 +16,9 @@ public class PanelListItems extends JPanel{
 
     private JProgressBar progressBar;
 
-    private DefaultTableModel model = new DefaultTableModel();
+    public static DefaultTableModel model = new DefaultTableModel();
 
-    private JTable table;
+    public static JTable table;
 
     private JScrollPane scrollPane;
     
@@ -142,7 +142,7 @@ public class PanelListItems extends JPanel{
         }
     }
 
-    public void saveTasks(String tfile){
+    public static void saveTasks(String tfile){
 
         try{
             File dataSaver = new File(tfile);
@@ -158,7 +158,7 @@ public class PanelListItems extends JPanel{
 
     }
 
-    public void saveNames(String nfile){
+    public static void saveNames(String nfile){
         try{
             File nameSaver = new File(nfile);
             PrintWriter saveToName = new PrintWriter(nameSaver);
@@ -172,7 +172,7 @@ public class PanelListItems extends JPanel{
         }
     }
 
-    public void showTable() //adds all existing persons', that are in the text file, tasks to the table
+    public static void showTable() //adds all existing persons', that are in the text file, tasks to the table
     {
         for(String person : Tasks.ArrofNames)
         {
@@ -180,7 +180,7 @@ public class PanelListItems extends JPanel{
         }
     }
 
-    private void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
+    private static void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
     {
         for(Tasks s : Tasks.ArrofTasks)
         {
