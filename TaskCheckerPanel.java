@@ -5,7 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class TaskCheckerPanel extends JFrame implements ItemListener {
-    private JPanel taskPanel;
+    private JPanel taskPanel = new JPanel();
     private JLabel pickName,pickTask,selectedUser,selectedTask;
     private JComboBox<String> nameDropDown, taskDropDown;
     private JButton checkButton;
