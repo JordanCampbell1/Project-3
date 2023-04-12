@@ -100,6 +100,7 @@ public class AddButtonPanel extends JFrame
 
 
                 //if data is entered then it will be added to the arraylist
+                //maybe a more efficient of way of doing this
                 if((!(nameTextField.getText().equals("")))&&
                 (!(taskOutlineTextField.getText().equals("")))&&
                 (!(startDateTextField.getText().equals("")))&&
