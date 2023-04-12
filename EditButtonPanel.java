@@ -6,10 +6,11 @@ import java.awt.event.ItemListener;
 
 public class EditButtonPanel extends JFrame implements ItemListener
 {
+    private JPanel editPanel= new JPanel();
     private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeStartDate, changeEndDate;
     private JTextField nameTextField, taskTextField, startDateTextField, endDateTextField;
     JComboBox<String> taskDropDown, userNameDropDown;
-    private JButton changeButton = new JButton("Change");
+    private JButton changeButton;
     
     public EditButtonPanel()
     {
@@ -23,7 +24,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 userNameDropDown.addItem(t);
             }
         userNameDropDown.addItemListener(this);
-        userNameDropDown.setBounds(300,90,20 ,10 );
         userSelected = new JLabel(" no name selected");
 
         //allow for the user to change all types of data access
@@ -51,22 +51,22 @@ public class EditButtonPanel extends JFrame implements ItemListener
         startDateTextField = new JTextField(15);
         endDateTextField = new JTextField(15);
 
-        add(userToBeEdited);
-        add(userNameDropDown);
-        add(userSelected);
-        add(changeName);
-        add(nameTextField);
-        add(taskToBeEdited);
-        add(taskDropDown);
-        add(changeTasks);
-        add(taskTextField);
-        add(changeStartDate);
-        add(startDateTextField);
-        add(changeEndDate);
-        add(endDateTextField);
-
+        editPanel.add(userToBeEdited);
+        editPanel.add(userNameDropDown);
+        editPanel.add(userSelected);
+        editPanel.add(changeName);
+        editPanel.add(nameTextField);
+        editPanel.add(taskToBeEdited);
+        editPanel.add(taskDropDown);
+        editPanel.add(changeTasks);
+        editPanel.add(taskTextField);
+        editPanel.add(changeStartDate);
+        editPanel.add(startDateTextField);
+        editPanel.add(changeEndDate);
+        editPanel.add(endDateTextField);
+        changeButton = new JButton("Change");
         changeButton.addActionListener(new ChangeButtonListener());
-        add(changeButton);
+        editPanel.add(changeButton);
         pack();
         setVisible(true);
     }
