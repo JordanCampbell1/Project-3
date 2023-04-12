@@ -109,7 +109,7 @@ public class AddButtonPanel extends JFrame
 
                     Tasks.ArrofTasks.add(P1);
                 }
-                else{
+                else{//otherwise the pop up panel is shown
                     PopUpPanel t = new PopUpPanel();
                 }
 
