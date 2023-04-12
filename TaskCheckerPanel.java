@@ -39,7 +39,7 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         taskPanel.add(pickTask);
         taskPanel.add(taskDropDown);
         taskPanel.add(selectedTask);
-        checkButton = new JButton();
+        checkButton = new JButton("Check");
         checkButton.addActionListener(new CheckButtonListener());
         taskPanel.add(checkButton);
         add(taskPanel);
