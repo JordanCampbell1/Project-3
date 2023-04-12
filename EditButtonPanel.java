@@ -15,7 +15,9 @@ public class EditButtonPanel extends JFrame implements ItemListener
     public EditButtonPanel()
     {
         setTitle("Edit Data");
-        setBounds(300, 90, 800, 400);
+        editPanel.setLayout(null);
+        
+        setBounds(300, 90, 500, 1000);
         setResizable(false);
         //ComboBox for the user-name choice for data to be edited
         userToBeEdited = new JLabel("Which user would you like to edit:");
@@ -38,7 +40,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 taskDropDown.addItem(t.getTaskOutline());
             }
         }
-        taskDropDown.setBounds(300,90,20,10);
         taskDropDown.addItemListener(this);
         taskSelected = new JLabel("no task selected");
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
@@ -67,6 +68,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         changeButton = new JButton("Change");
         changeButton.addActionListener(new ChangeButtonListener());
         editPanel.add(changeButton);
+        add(editPanel);
         pack();
         setVisible(true);
     }
