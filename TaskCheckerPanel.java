@@ -5,6 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class TaskCheckerPanel extends JFrame implements ItemListener {
+    private JPanel taskPanel;
     private JLabel pickName,pickTask,selectedUser,selectedTask;
     private JComboBox<String> nameDropDown, taskDropDown;
     private JButton checkButton;
@@ -32,15 +33,16 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         taskDropDown.addItemListener(this);
         selectedTask = new JLabel("no task selected");
 
-        add(pickName);
-        add(nameDropDown);
-        add(selectedUser);
-        add(pickTask);
-        add(taskDropDown);
-        add(selectedTask);
+        taskPanel.add(pickName);
+        taskPanel.add(nameDropDown);
+        taskPanel.add(selectedUser);
+        taskPanel.add(pickTask);
+        taskPanel.add(taskDropDown);
+        taskPanel.add(selectedTask);
         checkButton = new JButton();
         checkButton.addActionListener(new CheckButtonListener());
-        add(checkButton);
+        taskPanel.add(checkButton);
+        add(taskPanel);
         pack();
         setVisible(true);
     }
