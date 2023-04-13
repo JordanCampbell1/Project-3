@@ -115,6 +115,13 @@ public class AddButtonPanel extends JFrame
                     Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
 
                     Tasks.ArrofTasks.add(P1);
+                    Tasks.ArrofNames.add(name);
+                    PanelListItems.saveNames("names.txt");
+                    PanelListItems.saveTasks("tasks.txt");
+                    for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                        PanelListItems.model.removeRow(i);
+                    PanelListItems.showTable();
+                    dispose();
                 }
                 else{//otherwise the pop up panel is shown
                     PopUpPanel t = new PopUpPanel();
