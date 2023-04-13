@@ -5,10 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PanelListItems extends JPanel{
+public class PanelListItems extends JPanel implements ItemListener{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
@@ -21,12 +21,17 @@ public class PanelListItems extends JPanel{
     public static JTable table;
 
     private JScrollPane scrollPane;
+
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(),notiPanel = new JPanel();
+
+    private JComboBox<String> nameDropDown;
     
 
     public PanelListItems()
     {
-        super(new GridLayout(2,1)); //establishes a new layout for the GUI to use
+        super(null); //establishes a new layout for the GUI to use
 
+        setBounds(0,0,650,700);
 
         String[] columnNames=  {"First Name",
                 "Last Name", 
@@ -44,10 +49,10 @@ public class PanelListItems extends JPanel{
 
         table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
         table.setFillsViewportHeight(true);
-
+        tablePanel.setLayout(new GridLayout());
         scrollPane = new JScrollPane(table);
 
-        add(scrollPane);
+        tablePanel.add(scrollPane);
 
         //the above deals with list of data items in a table
 
@@ -61,36 +66,55 @@ public class PanelListItems extends JPanel{
         TaskChecker.addActionListener(new TaskCheckerListener());
         sortTimeTaken.addActionListener(new SortTimeTakenListener());
         sortTaskCompleted.addActionListener(new SortTaskCompletedListener());
+        buttonPanel.setLayout(new GridLayout(2,2));
+        buttonPanel.add(manipulateData);
+        buttonPanel.add(TaskChecker);
+        buttonPanel.add(sortTimeTaken);
+        buttonPanel.add(sortTaskCompleted);
 
-        add(manipulateData);
-        add(TaskChecker);
-        add(sortTimeTaken);
-        add(sortTaskCompleted);
 
-
-    
-        notifications = new JCheckBox("Enable Notifications for Overdue Tasks");
+        taskedPanel.setLayout(new GridLayout(2,1));
+        notifications = new JCheckBox("Enable Notifications");
 
         notifications.addActionListener(new NotificationsListener());
+        notiPanel.setLayout(new GridLayout());
+        notiPanel.add(notifications);
 
-        add(notifications);
-
-
+        nameDropDown = new JComboBox<>();
+        for (String t: Tasks.ArrofNames){
+            nameDropDown.addItem(t);
+        }
+        nameDropDown.addItemListener(this);
+        //taskedPanel.add(nameDropDown);
+        add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
 
+        //taskedPanel.add(progressBar);
         add(progressBar);
+        tablePanel.setBounds(0,0, 650, 500);
+        buttonPanel.setBounds(0,500,650,100);
+        notiPanel.setBounds(0,600,225,100);
+        progressBar.setBounds(375,635, 225, 25);
+        nameDropDown.setBounds(425,605,150,25);
+        //taskedPanel.setBounds(225,600,425,100);
 
-        fill(Tasks.ratioOfTasksCompleted()); //fill the progress bar animation based on ratio calculated
+        add(tablePanel);
+        add(buttonPanel);
+        add(notiPanel);
+        //add(taskedPanel);
+        
+
     }
 
     // function to dynamically increase progress  
-    private void fill(int limit)  
+    private void fill(int completes,int limit)  
     {  
-        int i = 0;  
+        int i = 0;
+        progressBar.setMaximum(limit); 
         try{  
-            while(i < limit){  
+            while(i <= completes){  
                 // fill the menu bar to the defined value using   
                 // the setValue( ) method  
                 progressBar.setValue(i) ;  
@@ -107,8 +131,8 @@ public class PanelListItems extends JPanel{
     }  
 
     public void loadNames(String nfile){
-        Scanner nscan = null;
         try{
+            Scanner nscan = null;
             nscan = new Scanner(new File(nfile));
             while(nscan.hasNext()){
                 String nextLine = nscan.nextLine();
@@ -116,9 +140,7 @@ public class PanelListItems extends JPanel{
             }
             nscan.close();
         }
-        catch (FileNotFoundException e) {
-            //throw new RuntimeException(e);
-        }
+        catch(IOException ioe){}
     }
 
     public void loadTasks(String tfile){
@@ -137,9 +159,7 @@ public class PanelListItems extends JPanel{
             }
             tscan.close();
         }
-        catch (FileNotFoundException e) {
-            //throw new RuntimeException(e);
-        }
+        catch (IOException e) {}
     }
 
     public static void saveTasks(String tfile){
@@ -152,9 +172,7 @@ public class PanelListItems extends JPanel{
             }
             saveTo.close();
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        catch (IOException e) {}
 
     }
 
@@ -167,9 +185,7 @@ public class PanelListItems extends JPanel{
             }
             saveToName.close();
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        catch (IOException e) {}
     }
 
     public static void showTable() //adds all existing persons', that are in the text file, tasks to the table
@@ -244,5 +260,23 @@ public class PanelListItems extends JPanel{
         {
             NotificationPanel random = new NotificationPanel();
         }
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        ArrayList<Tasks> numofTask = new ArrayList<>(); 
+        ArrayList<Tasks> numCompleted = new ArrayList<>();
+        if (e.getSource() == nameDropDown){
+            for (Tasks t: Tasks.ArrofTasks){
+                if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
+                    numofTask.add(t);
+                    if (t.getCompleted() == true){
+                        numCompleted.add(t);
+                    }
+                }
+            }
+            fill(numCompleted.size(),numofTask.size());
+        }
+            numofTask.clear();
+            numCompleted.clear();
     }
 }
