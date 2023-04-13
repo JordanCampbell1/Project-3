@@ -43,7 +43,9 @@ public class Tasks
 
     public String getName()
     {
-        return name;
+        String [] arrofname = name.split(",");
+
+        return arrofname[0] + " " + arrofname[1];
     }
 
     public String getTaskOutline()

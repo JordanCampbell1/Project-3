@@ -73,8 +73,8 @@ public class PanelListItems extends JPanel implements ItemListener{
         buttonPanel.add(sortTaskCompleted);
 
 
-        taskedPanel.setLayout(new GridLayout(2,1));
-        notifications = new JCheckBox("Enable Notifications");
+        //taskedPanel.setLayout(new GridLayout(2,1));
+        notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
 
         notifications.addActionListener(new NotificationsListener());
         notiPanel.setLayout(new GridLayout());
@@ -82,7 +82,9 @@ public class PanelListItems extends JPanel implements ItemListener{
 
         nameDropDown = new JComboBox<>();
         for (String t: Tasks.ArrofNames){
-            nameDropDown.addItem(t);
+            String[] arroft = t.split(",");
+            String namep = arroft[0] + " " + arroft[1];
+            nameDropDown.addItem(namep);
         }
         nameDropDown.addItemListener(this);
         //taskedPanel.add(nameDropDown);
@@ -104,6 +106,8 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(buttonPanel);
         add(notiPanel);
         //add(taskedPanel);
+
+        //fill(Tasks.ratioOfTasksCompleted());
         
 
     }
@@ -192,7 +196,11 @@ public class PanelListItems extends JPanel implements ItemListener{
     {
         for(String person : Tasks.ArrofNames)
         {
-            addToTable(person);
+            String [] arrofname = person.split(",");
+
+            String p = arrofname[0] + " " + arrofname[1];
+
+            addToTable(p);
         }
     }
 
@@ -202,7 +210,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         {
             if(s.getName().matches(person))
             {
-                String[] name= s.getName().split(",");
+                String[] name = s.getName().split(" ");
 
                 String complete = "No";
 
