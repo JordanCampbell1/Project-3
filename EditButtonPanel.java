@@ -124,12 +124,13 @@ public class EditButtonPanel extends JFrame implements ItemListener
 
             }
             catch(NumberFormatException error){}
-            PanelListItems.saveNames("names.txt");
-            PanelListItems.saveTasks("tasks.txt");
-            PanelListItems.table.getRowCount();
-            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                PanelListItems.model.removeRow(i);
-            PanelListItems.showTable();
+            PanelListItems saver = new PanelListItems();
+            saver.saveNames("names.txt");
+            saver.saveTasks("tasks.txt");
+            saver.table.getRowCount();
+            for (int i=saver.table.getRowCount()-1;i>=0;i--)
+                saver.model.removeRow(i);
+            saver.showTable();
             dispose();
         }
     }

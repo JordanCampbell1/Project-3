@@ -10,10 +10,12 @@ public class Project3 extends JFrame
         mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         PanelListItems mainPanel = new PanelListItems();
+        
+        mainFrame.setSize(650,700);
 
         mainFrame.getContentPane().add(mainPanel); //can be substitued with add(mainPanel);
 
-        mainFrame.pack();
+        mainFrame.setResizable(false);
 
         mainFrame.setVisible(true);
 
