@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +20,10 @@ public class DeleteButtonPanel extends JFrame
     public DeleteButtonPanel()
     {
         setTitle("Select the respective Checkbox and click Delete to Remove the Tasks");
+        setLayout(new GridLayout());
         setBounds(300, 90, 200, 250);
+        Dimension size = new Dimension(200, 250);
+        //setMinimumSize(size);
 
 
         //sets the datatype for each column
@@ -59,11 +64,15 @@ public class DeleteButtonPanel extends JFrame
             model.addRow(new Object[0]);
             model.setValueAt(false, count, 0);
 
-            for(String person : Tasks.ArrofNames)
+            for(String person : Tasks.ArrofNames) //currently prints 1 name 3 times
             {
+                String [] p = person.split(",");
+
+                String namep = p[0] + " " + p[1];
+
                 for(Tasks t : Tasks.ArrofTasks)
                 {
-                    if(t.getName().matches(person))
+                    if(t.getName().matches(namep))
                     {
                         model.setValueAt(t.getName(), count, 1);
                         model.setValueAt(t.getTaskOutline(), count, 2);
@@ -81,7 +90,9 @@ public class DeleteButtonPanel extends JFrame
         //deleteButton.setBounds(); //for further accuracy of where it is placed and the size of it
         add(deleteButton);
         
+        pack();
 
+        setVisible(true);
 
     }
     
