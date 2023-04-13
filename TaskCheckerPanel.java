@@ -57,11 +57,12 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         public void actionPerformed(ActionEvent e) {
             for (Tasks t : Tasks.ArrofTasks){
                 if (t.getName().equals((String) nameDropDown.getSelectedItem()))
-                    if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem())){
+                    if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()) && t.getCompleted()==false){
                         t.setCompleted(true);
                         for (Person p : Tasks.ArrofNames){
                             if(p.getName().equals(t.getName())){
-                                p.setTaskComplete(p.getTaskComplete()+1);
+                                p.setTaskComplete(p.getTaskComplete()+t.getExpectedTime());
+                                p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() - t.getExpectedTime());
                             }
                         }
                     }                        

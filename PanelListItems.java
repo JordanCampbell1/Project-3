@@ -185,7 +185,7 @@ public class PanelListItems extends JPanel implements ItemListener{
             File nameSaver = new File(nfile);
             PrintWriter saveToName = new PrintWriter(nameSaver);
             for (Person t : Tasks.ArrofNames){
-                saveToName.println(t.getName() + " " + t.getEstTaskTimeLeft() + " " + t.getTaskComplete());
+                saveToName.println(t.getName() + " " +t.getTaskComplete() + " " + t.getEstTaskTimeLeft());
             }
             saveToName.close();
         }

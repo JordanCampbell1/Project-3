@@ -1,4 +1,6 @@
-public class Person{
+import java.util.Comparator;
+
+public class Person implements Comparable<Person>, Comparator<Person>{
     private String name;
     private int taskComplete;
     private int estTaskTimeLeft;
@@ -38,6 +40,24 @@ public class Person{
     public void setEstTaskTimeLeft(int estTaskTimeLeft)
     {
         this.estTaskTimeLeft = estTaskTimeLeft;
+    }
+
+    public int compareTo(Person pele){
+        if(this.getTaskComplete() == pele.getTaskComplete()){
+            return 0;
+        }
+        
+        else{
+            if(this.getTaskComplete() > pele.getTaskComplete())
+            {  
+            return -1;
+            }
+        } 
+        return 1;
+    }
+    public int compare(Person o1, Person o2) {
+        return (o2.getEstTaskTimeLeft() - o1.getEstTaskTimeLeft());
+
     }
 
 }
