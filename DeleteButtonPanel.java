@@ -58,29 +58,27 @@ public class DeleteButtonPanel extends JFrame
         model.addColumn("Task Outline");
 
 
-        //fill the rows of the table with data
-        for(int count = 0; count < Tasks.ArrofTasks.size() ; count++)
+        //fill the rows of the table with data    
+
+        for(String person : Tasks.ArrofNames) //currently prints 1 name 3 times
         {
-            model.addRow(new Object[0]);
-            model.setValueAt(false, count, 0);
+            String [] p = person.split(",");
 
-            for(String person : Tasks.ArrofNames) //currently prints 1 name 3 times
+            String namep = p[0] + " " + p[1];
+
+            for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
             {
-                String [] p = person.split(",");
-
-                String namep = p[0] + " " + p[1];
-
-                for(Tasks t : Tasks.ArrofTasks)
+                if(Tasks.ArrofTasks.get(count).getName().matches(namep))
                 {
-                    if(t.getName().matches(namep))
-                    {
-                        model.setValueAt(t.getName(), count, 1);
-                        model.setValueAt(t.getTaskOutline(), count, 2);
-                    }
+                    model.addRow(new Object[0]);
+                    model.setValueAt(false, count, 0);
+                    model.setValueAt(Tasks.ArrofTasks.get(count).getName(), count, 1);
+                     model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), count, 2);
                 }
             }
-            
         }
+            
+        
 
         //delete selected rows from table 
 
