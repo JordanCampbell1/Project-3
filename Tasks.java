@@ -120,7 +120,7 @@ public class Tasks
         this.ETF = ETF;
     }
 
-    public static int ratioOfTasksCompleted()
+    public static int ratioOfAllTasksCompleted()
     {
         if(ArrofTasks.size() == 0)
         {
@@ -140,5 +140,29 @@ public class Tasks
         return (int) count / ArrofTasks.size(); 
     }
    
+    //almost useless code
+    public static int ratioOfTasksCompleted(String namep)
+    {
+        int completed = 0;
+        int tasksTotal = 0;
+
+        for(Tasks t : ArrofTasks)
+        {
+            if(namep.matches(t.getName()))
+            {   
+                if(t.getCompleted() == true)
+                {
+                    completed++;
+                }
+
+                tasksTotal++;
+            }            
+        }
+
+
+
+        return (int) completed / tasksTotal; 
+    }
+   
     
-}
+}   
