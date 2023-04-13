@@ -60,19 +60,21 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
                     if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()))
                         t.setCompleted(true);
             }
+            //saves the updated completed tasks to text files.
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");
+            //updates the table to include the newly checked task by removing and replacing all rows of the table.
             for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
                 PanelListItems.model.removeRow(i);
             PanelListItems.showTable();
             dispose();
         }
     }
-
+    // combobox selection affects the display in the second combobox and displays text of the selected user.
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == nameDropDown){
             selectedUser.setText(nameDropDown.getSelectedItem() + " selected");
-            taskDropDown.removeAllItems();;
+            taskDropDown.removeAllItems();
             for (Tasks t: Tasks.ArrofTasks){
                 if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
                     taskDropDown.addItem(t.getTaskOutline());

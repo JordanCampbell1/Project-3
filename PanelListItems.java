@@ -5,10 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PanelListItems extends JPanel{
+public class PanelListItems extends JPanel implements ItemListener{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
@@ -22,7 +22,9 @@ public class PanelListItems extends JPanel{
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(),notiPanel = new JPanel();
+
+    private JComboBox<String> nameDropDown;
     
 
     public PanelListItems()
@@ -71,37 +73,48 @@ public class PanelListItems extends JPanel{
         buttonPanel.add(sortTaskCompleted);
 
 
-        taskedPanel.setLayout(new GridLayout(1,2));
-        notifications = new JCheckBox("Enable Notifications for Overdue Tasks");
+        taskedPanel.setLayout(new GridLayout(2,1));
+        notifications = new JCheckBox("Enable Notifications");
 
         notifications.addActionListener(new NotificationsListener());
+        notiPanel.setLayout(new GridLayout());
+        notiPanel.add(notifications);
 
-        taskedPanel.add(notifications);
-
-
+        nameDropDown = new JComboBox<>();
+        for (String t: Tasks.ArrofNames){
+            nameDropDown.addItem(t);
+        }
+        nameDropDown.addItemListener(this);
+        //taskedPanel.add(nameDropDown);
+        add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
 
-        taskedPanel.add(progressBar);
+        //taskedPanel.add(progressBar);
+        add(progressBar);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
-        taskedPanel.setBounds(0,600,650,100);
+        notiPanel.setBounds(0,600,225,100);
+        progressBar.setBounds(375,635, 225, 25);
+        nameDropDown.setBounds(425,605,150,25);
+        //taskedPanel.setBounds(225,600,425,100);
 
         add(tablePanel);
         add(buttonPanel);
-        add(taskedPanel);
+        add(notiPanel);
+        //add(taskedPanel);
         
 
-        fill(Tasks.ratioOfTasksCompleted()); //fill the progress bar animation based on ratio calculated
     }
 
     // function to dynamically increase progress  
-    private void fill(int limit)  
+    private void fill(int completes,int limit)  
     {  
-        int i = 0;  
+        int i = 0;
+        progressBar.setMaximum(limit); 
         try{  
-            while(i < limit){  
+            while(i <= completes){  
                 // fill the menu bar to the defined value using   
                 // the setValue( ) method  
                 progressBar.setValue(i) ;  
@@ -247,5 +260,23 @@ public class PanelListItems extends JPanel{
         {
             NotificationPanel random = new NotificationPanel();
         }
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        ArrayList<Tasks> numofTask = new ArrayList<>(); 
+        ArrayList<Tasks> numCompleted = new ArrayList<>();
+        if (e.getSource() == nameDropDown){
+            for (Tasks t: Tasks.ArrofTasks){
+                if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
+                    numofTask.add(t);
+                    if (t.getCompleted() == true){
+                        numCompleted.add(t);
+                    }
+                }
+            }
+            fill(numCompleted.size(),numofTask.size());
+        }
+            numofTask.clear();
+            numCompleted.clear();
     }
 }
