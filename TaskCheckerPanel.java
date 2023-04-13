@@ -60,13 +60,11 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
                     if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()))
                         t.setCompleted(true);
             }
-            PanelListItems saver = new PanelListItems();
-            saver.saveNames("names.txt");
-            saver.saveTasks("tasks.txt");
-            saver.table.getRowCount();
-            for (int i=saver.table.getRowCount()-1;i>=0;i--)
-                saver.model.removeRow(i);
-            saver.showTable();
+            PanelListItems.saveNames("names.txt");
+            PanelListItems.saveTasks("tasks.txt");
+            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                PanelListItems.model.removeRow(i);
+            PanelListItems.showTable();
             dispose();
         }
     }
