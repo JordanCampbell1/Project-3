@@ -26,8 +26,8 @@ public class EditButtonPanel extends JFrame implements ItemListener
         //ComboBox for the user-name choice for data to be edited
         userToBeEdited = new JLabel("Which user would you like to edit:");
         userNameDropDown = new JComboBox<>();
-        for (String t: Tasks.ArrofNames){
-                userNameDropDown.addItem(t);
+        for (Person t: Tasks.ArrofNames){
+                userNameDropDown.addItem(t.getName());
             }
         userNameDropDown.addItemListener(this);
         userSelected = new JLabel(userNameDropDown.getSelectedItem() +" selected", JLabel.CENTER);

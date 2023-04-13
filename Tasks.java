@@ -9,7 +9,7 @@ public class Tasks
 {
     public static ArrayList<Tasks> ArrofTasks = new ArrayList<Tasks>();
 
-    public static ArrayList<String> ArrofNames = new ArrayList<String>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
+    public static ArrayList<Person> ArrofNames = new ArrayList<Person>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
 
     private String name, taskOutline;
     private boolean completed;

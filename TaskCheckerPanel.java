@@ -20,8 +20,8 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         //ComboBox for the user that is completing their task
         pickName = new JLabel("Which user completed a task:");
         nameDropDown = new JComboBox<String>();
-        for (String t: Tasks.ArrofNames){
-            nameDropDown.addItem(t);
+        for (Person t: Tasks.ArrofNames){
+            nameDropDown.addItem(t.getName());
         }
         nameDropDown.addItemListener(this);
         selectedUser = new JLabel(nameDropDown.getSelectedItem() + " selected",JLabel.CENTER);
@@ -57,8 +57,14 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         public void actionPerformed(ActionEvent e) {
             for (Tasks t : Tasks.ArrofTasks){
                 if (t.getName().equals((String) nameDropDown.getSelectedItem()))
-                    if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()))
+                    if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem())){
                         t.setCompleted(true);
+                        for (Person p : Tasks.ArrofNames){
+                            if(p.getName().equals(t.getName())){
+                                p.setTaskComplete(p.getTaskComplete()+1);
+                            }
+                        }
+                    }                        
             }
             //saves the updated completed tasks to text files.
             PanelListItems.saveNames("names.txt");

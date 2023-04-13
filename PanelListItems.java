@@ -24,7 +24,7 @@ public class PanelListItems extends JPanel implements ItemListener{
 
     private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(),notiPanel = new JPanel();
 
-    private JComboBox<String> nameDropDown;
+    public static JComboBox<String> nameDropDownPub;
     
 
     public PanelListItems()
@@ -80,13 +80,13 @@ public class PanelListItems extends JPanel implements ItemListener{
         notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
 
-        nameDropDown = new JComboBox<>();
-        for (String t: Tasks.ArrofNames){
-            nameDropDown.addItem(t);
+        nameDropDownPub = new JComboBox<>();
+        for (Person t: Tasks.ArrofNames){
+            nameDropDownPub.addItem(t.getName());
         }
-        nameDropDown.addItemListener(this);
+        nameDropDownPub.addItemListener(this);
         //taskedPanel.add(nameDropDown);
-        add(nameDropDown);
+        add(nameDropDownPub);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
@@ -97,7 +97,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         buttonPanel.setBounds(0,500,650,100);
         notiPanel.setBounds(0,600,225,100);
         progressBar.setBounds(375,635, 225, 25);
-        nameDropDown.setBounds(425,605,150,25);
+        nameDropDownPub.setBounds(425,605,150,25);
         //taskedPanel.setBounds(225,600,425,100);
 
         add(tablePanel);
@@ -135,8 +135,12 @@ public class PanelListItems extends JPanel implements ItemListener{
             Scanner nscan = null;
             nscan = new Scanner(new File(nfile));
             while(nscan.hasNext()){
-                String nextLine = nscan.nextLine();
-                Tasks.ArrofNames.add(nextLine);
+                String[] nextLine = nscan.nextLine().split(" ");
+                String name = nextLine[0];
+                int taskComplete = Integer.parseInt(nextLine[1]);
+                int estTaskTimeLeft = Integer.parseInt(nextLine[2]);
+                Person p = new Person(name,taskComplete,estTaskTimeLeft);
+                Tasks.ArrofNames.add(p);
             }
             nscan.close();
         }
@@ -180,8 +184,8 @@ public class PanelListItems extends JPanel implements ItemListener{
         try{
             File nameSaver = new File(nfile);
             PrintWriter saveToName = new PrintWriter(nameSaver);
-            for (String t : Tasks.ArrofNames){
-                saveToName.println(t);
+            for (Person t : Tasks.ArrofNames){
+                saveToName.println(t.getName() + " " + t.getEstTaskTimeLeft() + " " + t.getTaskComplete());
             }
             saveToName.close();
         }
@@ -190,9 +194,9 @@ public class PanelListItems extends JPanel implements ItemListener{
 
     public static void showTable() //adds all existing persons', that are in the text file, tasks to the table
     {
-        for(String person : Tasks.ArrofNames)
+        for(Person person : Tasks.ArrofNames)
         {
-            addToTable(person);
+            addToTable(person.getName());
         }
     }
 
@@ -265,9 +269,9 @@ public class PanelListItems extends JPanel implements ItemListener{
     public void itemStateChanged(ItemEvent e) {
         ArrayList<Tasks> numofTask = new ArrayList<>(); 
         ArrayList<Tasks> numCompleted = new ArrayList<>();
-        if (e.getSource() == nameDropDown){
+        if (e.getSource() == nameDropDownPub){
             for (Tasks t: Tasks.ArrofTasks){
-                if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
+                if (t.getName().equals((String) nameDropDownPub.getSelectedItem())) {
                     numofTask.add(t);
                     if (t.getCompleted() == true){
                         numCompleted.add(t);

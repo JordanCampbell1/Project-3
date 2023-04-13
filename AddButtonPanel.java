@@ -118,12 +118,26 @@ public class AddButtonPanel extends JFrame
                 {
                     Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
                     Tasks.ArrofTasks.add(P1);
-                    for (String t: Tasks.ArrofNames){
-                        if (t.equals(name))
+                    for (Person t: Tasks.ArrofNames){
+                        //checks if the name is already recorded
+                        if (t.getName().equals(name))
                             same = true;
                     }
-                    if (!same)
-                        Tasks.ArrofNames.add(name);
+
+                    //creating a new person object with 0 task complete and the expected time of the task.
+                    if (!same){
+                        Person peeps = new Person(name,0,P1.getExpectedTime());
+                        Tasks.ArrofNames.add(peeps);
+                        PanelListItems.nameDropDownPub.addItem(name);
+                    }
+                    //Since the person already exist just add the expected time to finish to the persons total expected time for tasks.
+                    else{
+                        for (Person pele : Tasks.ArrofNames){
+                            if (pele.getName().equals(name)){
+                                pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()+P1.getExpectedTime());
+                            }
+                        }
+                    }
                     same = false;
                     PanelListItems.saveNames("names.txt");
                     PanelListItems.saveTasks("tasks.txt");

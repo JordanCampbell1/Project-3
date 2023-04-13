@@ -59,11 +59,11 @@ public class DeleteButtonPanel extends JFrame
             model.addRow(new Object[0]);
             model.setValueAt(false, count, 0);
 
-            for(String person : Tasks.ArrofNames)
+            for(Person person : Tasks.ArrofNames)
             {
                 for(Tasks t : Tasks.ArrofTasks)
                 {
-                    if(t.getName().matches(person))
+                    if(t.getName().matches(person.getName()))
                     {
                         model.setValueAt(t.getName(), count, 1);
                         model.setValueAt(t.getTaskOutline(), count, 2);
