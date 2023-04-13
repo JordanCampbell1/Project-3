@@ -1,3 +1,4 @@
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,9 +22,11 @@ public class AddButtonPanel extends JFrame
 
     public AddButtonPanel()
     {
-        setTitle("Adding a Task"); 
-        setBounds(300, 90, 600, 700);
-        //setResizable(false);
+        setTitle("Adding a Task");
+        p.setSize(300,300);
+        p.setLayout(new GridLayout(9,1)); 
+        setMinimumSize(p.getSize());
+        setResizable(false);
 
         //p.setLayout(null); //to accurately set the componenets on the panel
 
