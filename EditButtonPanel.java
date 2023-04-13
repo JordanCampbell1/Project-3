@@ -88,7 +88,8 @@ public class EditButtonPanel extends JFrame implements ItemListener
                 {
                     for (Tasks t: Tasks.ArrofTasks){
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
-                            t.setName(nameTextField.getText());
+                            String [] arrofname = nameTextField.getText().split(" ");
+                            t.setName(arrofname[0] + "," + arrofname[1]);
                         }
                     }
                 }
@@ -123,6 +124,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
             }
 
             }
+            catch(ArrayIndexOutOfBoundsException ed){}
             catch(NumberFormatException error){}
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");

@@ -139,6 +139,7 @@ public class AddButtonPanel extends JFrame
 
                 
             }
+            catch(ArrayIndexOutOfBoundsException el){}
             catch(NumberFormatException error){}
 
         }
