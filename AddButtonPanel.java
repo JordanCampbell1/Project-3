@@ -75,6 +75,7 @@ public class AddButtonPanel extends JFrame
 
         public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)
         {
+            Boolean same = false;
             try
             {
                 String name = "";
@@ -116,9 +117,14 @@ public class AddButtonPanel extends JFrame
                 (Integer.parseInt(ETFTextField.getText()) > 0))
                 {
                     Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
-
                     Tasks.ArrofTasks.add(P1);
-                    Tasks.ArrofNames.add(name);
+                    for (String t: Tasks.ArrofNames){
+                        if (t.equals(name))
+                            same = true;
+                    }
+                    if (!same)
+                        Tasks.ArrofNames.add(name);
+                    same = false;
                     PanelListItems.saveNames("names.txt");
                     PanelListItems.saveTasks("tasks.txt");
                     for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
