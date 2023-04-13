@@ -16,17 +16,20 @@ public class PanelListItems extends JPanel{
 
     private JProgressBar progressBar;
 
-    public static DefaultTableModel model = new DefaultTableModel();
+    public DefaultTableModel model = new DefaultTableModel();
 
-    public static JTable table;
+    public JTable table;
 
     private JScrollPane scrollPane;
+
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel();
     
 
     public PanelListItems()
     {
-        super(new GridLayout(2,1)); //establishes a new layout for the GUI to use
+        super(null); //establishes a new layout for the GUI to use
 
+        setBounds(0,0,650,700);
 
         String[] columnNames=  {"First Name",
                 "Last Name", 
@@ -44,10 +47,10 @@ public class PanelListItems extends JPanel{
 
         table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
         table.setFillsViewportHeight(true);
-
+        tablePanel.setLayout(new GridLayout());
         scrollPane = new JScrollPane(table);
 
-        add(scrollPane);
+        tablePanel.add(scrollPane);
 
         //the above deals with list of data items in a table
 
@@ -61,26 +64,34 @@ public class PanelListItems extends JPanel{
         TaskChecker.addActionListener(new TaskCheckerListener());
         sortTimeTaken.addActionListener(new SortTimeTakenListener());
         sortTaskCompleted.addActionListener(new SortTaskCompletedListener());
+        buttonPanel.setLayout(new GridLayout(2,2));
+        buttonPanel.add(manipulateData);
+        buttonPanel.add(TaskChecker);
+        buttonPanel.add(sortTimeTaken);
+        buttonPanel.add(sortTaskCompleted);
 
-        add(manipulateData);
-        add(TaskChecker);
-        add(sortTimeTaken);
-        add(sortTaskCompleted);
 
-
-    
+        taskedPanel.setLayout(new GridLayout(1,2));
         notifications = new JCheckBox("Enable Notifications for Overdue Tasks");
 
         notifications.addActionListener(new NotificationsListener());
 
-        add(notifications);
+        taskedPanel.add(notifications);
 
 
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
 
-        add(progressBar);
+        taskedPanel.add(progressBar);
+        tablePanel.setBounds(0,0, 650, 500);
+        buttonPanel.setBounds(0,500,650,100);
+        taskedPanel.setBounds(0,600,650,100);
+
+        add(tablePanel);
+        add(buttonPanel);
+        add(taskedPanel);
+        
 
         fill(Tasks.ratioOfTasksCompleted()); //fill the progress bar animation based on ratio calculated
     }
@@ -107,8 +118,8 @@ public class PanelListItems extends JPanel{
     }  
 
     public void loadNames(String nfile){
-        Scanner nscan = null;
         try{
+            Scanner nscan = null;
             nscan = new Scanner(new File(nfile));
             while(nscan.hasNext()){
                 String nextLine = nscan.nextLine();
@@ -116,9 +127,7 @@ public class PanelListItems extends JPanel{
             }
             nscan.close();
         }
-        catch (FileNotFoundException e) {
-            //throw new RuntimeException(e);
-        }
+        catch(IOException ioe){}
     }
 
     public void loadTasks(String tfile){
@@ -137,12 +146,10 @@ public class PanelListItems extends JPanel{
             }
             tscan.close();
         }
-        catch (FileNotFoundException e) {
-            //throw new RuntimeException(e);
-        }
+        catch (IOException e) {}
     }
 
-    public static void saveTasks(String tfile){
+    public void saveTasks(String tfile){
 
         try{
             File dataSaver = new File(tfile);
@@ -152,13 +159,11 @@ public class PanelListItems extends JPanel{
             }
             saveTo.close();
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        catch (IOException e) {}
 
     }
 
-    public static void saveNames(String nfile){
+    public void saveNames(String nfile){
         try{
             File nameSaver = new File(nfile);
             PrintWriter saveToName = new PrintWriter(nameSaver);
@@ -167,12 +172,10 @@ public class PanelListItems extends JPanel{
             }
             saveToName.close();
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        catch (IOException e) {}
     }
 
-    public static void showTable() //adds all existing persons', that are in the text file, tasks to the table
+    public void showTable() //adds all existing persons', that are in the text file, tasks to the table
     {
         for(String person : Tasks.ArrofNames)
         {
@@ -180,7 +183,7 @@ public class PanelListItems extends JPanel{
         }
     }
 
-    private static void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
+    private void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
     {
         for(Tasks s : Tasks.ArrofTasks)
         {
