@@ -1,5 +1,6 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 
+//rnuts
 
 public class Project3 extends JFrame
 {

@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
@@ -16,61 +15,52 @@ public class AddButtonPanel extends JFrame
 
     private JButton saveButton = new JButton("Save");
 
-    private JPanel p = new JPanel();
-
 
     public AddButtonPanel()
     {
         setTitle("Adding a Task"); 
-        setBounds(300, 90, 600, 700);
-        //setResizable(false);
+        setBounds(300, 90, 800, 400);
+        setResizable(false);
 
-        //p.setLayout(null); //to accurately set the componenets on the panel
-
+        //place the textfields and the labels here
 
         namelLabel = new JLabel("Full Name");
-        namelLabel.setBounds(0,0,75,75);
         taskOutlinelLabel= new JLabel("Task Outline");
-        taskOutlinelLabel.setBounds(0,150,75,75);
         startDateLabel = new JLabel("Start Date");
         ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
 
         nameTextField = new JTextField(30);
-        nameTextField.setBounds(0,75,75,75);
         taskOutlineTextField = new JTextField(50);
-        taskOutlineTextField.setBounds(0,225,75,75);
         startDateTextField = new JTextField(15);
         ETFTextField = new JTextField(5);
 
 
         //may need to adjust the size and locations of these components
-        p.add(namelLabel);
-        p.add(nameTextField);
-        p.add(taskOutlinelLabel);
-        p.add(taskOutlineTextField);
-        p.add(startDateLabel);
-        p.add(startDateTextField);
-        p.add(ETFJLabel);
-        p.add(ETFTextField);
+        add(namelLabel);
+        add(nameTextField);
+        add(taskOutlinelLabel);
+        add(taskOutlineTextField);
+        add(startDateLabel);
+        add(startDateTextField);
+        add(ETFJLabel);
+        add(ETFTextField);
 
 
         saveButton.addActionListener(new SaveButtonListener());
         //closeButton.addActionListener(new CloseButtonListener()); // i dont think i need a close button since it is default
 
-        p.add(saveButton);
+        add(saveButton);
         //p.add(closeButton);
-
-        getContentPane().add(p);
 
         pack();
 
         setVisible(true);
     }
 
-    //test
+    
     private class SaveButtonListener implements ActionListener{
 
-        public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)
+        public void actionPerformed(ActionEvent e) //while loop to check half-filled tasks as to prevent half-filled info to go into the database
         {
             try
             {
@@ -78,9 +68,7 @@ public class AddButtonPanel extends JFrame
 
                 if(!(nameTextField.getText().equals("")))
                 {
-                    String [] arrofname = nameTextField.getText().split(" ");
-
-                    name = arrofname[0] + "," + arrofname[1]; //allows save task method to work properly since the format for name is "FIRSTNAME,LASTNAME"
+                    name = nameTextField.getText();
                 }
     
                 String taskOutline = "";
@@ -99,29 +87,15 @@ public class AddButtonPanel extends JFrame
     
                 int ETF = 0;
     
-                if(Integer.parseInt(ETFTextField.getText()) > 0)
+                if(Integer.parseInt(startDateTextField.getText()) <= 0)
                 {
-                    ETF = Integer.parseInt(ETFTextField.getText());
+                    ETF = Integer.parseInt(startDateTextField.getText());
                 }
 
 
-                //if data is entered then it will be added to the arraylist
-                //maybe a more efficient of way of doing this
-                if((!(nameTextField.getText().equals("")))&&
-                (!(taskOutlineTextField.getText().equals("")))&&
-                (!(startDateTextField.getText().equals("")))&&
-                (Integer.parseInt(ETFTextField.getText()) > 0))
-                {
-                    Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
+                Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
 
-                    Tasks.ArrofTasks.add(P1);
-                }
-                else{//otherwise the pop up panel is shown
-                    PopUpPanel t = new PopUpPanel();
-                }
-
-
-                
+                Tasks.ArrofTasks.add(P1);
             }
             catch(NumberFormatException error){}
 

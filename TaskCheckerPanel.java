@@ -5,47 +5,44 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class TaskCheckerPanel extends JFrame implements ItemListener {
-    private JPanel taskPanel = new JPanel();
     private JLabel pickName,pickTask,selectedUser,selectedTask;
     private JComboBox<String> nameDropDown, taskDropDown;
     private JButton checkButton;
     public TaskCheckerPanel(){
         setTitle("Complete Tasks");
-        taskPanel.setSize(500,200);
+        setBounds(300, 90, 800, 200);
         setResizable(false);
-        setLayout(null);
-
         //ComboBox for the user that is completing their task
+        TaskCheckerPanel userSelected = new TaskCheckerPanel();
         pickName = new JLabel("Which user completed a task");
-        nameDropDown = new JComboBox<String>();
+        nameDropDown = new JComboBox<>();
         for (String t: Tasks.ArrofNames){
             nameDropDown.addItem(t);
         }
-        nameDropDown.addItemListener(this);
-        selectedUser = new JLabel(nameDropDown.getSelectedItem() + " selected");
+        nameDropDown.addItemListener(userSelected);
+        selectedUser = new JLabel("no name selected");
 
         //ComboBox to select which task was completed
+        TaskCheckerPanel taskSelected = new TaskCheckerPanel();
         pickTask = new JLabel("Which task was completed");
-        taskDropDown = new JComboBox<String>();
+        taskDropDown = new JComboBox<>();
         for (Tasks t: Tasks.ArrofTasks){
             if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
                 taskDropDown.addItem(t.getTaskOutline());
             }
         }
-        taskDropDown.addItemListener(this);
-        selectedTask = new JLabel(taskDropDown.getSelectedItem() + " selected");
+        taskDropDown.addItemListener(taskSelected);
+        selectedTask = new JLabel("no task selected");
 
-        taskPanel.add(pickName);
-        taskPanel.add(nameDropDown);
-        taskPanel.add(selectedUser);
-        taskPanel.add(pickTask);
-        taskPanel.add(taskDropDown);
-        taskPanel.add(selectedTask);
-        checkButton = new JButton("Check");
+        add(pickName);
+        add(nameDropDown);
+        add(selectedUser);
+        add(pickTask);
+        add(taskDropDown);
+        add(selectedTask);
+
         checkButton.addActionListener(new CheckButtonListener());
-        taskPanel.add(checkButton);
-        add(taskPanel);
-        setMinimumSize(taskPanel.getSize());
+        add(checkButton);
         pack();
         setVisible(true);
     }
@@ -58,25 +55,12 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
                     if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()))
                         t.setCompleted(true);
             }
-            PanelListItems.saveNames("names.txt");
-            PanelListItems.saveTasks("tasks.txt");
-            PanelListItems.table.getRowCount();
-            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                PanelListItems.model.removeRow(i);
-            PanelListItems.showTable();
-            dispose();
         }
     }
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == nameDropDown){
             selectedUser.setText(nameDropDown.getSelectedItem() + " selected");
-            taskDropDown.removeAllItems();;
-            for (Tasks t: Tasks.ArrofTasks){
-                if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
-                    taskDropDown.addItem(t.getTaskOutline());
-                }
-            }
         }
         if (e.getSource() == taskDropDown){
             selectedTask.setText(taskDropDown.getSelectedItem() + " selected");

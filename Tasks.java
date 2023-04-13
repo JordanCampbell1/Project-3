@@ -120,11 +120,6 @@ public class Tasks
 
     public static int ratioOfTasksCompleted()
     {
-        if(ArrofTasks.size() == 0)
-        {
-            return 0;
-        }
-
         int count = 0;
 
         for(Tasks t : ArrofTasks)

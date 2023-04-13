@@ -16,9 +16,9 @@ public class PanelListItems extends JPanel{
 
     private JProgressBar progressBar;
 
-    public static DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel model = new DefaultTableModel();
 
-    public static JTable table;
+    private JTable table;
 
     private JScrollPane scrollPane;
     
@@ -117,7 +117,7 @@ public class PanelListItems extends JPanel{
             nscan.close();
         }
         catch (FileNotFoundException e) {
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -138,11 +138,11 @@ public class PanelListItems extends JPanel{
             tscan.close();
         }
         catch (FileNotFoundException e) {
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
-    public static void saveTasks(String tfile){
+    public void saveTasks(String tfile){
 
         try{
             File dataSaver = new File(tfile);
@@ -158,7 +158,7 @@ public class PanelListItems extends JPanel{
 
     }
 
-    public static void saveNames(String nfile){
+    public void saveNames(String nfile){
         try{
             File nameSaver = new File(nfile);
             PrintWriter saveToName = new PrintWriter(nameSaver);
@@ -172,7 +172,7 @@ public class PanelListItems extends JPanel{
         }
     }
 
-    public static void showTable() //adds all existing persons', that are in the text file, tasks to the table
+    public void showTable() //adds all existing persons', that are in the text file, tasks to the table
     {
         for(String person : Tasks.ArrofNames)
         {
@@ -180,13 +180,13 @@ public class PanelListItems extends JPanel{
         }
     }
 
-    private static void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
+    private void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
     {
         for(Tasks s : Tasks.ArrofTasks)
         {
             if(s.getName().matches(person))
             {
-                String[] name= s.getName().split(",");
+                String[] name= s.getName().split(" ");
 
                 String complete = "No";
 
@@ -226,7 +226,28 @@ public class PanelListItems extends JPanel{
     {
         public void actionPerformed(ActionEvent e)
         {
-            SortTimePanel random = new SortTimePanel();
+  Collections.sort(Tasks.ArrofTasks, new Comparator<Tasks>() {
+            @Override
+         public int compare(Tasks t1, Tasks t2) {
+                return t1.getExpectedTime() - t2.getExpectedTime();
+            }
+        });
+
+        // Display the sorted list in a table
+      JFrame frame = new JFrame("Tasks sorted by Time Taken");
+        JTable table = new JTable();
+ DefaultTableModel model = new DefaultTableModel(new Object[]{"Name", "Task Outline", "Start Date", "End Date", "Expected Time", "Completed"}, 0);
+        
+        for (Tasks task : Tasks.ArrofTasks) {
+            model.addRow(new Object[]{task.getName(), task.getTaskOutline(), task.getStartDate(), task.getEndDate(), task.getExpectedTime(), task.getCompleted()});
+        }
+        
+        table.setModel(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.setSize(800, 400);
+        frame.setVisible(true);
+            
         }
     }
 
@@ -235,6 +256,28 @@ public class PanelListItems extends JPanel{
         public void actionPerformed(ActionEvent e)
         {
             SortTaskCompletedPanel random = new SortTaskCompletedPanel();
+
+          Collections.sort(Tasks.ArrofTasks, new Comparator<Tasks>() {
+            @Override
+            public int compare(Tasks t1, Tasks t2) {
+                return t1.getCompleted() - t2.getCompleted();
+            }
+        });
+
+        // Display the sorted list in a table
+        JFrame frame = new JFrame("Tasks sorted by Task Completed");
+        JTable table = new JTable();
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"Name", "Task Outline", "Start Date", "End Date", "Expected Time", "Completed"}, 0);
+
+        for (Tasks task : Tasks.ArrofTasks) {
+            model.addRow(new Object[]{task.getName(), task.getTaskOutline(), task.getStartDate(), task.getEndDate(), task.getExpectedTime(), task.getCompleted()});
+        }
+
+        table.setModel(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.setSize(800, 400);
+        frame.setVisible(true);
         }
     }
 
@@ -242,7 +285,14 @@ public class PanelListItems extends JPanel{
     {
         public void actionPerformed(ActionEvent e)
         {
-            NotificationPanel random = new NotificationPanel();
+           // Enable notifications for overdue tasks
+int response = JOptionPane.showConfirmDialog(null, "Do you want to enable notifications for overdue tasks?", "Notifications", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            Tasks.enableNotifications(true);
+            JOptionPane.showMessageDialog(null, "Notifications enabled for overdue tasks. You will be notified with a sound when you open the program next time.");
+        } else {
+            Tasks.enableNotifications(false);
+        }
         }
     }
 }
