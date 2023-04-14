@@ -139,7 +139,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         userSelected.setText(userNameDropDown.getSelectedItem() + " selected");
         if (e.getSource() == userNameDropDown){
             userSelected.setText(userNameDropDown.getSelectedItem() + " selected");
-            taskDropDown.removeAllItems();;
+            taskDropDown.removeAllItems();//double semi-colon?
             for (Tasks t: Tasks.ArrofTasks){
                 if (t.getName().equals((String) userNameDropDown.getSelectedItem())) {
                     taskDropDown.addItem(t.getTaskOutline());
