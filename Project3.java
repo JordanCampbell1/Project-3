@@ -13,8 +13,8 @@ public class Project3 extends JFrame
         
         mainFrame.setSize(650,700);
 
-        mainFrame.getContentPane().add(mainPanel); //can be substitued with add(mainPanel);
-
+        mainFrame.getContentPane().add(mainPanel); 
+        
         mainFrame.setResizable(false);
 
         mainFrame.setVisible(true);

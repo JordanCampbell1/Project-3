@@ -22,7 +22,8 @@ public class DeleteButtonPanel extends JFrame
         setTitle("Select the respective Checkbox and click Delete to Remove the Tasks");
         setLayout(new GridLayout());
         setBounds(300, 90, 200, 250);
-        Dimension size = new Dimension(200, 250);
+        setResizable(false);
+        //Dimension size = new Dimension(200, 250);
         //setMinimumSize(size);
 
 
@@ -73,7 +74,7 @@ public class DeleteButtonPanel extends JFrame
                     model.addRow(new Object[0]);
                     model.setValueAt(false, count, 0);
                     model.setValueAt(Tasks.ArrofTasks.get(count).getName(), count, 1);
-                     model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), count, 2);
+                    model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), count, 2);
                 }
             }
         }
@@ -100,7 +101,7 @@ public class DeleteButtonPanel extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            for(int row = 0; row < table.getRowCount(); row++)
+            for(int row = 0; row < Tasks.ArrofTasks.size(); row++) //rows of table = size of ArrofTasks
             {
                 Boolean checked = Boolean.valueOf(table.getValueAt(row, 0).toString());
 
@@ -112,6 +113,8 @@ public class DeleteButtonPanel extends JFrame
                         && table.getValueAt(row, 2).toString().matches(t.getTaskOutline()))
                         {
                             Tasks.ArrofTasks.remove(t); //deletes the task that was checked by the user
+                            //Tasks.ArrofNames.remove(); //remove name at the same time
+                            PanelListItems.saveTasks("tasks.txt");
                         }
                     }
 
@@ -119,6 +122,7 @@ public class DeleteButtonPanel extends JFrame
                 }
             }
 
+            dispose();
             setVisible(false); //closes the window
         }
     }

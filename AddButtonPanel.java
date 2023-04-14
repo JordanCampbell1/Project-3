@@ -35,7 +35,7 @@ public class AddButtonPanel extends JFrame
         namelLabel.setBounds(0,0,75,75);
         taskOutlinelLabel= new JLabel("Task Outline");
         taskOutlinelLabel.setBounds(0,150,75,75);
-        startDateLabel = new JLabel("Start Date");
+        startDateLabel = new JLabel("Start Date (MM/DD/YYYY)");
         ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
 
         nameTextField = new JTextField(30);
@@ -82,9 +82,7 @@ public class AddButtonPanel extends JFrame
 
                 if(!(nameTextField.getText().equals("")))
                 {
-                    String [] arrofname = nameTextField.getText().split(" ");
-
-                    name = arrofname[0] + "," + arrofname[1]; //allows save task method to work properly since the format for name is "FIRSTNAME,LASTNAME"
+                    name = nameTextField.getText();
                 }
     
                 String taskOutline = "";
@@ -118,17 +116,18 @@ public class AddButtonPanel extends JFrame
                 {
                     Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
                     Tasks.ArrofTasks.add(P1);
-                    for (String t: Tasks.ArrofNames){
+                    for (String t: Tasks.ArrofNames){//checking to see if name matches any existing name
                         if (t.equals(name))
                             same = true;
                     }
-                    if (!same)
+                    if (!same)//if name doesnt match in the arrofNames then...
                         Tasks.ArrofNames.add(name);
                     same = false;
                     PanelListItems.saveNames("names.txt");
                     PanelListItems.saveTasks("tasks.txt");
-                    for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                        PanelListItems.model.removeRow(i);
+                    //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)//table.getRowCount(0) does the same thing
+                        //PanelListItems.model.removeRow(i);
+                    PanelListItems.model.setRowCount(0); //to empty the table of data
                     PanelListItems.showTable();
                     dispose();
                 }

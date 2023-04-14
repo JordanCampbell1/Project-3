@@ -5,11 +5,11 @@ import java.util.Calendar;
 import java.text.ParseException;  
 
 
-public class Tasks 
+public class Tasks //implements Comparable<Tasks>
 {
     public static ArrayList<Tasks> ArrofTasks = new ArrayList<Tasks>();
 
-    public static ArrayList<String> ArrofNames = new ArrayList<String>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
+    public static ArrayList<String> ArrofNames = new ArrayList<String>(); 
 
     private String name, taskOutline;
     private boolean completed;
@@ -43,9 +43,7 @@ public class Tasks
 
     public String getName()
     {
-        String [] arrofname = name.split(",");
-
-        return arrofname[0] + " " + arrofname[1];
+        return name;
     }
 
     public String getTaskOutline()
@@ -137,7 +135,7 @@ public class Tasks
             }
         }
 
-        return (int) count / ArrofTasks.size(); 
+        return (int) count * 100 / ArrofTasks.size(); 
     }
    
     //almost useless code
@@ -159,9 +157,7 @@ public class Tasks
             }            
         }
 
-
-
-        return (int) completed / tasksTotal; 
+        return (int) completed * 100 / tasksTotal; 
     }
    
     

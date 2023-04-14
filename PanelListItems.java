@@ -22,7 +22,7 @@ public class PanelListItems extends JPanel implements ItemListener{
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(),notiPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(), notiPanel = new JPanel();
 
     private JComboBox<String> nameDropDown;
     
@@ -73,7 +73,6 @@ public class PanelListItems extends JPanel implements ItemListener{
         buttonPanel.add(sortTaskCompleted);
 
 
-        //taskedPanel.setLayout(new GridLayout(2,1));
         notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
 
         notifications.addActionListener(new NotificationsListener());
@@ -82,62 +81,54 @@ public class PanelListItems extends JPanel implements ItemListener{
 
         nameDropDown = new JComboBox<>();
         for (String t: Tasks.ArrofNames){
-            String[] arroft = t.split(",");
-            String namep = arroft[0] + " " + arroft[1];
-            nameDropDown.addItem(namep);
+            nameDropDown.addItem(t);
         }
         nameDropDown.addItemListener(this);
-        //taskedPanel.add(nameDropDown);
         add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
 
-        //taskedPanel.add(progressBar);
         add(progressBar);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
         notiPanel.setBounds(0,600,225,100);
         progressBar.setBounds(375,635, 225, 25);
         nameDropDown.setBounds(425,605,150,25);
-        //taskedPanel.setBounds(225,600,425,100);
 
         add(tablePanel);
         add(buttonPanel);
         add(notiPanel);
-        //add(taskedPanel);
 
         //fill(Tasks.ratioOfTasksCompleted());
         
 
     }
 
-    // function to dynamically increase progress  //doesnt seem to work though
-    private void fill(int completes,int limit)  
+    
+    private void fill(int completes,int limit)  //for particular tasks progress bar
     {  
-        //int i = 0;
-
         int ratio = (int) completes * 100 / limit;
-        //progressBar.setMaximum(limit); //may not be needed
+
         try{  
             progressBar.setValue(ratio) ;  
-   
-            /*
-            while(i <= ratio){  
-                // fill the menu bar to the defined value using   
-                // the setValue( ) method  
-                
-                // delay the thread by 100 ms  
-                //Thread.sleep(10);  
-                // increasing the progress every time by 1%  
-                //i += 10;  //i++
-            }  
-            */
         }  
         catch (Exception e) {  
           System.out.println(e);    
         }  
     }  
+
+    private void fill(int ratio)  //for overall progress bar
+    {  
+        try{  
+            progressBar.setValue(ratio) ;  
+        }  
+        catch (Exception e) {  
+          System.out.println(e);    
+        }  
+    }  
+
+
 
     public void loadNames(String nfile){
         try{
@@ -157,7 +148,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         try{
             tscan = new Scanner(new File(tfile));
             while (tscan.hasNext()){
-                String[] nextLine = tscan.nextLine().split(" ");
+                String[] nextLine = tscan.nextLine().split(",");
                 String name = nextLine[0];
                 String taskName = nextLine[1];
                 String startDate = nextLine[2];
@@ -177,7 +168,7 @@ public class PanelListItems extends JPanel implements ItemListener{
             File dataSaver = new File(tfile);
             PrintWriter saveTo = new PrintWriter(dataSaver);
             for (Tasks t : Tasks.ArrofTasks){
-                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime() + " " + t.getCompleted());
+                saveTo.println(t.getName()+","+t.getTaskOutline()+","+t.getStartDate()+ "," +t.getExpectedTime() + "," + t.getCompleted());
             }
             saveTo.close();
         }
@@ -201,11 +192,7 @@ public class PanelListItems extends JPanel implements ItemListener{
     {
         for(String person : Tasks.ArrofNames)
         {
-            String [] arrofname = person.split(",");
-
-            String p = arrofname[0] + " " + arrofname[1];
-
-            addToTable(p);
+            addToTable(person);
         }
     }
 
