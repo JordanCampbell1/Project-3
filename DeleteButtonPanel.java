@@ -63,13 +63,9 @@ public class DeleteButtonPanel extends JFrame
 
         for(String person : Tasks.ArrofNames) 
         {
-            String [] p = person.split(",");
-
-            String namep = p[0] + " " + p[1];
-
             for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
             {
-                if(Tasks.ArrofTasks.get(count).getName().matches(namep))
+                if(Tasks.ArrofTasks.get(count).getName().matches(person))
                 {
                     model.addRow(new Object[0]);
                     model.setValueAt(false, count, 0);
@@ -107,23 +103,26 @@ public class DeleteButtonPanel extends JFrame
 
                 if(checked == true)
                 {
-                    for(Tasks t: Tasks.ArrofTasks)
+                    for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
                     {
-                        if(table.getValueAt(row, 1).toString().matches(t.getName())
-                        && table.getValueAt(row, 2).toString().matches(t.getTaskOutline()))
+                        if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
+                        && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
                         {
-                            Tasks.ArrofTasks.remove(t); //deletes the task that was checked by the user
-                            //Tasks.ArrofNames.remove(); //remove name at the same time
-                            PanelListItems.saveTasks("tasks.txt");
+                            Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
+                            Tasks.ArrofNames.remove(count); //remove name at the same time
                         }
                     }
 
                     
                 }
             }
+            PanelListItems.saveTasks("tasks.txt"); //overwrite file
+            PanelListItems.saveNames("names.txt");//overwrite file
+            PanelListItems.model.setRowCount(0);//removes data from table
+            PanelListItems.showTable();//updates main table
 
             dispose();
-            setVisible(false); //closes the window
+            //setVisible(false); //hides the window but still consumes memory
         }
     }
 }
