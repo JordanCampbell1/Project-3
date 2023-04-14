@@ -1,6 +1,7 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,9 +12,9 @@ import javax.swing.JTextField;
 
 public class AddButtonPanel extends JFrame
 {
-    private JLabel namelLabel, taskOutlinelLabel, startDateLabel, ETFJLabel;
+    private JLabel namelLabel, taskOutlinelLabel, ETFJLabel;
 
-    private JTextField nameTextField, taskOutlineTextField, startDateTextField, ETFTextField;
+    private JTextField nameTextField, taskOutlineTextField, ETFTextField;
 
     private JButton saveButton = new JButton("Save");
 
@@ -23,8 +24,8 @@ public class AddButtonPanel extends JFrame
     public AddButtonPanel()
     {
         setTitle("Adding a Task");
-        p.setSize(300,300);
-        p.setLayout(new GridLayout(9,1)); 
+        p.setSize(200,100);
+        p.setLayout(new GridLayout(7,1)); 
         setMinimumSize(p.getSize());
         setResizable(false);
 
@@ -35,14 +36,12 @@ public class AddButtonPanel extends JFrame
         namelLabel.setBounds(0,0,75,75);
         taskOutlinelLabel= new JLabel("Task Outline");
         taskOutlinelLabel.setBounds(0,150,75,75);
-        startDateLabel = new JLabel("Start Date (MM/DD/YYYY)");
         ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
 
         nameTextField = new JTextField(30);
         nameTextField.setBounds(0,75,75,75);
         taskOutlineTextField = new JTextField(50);
         taskOutlineTextField.setBounds(0,225,75,75);
-        startDateTextField = new JTextField(15);
         ETFTextField = new JTextField(5);
 
 
@@ -51,8 +50,6 @@ public class AddButtonPanel extends JFrame
         p.add(nameTextField);
         p.add(taskOutlinelLabel);
         p.add(taskOutlineTextField);
-        p.add(startDateLabel);
-        p.add(startDateTextField);
         p.add(ETFJLabel);
         p.add(ETFTextField);
 
@@ -76,6 +73,7 @@ public class AddButtonPanel extends JFrame
         public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)
         {
             Boolean same = false;
+
             try
             {
                 String name = "";
@@ -92,12 +90,6 @@ public class AddButtonPanel extends JFrame
                     taskOutline = taskOutlineTextField.getText();
                 }
     
-                String startDate = "";
-    
-                if(!(startDateTextField.getText().equals("")))
-                {
-                    startDate = startDateTextField.getText();
-                }
     
                 int ETF = 0;
     
@@ -111,17 +103,31 @@ public class AddButtonPanel extends JFrame
                 //maybe a more efficient of way of doing this
                 if((!(nameTextField.getText().equals("")))&&
                 (!(taskOutlineTextField.getText().equals("")))&&
-                (!(startDateTextField.getText().equals("")))&&
                 (Integer.parseInt(ETFTextField.getText()) > 0))
                 {
-                    Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
+                    Tasks P1 = new Tasks(name, taskOutline, ETF);
                     Tasks.ArrofTasks.add(P1);
-                    for (String t: Tasks.ArrofNames){//checking to see if name matches any existing name
-                        if (t.equals(name))
+                    new PopUpPanel(LocalTime.parse(P1.getEndTime()));
+                    for (Person t: Tasks.ArrofNames){
+                        //checks if the name is already recorded
+                        if (t.getName().equals(name))
                             same = true;
                     }
-                    if (!same)//if name doesnt match in the arrofNames then...
-                        Tasks.ArrofNames.add(name);
+
+                    //creating a new person object with 0 task complete and the expected time of the task.
+                    if (!same){
+                        Person peeps = new Person(name,0,P1.getExpectedTime());
+                        Tasks.ArrofNames.add(peeps);
+                        PanelListItems.fill();
+                    }
+                    //Since the person already exist just add the expected time to finish to the persons total expected time for tasks.
+                    else{
+                        for (Person pele : Tasks.ArrofNames){
+                            if (pele.getName().equals(name)){
+                                pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()+P1.getExpectedTime());
+                            }
+                        }
+                    }
                     same = false;
                     PanelListItems.saveNames("names.txt");
                     PanelListItems.saveTasks("tasks.txt");
@@ -130,9 +136,6 @@ public class AddButtonPanel extends JFrame
                     PanelListItems.model.setRowCount(0); //to empty the table of data
                     PanelListItems.showTable();
                     dispose();
-                }
-                else{//otherwise the pop up panel is shown
-                    PopUpPanel t = new PopUpPanel();
                 }
 
 
