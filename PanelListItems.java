@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -155,10 +156,12 @@ public class PanelListItems extends JPanel implements ItemListener{
                 String[] nextLine = tscan.nextLine().split(" ");
                 String name = nextLine[0];
                 String taskName = nextLine[1];
-                String startDate = nextLine[2];
+                String startTime = nextLine[2];
                 int estFin = Integer.parseInt(nextLine[3]);
                 boolean completed = Boolean.parseBoolean(nextLine[4]);
-                Tasks t = new Tasks(name,taskName,startDate,estFin,completed);
+                Tasks t = new Tasks(name,taskName,estFin,completed);
+                t.setStartTime(LocalTime.parse(startTime));
+                t.setEndTime();
                 Tasks.ArrofTasks.add(t);
             }
             tscan.close();
@@ -172,7 +175,7 @@ public class PanelListItems extends JPanel implements ItemListener{
             File dataSaver = new File(tfile);
             PrintWriter saveTo = new PrintWriter(dataSaver);
             for (Tasks t : Tasks.ArrofTasks){
-                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartDate()+ " " +t.getExpectedTime() + " " + t.getCompleted());
+                saveTo.println(t.getName()+" "+t.getTaskOutline()+" "+t.getStartTime()+ " " +t.getExpectedTime() + " " + t.getCompleted());
             }
             saveTo.close();
         }
@@ -214,7 +217,7 @@ public class PanelListItems extends JPanel implements ItemListener{
                     complete = "Yes";
                 }
 
-                String[] item={name[0], name[1], s.getTaskOutline(), s.getStartDate(), "" + s.getExpectedTime(), s.getEndDate(), complete};
+                String[] item={name[0], name[1], s.getTaskOutline(), s.getStartTime(), "" + s.getExpectedTime(), s.getEndTime(), complete};
                 model.addRow(item);   
             }
 

@@ -9,8 +9,8 @@ import java.awt.event.ItemListener;
 public class EditButtonPanel extends JFrame implements ItemListener
 {
     private JPanel editPanel= new JPanel();
-    private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeStartDate, changeEndDate;
-    private JTextField nameTextField, taskTextField, startDateTextField, endDateTextField;
+    private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeEndDate;
+    private JTextField nameTextField, taskTextField, endDateTextField;
     JComboBox<String> taskDropDown, userNameDropDown;
     private JButton changeButton;
     
@@ -47,13 +47,11 @@ public class EditButtonPanel extends JFrame implements ItemListener
         taskDropDown.addItemListener(this);
         taskSelected = new JLabel(taskDropDown.getSelectedItem() +" selected",JLabel.CENTER);
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
-        changeStartDate =  new JLabel("Change Start of task or leave empty to keep current start: ");
         changeEndDate = new JLabel("Change task expected time or leave empty to keep current expectation: ");
 
         //textfields for options chosen to be changed
         nameTextField = new JTextField(30);
         taskTextField = new JTextField(30);
-        startDateTextField = new JTextField(15);
         endDateTextField = new JTextField(15);
 
         editPanel.add(userToBeEdited);
@@ -66,8 +64,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
         editPanel.add(taskSelected);
         editPanel.add(changeTasks);
         editPanel.add(taskTextField);
-        editPanel.add(changeStartDate);
-        editPanel.add(startDateTextField);
         editPanel.add(changeEndDate);
         editPanel.add(endDateTextField);
         changeButton = new JButton("Change");
@@ -100,15 +96,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
                             if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
                                 t.setTaskOutline(taskTextField.getText());
-                    }
-                }
-
-                if(!(startDateTextField.getText().equals("")))
-                {
-                    for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                t.setStartDate(startDateTextField.getText());
                     }
                 }
 

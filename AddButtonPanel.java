@@ -1,7 +1,6 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -76,6 +75,7 @@ public class AddButtonPanel extends JFrame
         public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)
         {
             Boolean same = false;
+
             try
             {
                 String name = "";
@@ -94,12 +94,6 @@ public class AddButtonPanel extends JFrame
                     taskOutline = taskOutlineTextField.getText();
                 }
     
-                String startDate = "";
-    
-                if(!(startDateTextField.getText().equals("")))
-                {
-                    startDate = startDateTextField.getText();
-                }
     
                 int ETF = 0;
     
@@ -116,7 +110,7 @@ public class AddButtonPanel extends JFrame
                 (!(startDateTextField.getText().equals("")))&&
                 (Integer.parseInt(ETFTextField.getText()) > 0))
                 {
-                    Tasks P1 = new Tasks(name, taskOutline, startDate, ETF);
+                    Tasks P1 = new Tasks(name, taskOutline, ETF);
                     Tasks.ArrofTasks.add(P1);
                     for (Person t: Tasks.ArrofNames){
                         //checks if the name is already recorded
