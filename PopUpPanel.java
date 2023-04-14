@@ -1,28 +1,46 @@
-import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class PopUpPanel extends JFrame{
 
-    private JPanel p = new JPanel();
+public class PopUpPanel extends JFrame {
+   JPanel popOut = new JPanel();
+   
+   public PopUpPanel(LocalTime endTime) {
+      setTitle("Incomplete Task");
+      setResizable(false);
+      // create a timer that will check the current time every second
+      Timer timer = new Timer(1000, new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            // get the current time
+            LocalTime currentTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
 
-    private JLabel tLabel = new JLabel("You Have OverDue Tasks");
+            // check if the current time is equal to the popup time
+            if (currentTime.equals(endTime)) {
+               // create a panel to display
+               popOut.setSize(300,150);
+               popOut.setLayout(new GridLayout());
+               popOut.add(new JLabel("Task not Complete", JLabel.CENTER));
+               setMinimumSize(popOut.getSize());
+               add(popOut);
+               pack();
+               //setLocation(b);
+               setVisible(true);
+               
+               // stop the timer after the panel is displayed
+               ((Timer) e.getSource()).stop();
+            }
+         }
+      });
 
-    public PopUpPanel()
-    {
-        setTitle("Issue With Tasks");
-
-        p.setBackground(Color.RED);
-
-        p.add(tLabel);
-
-        getContentPane().add(p);
-
-        pack();
-
-        setVisible(true);
-    }
-    
+      // start the timer
+      timer.start();
+   }
 }

@@ -1,6 +1,8 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -107,6 +109,7 @@ public class AddButtonPanel extends JFrame
                 {
                     Tasks P1 = new Tasks(name, taskOutline, ETF);
                     Tasks.ArrofTasks.add(P1);
+                    new PopUpPanel(LocalTime.parse(P1.getEndTime()));
                     for (Person t: Tasks.ArrofNames){
                         //checks if the name is already recorded
                         if (t.getName().equals(name))
@@ -134,9 +137,6 @@ public class AddButtonPanel extends JFrame
                         PanelListItems.model.removeRow(i);
                     PanelListItems.showTable();
                     dispose();
-                }
-                else{//otherwise the pop up panel is shown
-                    PopUpPanel t = new PopUpPanel();
                 }
 
 
