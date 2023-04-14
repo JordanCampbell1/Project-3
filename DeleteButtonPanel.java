@@ -61,7 +61,7 @@ public class DeleteButtonPanel extends JFrame
 
         //fill the rows of the table with data    
 
-        for(String person : Tasks.ArrofNames) //currently prints 1 name 3 times
+        for(String person : Tasks.ArrofNames) 
         {
             String [] p = person.split(",");
 

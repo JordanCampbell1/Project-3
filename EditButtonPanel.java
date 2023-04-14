@@ -128,8 +128,9 @@ public class EditButtonPanel extends JFrame implements ItemListener
             catch(NumberFormatException error){}
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");
-            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                PanelListItems.model.removeRow(i);
+            //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                //PanelListItems.model.removeRow(i);
+            PanelListItems.model.setRowCount(0);//removes all the data in the table
             PanelListItems.showTable();
             dispose();
         }
