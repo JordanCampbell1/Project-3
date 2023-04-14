@@ -79,6 +79,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         public void actionPerformed(ActionEvent e) {
             try
             {
+                if (e.getSource() == changeButton){
                 if(Integer.parseInt(endDateTextField.getText()) > 0)
                 {
                     for (Tasks t: Tasks.ArrofTasks){
@@ -103,17 +104,15 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                 t.setTaskOutline(taskTextField.getText());
                     }
                 }
-
-                if (e.getSource() == changeButton){
                     if(!(nameTextField.getText().equals("")))
                 {
                     for (Tasks t: Tasks.ArrofTasks){
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
                             String [] arrofname = nameTextField.getText().split(" ");
-                            t.setName(arrofname[0] + "," + arrofname[1]);
+                            t.setName(arrofname[0] + " " + arrofname[1]);
                             for (Person p : Tasks.ArrofNames){
                                 if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
-                                    p.setName(arrofname[0] + "," + arrofname[1]);
+                                    p.setName(arrofname[0] + " " + arrofname[1]);
                                 }
                             }
                         }

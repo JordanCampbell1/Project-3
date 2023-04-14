@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-Matthew Williams,fishing,11/15/2023,4,false
-William Matthews,killing,10/09/2023,7,true
-=======
-Got,it getting 22:15 150 true
-Otter,Mills coding 22:15 240 false
-Kellington,Fry semiAuto 22:17 30 false
-Very,Loud help 00:03 20 false
-Reckless,Codeine Rapping 00:03 50 true
->>>>>>> Testproj3
+Got it,getting,22:15,500,true
+Otter Mills,coding,22:15,240,true
+Kellington Fry,semiAuto,22:17,30,true
+Very Loud,help,00:03,400,false
+Reckless Codeine,Rapping,00:03,90,true
+working order,zoosa,15:04,5,false

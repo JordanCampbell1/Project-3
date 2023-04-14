@@ -61,11 +61,11 @@ public class DeleteButtonPanel extends JFrame
 
         //fill the rows of the table with data    
 
-        for(String person : Tasks.ArrofNames) 
+        for(Person person : Tasks.ArrofNames) 
         {
             for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
             {
-                if(Tasks.ArrofTasks.get(count).getName().matches(person))
+                if(Tasks.ArrofTasks.get(count).getName().matches(person.getName()))
                 {
                     model.addRow(new Object[0]);
                     model.setValueAt(false, count, 0);
