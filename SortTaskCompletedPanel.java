@@ -40,7 +40,7 @@ public class SortTaskCompletedPanel extends JFrame{
         for(Person s : Tasks.ArrofNames)
         {
             {
-                String[] name= s.getName().split(",");
+                String[] name= s.getName().split(" ");
                 String[] item={name[0], name[1], Integer.toString(s.getTaskComplete()), Integer.toString(s.getEstTaskTimeLeft())};
                 models.addRow(item);   
             }

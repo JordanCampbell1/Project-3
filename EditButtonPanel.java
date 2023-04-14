@@ -80,8 +80,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
             try
             {
                 if (e.getSource() == changeButton){
-                if(Integer.parseInt(endDateTextField.getText()) > 0)
-                {
+                if(Integer.parseInt(endDateTextField.getText()) > 0){
                     for (Tasks t: Tasks.ArrofTasks){
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
                             if (t.getTaskOutline().equals(taskDropDown.getSelectedItem())){
@@ -95,7 +94,13 @@ public class EditButtonPanel extends JFrame implements ItemListener
                             }
                     }
                 }
+            }
 
+            }
+            catch(ArrayIndexOutOfBoundsException ed){}
+            catch(NumberFormatException error){}
+
+            try{
                 if(!(taskTextField.getText().equals("")))
                 {
                     for (Tasks t: Tasks.ArrofTasks){
@@ -104,7 +109,12 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                 t.setTaskOutline(taskTextField.getText());
                     }
                 }
-                    if(!(nameTextField.getText().equals("")))
+            }
+            catch(ArrayIndexOutOfBoundsException ed){}
+            catch(NumberFormatException error){}
+
+            try{
+                if(!(nameTextField.getText().equals("")))
                 {
                     for (Tasks t: Tasks.ArrofTasks){
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
@@ -118,17 +128,15 @@ public class EditButtonPanel extends JFrame implements ItemListener
                         }
                     }
                 }
-                
-            }
-
             }
             catch(ArrayIndexOutOfBoundsException ed){}
             catch(NumberFormatException error){}
+
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");
-            //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                //PanelListItems.model.removeRow(i);
-            PanelListItems.model.setRowCount(0);//removes all the data in the table
+            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                PanelListItems.model.removeRow(i);
+            //PanelListItems.model.setRowCount(0);//removes all the data in the table
             PanelListItems.showTable();
             dispose();
         }

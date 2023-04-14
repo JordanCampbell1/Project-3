@@ -1,6 +1,7 @@
-Got it,getting,22:15,500,true
+change name,change,22:15,200,true
 Otter Mills,coding,22:15,240,true
 Kellington Fry,semiAuto,22:17,30,true
-Very Loud,help,00:03,400,false
+Very Loud,help,00:03,400,true
 Reckless Codeine,Rapping,00:03,90,true
 working order,zoosa,15:04,5,false
+looking glass,puzzles,16:11,100,false
