@@ -79,14 +79,19 @@ public class EditButtonPanel extends JFrame implements ItemListener
         public void actionPerformed(ActionEvent e) {
             try
             {
-                if (e.getSource() == changeButton){
-                    if(!(nameTextField.getText().equals("")))
+                if(Integer.parseInt(endDateTextField.getText()) > 0)
                 {
                     for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
-                            String [] arrofname = nameTextField.getText().split(" ");
-                            t.setName(arrofname[0] + "," + arrofname[1]);
-                        }
+                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
+                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem())){
+                                for (Person p : Tasks.ArrofNames){
+                                    if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
+                                        p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() - t.getExpectedTime() +Integer.parseInt(endDateTextField.getText()));
+                                    }
+                                }
+                                t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
+                                PanelListItems.fill();     
+                            }
                     }
                 }
 
@@ -99,12 +104,19 @@ public class EditButtonPanel extends JFrame implements ItemListener
                     }
                 }
 
-                if(Integer.parseInt(endDateTextField.getText()) <= 0)
+                if (e.getSource() == changeButton){
+                    if(!(nameTextField.getText().equals("")))
                 {
                     for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
+                        if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
+                            String [] arrofname = nameTextField.getText().split(" ");
+                            t.setName(arrofname[0] + "," + arrofname[1]);
+                            for (Person p : Tasks.ArrofNames){
+                                if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
+                                    p.setName(arrofname[0] + "," + arrofname[1]);
+                                }
+                            }
+                        }
                     }
                 }
                 

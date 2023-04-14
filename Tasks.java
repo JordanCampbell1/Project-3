@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 
 
@@ -21,7 +22,7 @@ public class Tasks
     {
         this.name = name;
         this.taskOutline = taskOutline;
-        this.startTime = LocalTime.now();
+        this.startTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
         this.ETF = ETF;
         setEndTime();
         this.completed = false;

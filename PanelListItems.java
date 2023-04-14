@@ -6,16 +6,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-public class PanelListItems extends JPanel implements ItemListener{
+public class PanelListItems extends JPanel{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
     private JCheckBox notifications;
 
-    private JProgressBar progressBar;
+    public static JProgressBar progressBar;
 
     public static DefaultTableModel model = new DefaultTableModel();
 
@@ -24,9 +24,8 @@ public class PanelListItems extends JPanel implements ItemListener{
     private JScrollPane scrollPane;
 
     private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(),notiPanel = new JPanel();
-
-    public static JComboBox<String> nameDropDownPub;
     
+    public static int totalTask,totalTaskComplete;  
 
     public PanelListItems()
     {
@@ -80,25 +79,19 @@ public class PanelListItems extends JPanel implements ItemListener{
         notifications.addActionListener(new NotificationsListener());
         notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
-
-        nameDropDownPub = new JComboBox<>();
-        for (Person t: Tasks.ArrofNames){
-            nameDropDownPub.addItem(t.getName());
-        }
-        nameDropDownPub.addItemListener(this);
+        
         //taskedPanel.add(nameDropDown);
-        add(nameDropDownPub);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
+        fill();
 
         //taskedPanel.add(progressBar);
         add(progressBar);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
         notiPanel.setBounds(0,600,225,100);
-        progressBar.setBounds(375,635, 225, 25);
-        nameDropDownPub.setBounds(425,605,150,25);
+        progressBar.setBounds(150,620, 350, 25);
         //taskedPanel.setBounds(225,600,425,100);
 
         add(tablePanel);
@@ -110,11 +103,15 @@ public class PanelListItems extends JPanel implements ItemListener{
     }
 
     // function to dynamically increase progress  
-    private void fill(int completes,int limit)  
+    public static void fill()
     {  
-        int i = 0;
-        progressBar.setMaximum(limit); 
-        try{  
+        for (Person t:Tasks.ArrofNames){
+            totalTask+=t.getEstTaskTimeLeft() +t.getTaskComplete();
+            totalTaskComplete += t.getTaskComplete();
+        }
+        progressBar.setMaximum(totalTask);
+        progressBar.setValue(totalTaskComplete); 
+        /**try{  
             while(i <= completes){  
                 // fill the menu bar to the defined value using   
                 // the setValue( ) method  
@@ -128,7 +125,8 @@ public class PanelListItems extends JPanel implements ItemListener{
         }  
         catch (Exception e) {  
           System.out.println(e);    
-        }  
+        }
+        **/  
     }  
 
     public void loadNames(String nfile){
@@ -160,7 +158,7 @@ public class PanelListItems extends JPanel implements ItemListener{
                 int estFin = Integer.parseInt(nextLine[3]);
                 boolean completed = Boolean.parseBoolean(nextLine[4]);
                 Tasks t = new Tasks(name,taskName,estFin,completed);
-                t.setStartTime(LocalTime.parse(startTime));
+                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
             }
@@ -268,7 +266,7 @@ public class PanelListItems extends JPanel implements ItemListener{
             NotificationPanel random = new NotificationPanel();
         }
     }
-
+/** 
     public void itemStateChanged(ItemEvent e) {
         ArrayList<Tasks> numofTask = new ArrayList<>(); 
         ArrayList<Tasks> numCompleted = new ArrayList<>();
@@ -286,4 +284,5 @@ public class PanelListItems extends JPanel implements ItemListener{
             numofTask.clear();
             numCompleted.clear();
     }
+*/
 }

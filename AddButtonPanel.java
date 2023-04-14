@@ -10,9 +10,9 @@ import javax.swing.JTextField;
 
 public class AddButtonPanel extends JFrame
 {
-    private JLabel namelLabel, taskOutlinelLabel, startDateLabel, ETFJLabel;
+    private JLabel namelLabel, taskOutlinelLabel, ETFJLabel;
 
-    private JTextField nameTextField, taskOutlineTextField, startDateTextField, ETFTextField;
+    private JTextField nameTextField, taskOutlineTextField, ETFTextField;
 
     private JButton saveButton = new JButton("Save");
 
@@ -22,8 +22,8 @@ public class AddButtonPanel extends JFrame
     public AddButtonPanel()
     {
         setTitle("Adding a Task");
-        p.setSize(300,300);
-        p.setLayout(new GridLayout(9,1)); 
+        p.setSize(200,100);
+        p.setLayout(new GridLayout(7,1)); 
         setMinimumSize(p.getSize());
         setResizable(false);
 
@@ -34,14 +34,12 @@ public class AddButtonPanel extends JFrame
         namelLabel.setBounds(0,0,75,75);
         taskOutlinelLabel= new JLabel("Task Outline");
         taskOutlinelLabel.setBounds(0,150,75,75);
-        startDateLabel = new JLabel("Start Date");
         ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
 
         nameTextField = new JTextField(30);
         nameTextField.setBounds(0,75,75,75);
         taskOutlineTextField = new JTextField(50);
         taskOutlineTextField.setBounds(0,225,75,75);
-        startDateTextField = new JTextField(15);
         ETFTextField = new JTextField(5);
 
 
@@ -50,8 +48,6 @@ public class AddButtonPanel extends JFrame
         p.add(nameTextField);
         p.add(taskOutlinelLabel);
         p.add(taskOutlineTextField);
-        p.add(startDateLabel);
-        p.add(startDateTextField);
         p.add(ETFJLabel);
         p.add(ETFTextField);
 
@@ -107,7 +103,6 @@ public class AddButtonPanel extends JFrame
                 //maybe a more efficient of way of doing this
                 if((!(nameTextField.getText().equals("")))&&
                 (!(taskOutlineTextField.getText().equals("")))&&
-                (!(startDateTextField.getText().equals("")))&&
                 (Integer.parseInt(ETFTextField.getText()) > 0))
                 {
                     Tasks P1 = new Tasks(name, taskOutline, ETF);
@@ -122,7 +117,7 @@ public class AddButtonPanel extends JFrame
                     if (!same){
                         Person peeps = new Person(name,0,P1.getExpectedTime());
                         Tasks.ArrofNames.add(peeps);
-                        PanelListItems.nameDropDownPub.addItem(name);
+                        PanelListItems.fill();
                     }
                     //Since the person already exist just add the expected time to finish to the persons total expected time for tasks.
                     else{
