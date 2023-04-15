@@ -96,7 +96,7 @@ public class DeleteButtonPanel extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            for(int row = 0; row < Tasks.ArrofTasks.size(); row++) //rows of table = size of ArrofTasks
+            for(int row = 0; row < table.getRowCount(); row++) //rows of table != size of ArrofTasks apparently //goes through table to look for boolean
             {
                 Boolean checked = Boolean.valueOf(table.getValueAt(row, 0).toString());
 
