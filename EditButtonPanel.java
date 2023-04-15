@@ -90,6 +90,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                     }
                                 }
                                 t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
+                                new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
                                 PanelListItems.fill();     
                             }
                     }
@@ -107,6 +108,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
                             if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
                                 t.setTaskOutline(taskTextField.getText());
+                                new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
                     }
                 }
             }
@@ -123,6 +125,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                             for (Person p : Tasks.ArrofNames){
                                 if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
                                     p.setName(arrofname[0] + " " + arrofname[1]);
+                                    new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
                                 }
                             }
                         }
@@ -134,9 +137,9 @@ public class EditButtonPanel extends JFrame implements ItemListener
 
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");
-            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                PanelListItems.model.removeRow(i);
-            //PanelListItems.model.setRowCount(0);//removes all the data in the table
+            //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+                //PanelListItems.model.removeRow(i);
+            PanelListItems.model.setRowCount(0);//removes all the data in the table
             PanelListItems.showTable();
             dispose();
         }

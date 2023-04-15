@@ -36,7 +36,7 @@ public class AddButtonPanel extends JFrame
         namelLabel.setBounds(0,0,75,75);
         taskOutlinelLabel= new JLabel("Task Outline");
         taskOutlinelLabel.setBounds(0,150,75,75);
-        ETFJLabel = new JLabel("Estimated Time to Finish (in Days)");
+        ETFJLabel = new JLabel("Estimated Duration (in mins)");
 
         nameTextField = new JTextField(30);
         nameTextField.setBounds(0,75,75,75);
@@ -107,7 +107,7 @@ public class AddButtonPanel extends JFrame
                 {
                     Tasks P1 = new Tasks(name, taskOutline, ETF);
                     Tasks.ArrofTasks.add(P1);
-                    new PopUpPanel(LocalTime.parse(P1.getEndTime()));
+                    new PopUpPanel(P1.getName(),P1.getTaskOutline(),P1.getEndTime());
                     for (Person t: Tasks.ArrofNames){
                         //checks if the name is already recorded
                         if (t.getName().equals(name))

@@ -5,3 +5,5 @@ Very Loud 400 0
 Reckless Codeine 50 40
 working order 0 5
 looking glass 0 100
+checksters lab 0 1
+Tiffany Morris 1 0

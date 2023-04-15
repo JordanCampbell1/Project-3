@@ -31,7 +31,8 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
         taskDropDown = new JComboBox<String>();
         for (Tasks t: Tasks.ArrofTasks){
             if (t.getName().equals((String) nameDropDown.getSelectedItem())) {
-                taskDropDown.addItem(t.getTaskOutline());
+                if(!(t.getCompleted()))
+                    taskDropDown.addItem(t.getTaskOutline());
             }
         }
         taskDropDown.addItemListener(this);

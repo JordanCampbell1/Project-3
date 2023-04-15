@@ -23,7 +23,7 @@ public class PanelListItems extends JPanel{
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(),notiPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),/**taskedPanel = new JPanel(),*/notiPanel = new JPanel();
     
     public static int totalTask,totalTaskComplete;  
 
@@ -36,9 +36,9 @@ public class PanelListItems extends JPanel{
         String[] columnNames=  {"First Name",
                 "Last Name", 
                 "Task Outline",
-                "Start Date",
-                "Expected Time to Finish",
-                "End Date",
+                "Start Time",
+                "Estimated Duration (Mins)",
+                "End Time",
                 "Completed"};
 
         model=new DefaultTableModel(columnNames,0);
@@ -172,6 +172,7 @@ public class PanelListItems extends JPanel{
                 t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
+                new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
             }
             tscan.close();
         }
