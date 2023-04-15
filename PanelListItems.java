@@ -7,9 +7,10 @@ import java.awt.event.*;
 import java.io.*;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PanelListItems extends JPanel{
+public class PanelListItems extends JPanel implements ItemListener{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
@@ -26,6 +27,8 @@ public class PanelListItems extends JPanel{
     private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(), notiPanel = new JPanel();
     
     public static int totalTask,totalTaskComplete;  
+
+    private JComboBox<String> nameDropDownPub;
 
     public PanelListItems()
     {
@@ -79,7 +82,13 @@ public class PanelListItems extends JPanel{
         notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
         
-        taskedPanel.add(nameDropDown);
+        nameDropDownPub = new JComboBox<>();
+        for (Person p: Tasks.ArrofNames){
+            nameDropDownPub.addItem(p.getName());
+        }
+        nameDropDownPub.addItemListener(this);
+
+        //taskedPanel.add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
@@ -128,7 +137,7 @@ public class PanelListItems extends JPanel{
         **/  
     }  
 
-    private void fill(int ratio)  //for overall progress bar
+    private void filler(int ratio)  //for overall progress bar
     {  
         try{  
             progressBar.setValue(ratio) ;  
@@ -278,7 +287,7 @@ public class PanelListItems extends JPanel{
             NotificationPanel random = new NotificationPanel();
         }
     }
-/** 
+
     public void itemStateChanged(ItemEvent e) {
         ArrayList<Tasks> numofTask = new ArrayList<>(); 
         ArrayList<Tasks> numCompleted = new ArrayList<>();
@@ -291,10 +300,10 @@ public class PanelListItems extends JPanel{
                     }
                 }
             }
-            fill(numCompleted.size(),numofTask.size());
+            filler(numCompleted.size(),numofTask.size());
         }
             numofTask.clear();
             numCompleted.clear();
     }
-*/
+
 }
