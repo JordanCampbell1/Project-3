@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -111,9 +112,10 @@ public class DeleteButtonPanel extends JFrame
                         {
                             Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                             Tasks.ArrofNames.remove(count); //remove name at the same time
-                        }
+                            PanelListItems.nameDropDownPub.remove(count);
+                            PanelListItems.fill();
                     }
-
+                }
                     
                 }
             }

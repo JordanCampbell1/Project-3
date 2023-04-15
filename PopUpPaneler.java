@@ -60,12 +60,14 @@ public class PopUpPaneler extends JFrame {
                               for(int i =0;i<Tasks.ArrofNames.size();i++){
                                  if (Tasks.ArrofNames.get(i).getName().equals(name)){
                                     Tasks.ArrofNames.remove(i);
+                                    PanelListItems.nameDropDownPub.remove(i);
                                  }
                               }
                            }
                         }
                         Tasks.ArrofTasks.remove(j);
                         PanelListItems.fill();
+                        PanelListItems.filler(name);
                         PanelListItems.saveNames("names.txt");
                         PanelListItems.saveTasks("tasks.txt");
                         //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)//table.getRowCount(0) does the same thing

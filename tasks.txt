@@ -1,8 +1,4 @@
-Otter Mills,coding,22:15,240,true
-Kellington Fry,semiAuto,22:17,30,true
-Very Loud,help,00:03,400,true
-checksters lab,checking,18:20,1,false
-Tiffany Morris,Goat,18:55,1,true
-Chad Awesome,tooling,20:08,1,false
-CHeck progreess,tkk,20:13,100,false
-oekso dimaomdso,odkaom,20:14,400,false
+Straight toliver,faded,01:21,30,false
+object rockit,fainting,01:22,50,false
+car pool,looool,01:22,100,false
+dying inside,fading,01:25,200,false

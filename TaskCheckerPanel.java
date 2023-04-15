@@ -65,6 +65,7 @@ public class TaskCheckerPanel extends JFrame implements ItemListener {
                                 p.setTaskComplete(p.getTaskComplete()+t.getExpectedTime());
                                 p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() - t.getExpectedTime());
                                 PanelListItems.fill();
+                                PanelListItems.filler(p.getName());
                             }
                         }
                     }                        

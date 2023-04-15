@@ -20,7 +20,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         editPanel.setSize(480,550);
         this.setLayout(null);
         this.setResizable(false);
-        editPanel.setLayout(new GridLayout(16,1,1,5));
+        editPanel.setLayout(new GridLayout(14,1,1,5));
         
         
         //ComboBox for the user-name choice for data to be edited
@@ -40,7 +40,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         //Specific task for that person
         taskDropDown = new JComboBox<>();
         for (Tasks t: Tasks.ArrofTasks){
-            if (t.getName().equals((String) userNameDropDown.getSelectedItem())) {
+            if (t.getName().equals((String) userNameDropDown.getSelectedItem()) && !(t.getCompleted())) {
                 taskDropDown.addItem(t.getTaskOutline());
             }
         }
@@ -91,7 +91,8 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                 }
                                 t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
                                 new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
-                                PanelListItems.fill();     
+                                PanelListItems.fill();
+                                PanelListItems.filler(t.getName());     
                             }
                     }
                 }
