@@ -7,24 +7,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+/**
+ * AddButtonPanel when initialized creates a frame which includes
+ * the inputs for adding a tasks to arraylist of tasks.
+ * 
+ * {@code AddButtonPanel} extends {@code JFrame} and implements
+ * the ActionListener interface used by save button.
+ */
 public class AddButtonPanel extends JFrame
 {
     private JLabel namelLabel, taskOutlinelLabel, ETFJLabel;
 
     private JTextField nameTextField, taskOutlineTextField, ETFTextField;
-
+    /**
+     * The saveButton is implemented as a button that when
+     * pressed saves the user input to the arrayLists of tasks.
+     * {@code saveButton} is {@code JButton} object that is added
+     * to the panel.
+     */
     private JButton saveButton = new JButton("Save");
 
     private JPanel p = new JPanel();
-
 
     public AddButtonPanel()
     {
         setTitle("Adding a Task");
         p.setSize(200,100);
         p.setLayout(new GridLayout(7,1)); 
-        //setMinimumSize(p.getSize()); //dont think this is needed
+        setMinimumSize(p.getSize());
         setResizable(false);
 
         //p.setLayout(null); //to accurately set the componenets on the panel
@@ -65,7 +75,10 @@ public class AddButtonPanel extends JFrame
         setVisible(true);
     }
 
-    //test
+    /**
+     * {@code actionPerformed} method is called when the save button is clicked
+     * to save the user text input to the array of tasks.
+     */
     private class SaveButtonListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)

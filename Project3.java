@@ -1,6 +1,11 @@
 import javax.swing.JFrame;
 
-
+/**
+ * Project3 when initialized creates a frame which includes
+ * the PanelListItems panel.
+ * 
+ * {@code Project3} extends {@code JFrame}.
+ */
 public class Project3 extends JFrame
 {
     public static void main(String [] args)

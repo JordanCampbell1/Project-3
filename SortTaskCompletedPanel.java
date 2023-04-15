@@ -8,6 +8,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * SortTaskCompletedPanel when initialized creates a frame which
+ * shows the users sorted by the amount of task completed.
+ * 
+ * {@code SortTaskCompletedPanel} extends {@code JFrame}.
+ */
 public class SortTaskCompletedPanel extends JFrame{
 
     private JPanel sortedTablePanel = new JPanel();

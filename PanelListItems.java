@@ -8,7 +8,16 @@ import java.io.*;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
-
+/**
+ * PanelListItems when initialized creates a panel which includes
+ * the buttons to sort, manipulate and check a user for completion of a task,
+ * a table displaying the user tasks and progressbars showing the overall 
+ * completion of task and specific user task completion.
+ * 
+ * {@code PanelListItems} extends {@code JPanel} and implements
+ * the ItemListener interface used by the combobox that shows the
+ * progress of a speciific user on the progressbar.
+ */
 public class PanelListItems extends JPanel implements ItemListener{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
@@ -148,7 +157,15 @@ public class PanelListItems extends JPanel implements ItemListener{
     }  
 
 
-
+/**
+ * {@code loadNames} takes the string name of the textfile and
+ * initializes a file object using the string to load the names attributes
+ * from the text file and iniitialize a person object to add to the
+ * arrofNames.  
+ *  
+ * @param nfile is a string of the name of the textfile used which
+ * has a list of the names of the users.
+ */
     public void loadNames(String nfile){
         try{
             Scanner nscan = null;
@@ -166,6 +183,15 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch(IOException ioe){}
     }
 
+/**
+ * {@code loadTasks} takes the string name of the textfile and
+ * initializes a file object using the string to load the tasks attributes
+ * from the text file and iniitialize a tasks object to add to the
+ * arrofTasks.  
+ *  
+ * @param tfile is a string of the name of the textfile used which
+ * has a list of the attributes of the tasks.
+ */
     public void loadTasks(String tfile){
         Scanner tscan = null;
         try{
@@ -188,6 +214,14 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch (IOException e) {}
     }
 
+/**
+ * {@code saveTasks} takes the string name of the textfile and
+ * initializes a file object using the string to save the tasks attributes
+ * to the text file.
+ *  
+ * @param tfile is a string of the name of the textfile used which
+ * has a list of the attributes of the tasks.
+ */
     public static void saveTasks(String tfile){
 
         try{
@@ -201,7 +235,14 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch (IOException e) {}
 
     }
-
+/**
+ * {@code saveNames} takes the string name of the textfile and
+ * initializes a file object using the string to save the person attributes
+ * to the text file.
+ *  
+ * @param nfile is a string of the name of the textfile used which
+ * has a list of the attributes of the person.
+ */
     public static void saveNames(String nfile){
         try{
             File nameSaver = new File(nfile);
@@ -221,8 +262,15 @@ public class PanelListItems extends JPanel implements ItemListener{
             addToTable(person.getName());
         }
     }
-
-    private static void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
+    /**
+     * {@code addToTable} adds a person's task to the table if they
+     *  have a task attached to them in the text file. 
+     * 
+     * @param person is a string of a users name that is used
+     * to index through the list of tasks and add the matching
+     * task to the table to display the task attributes.
+     */
+    private static void addToTable(String person) 
     {
         for(Tasks s : Tasks.ArrofTasks)
         {

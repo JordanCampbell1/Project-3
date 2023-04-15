@@ -1,17 +1,33 @@
 import javax.swing.*;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+/**
+ * EditButtonPanel when initialized creates a frame which includes
+ * the inputs for editing all attributes associated with a tasks.
+ * 
+ * {@code EditButtonPanel} extends {@code JFrame} and implements
+ * the ItemListener interface used by the ComboBoxes to select
+ * which users and task of user should be changed.
+ */
 public class EditButtonPanel extends JFrame implements ItemListener
 {
     private JPanel editPanel= new JPanel();
     private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeEndDate;
     private JTextField nameTextField, taskTextField, endDateTextField;
     JComboBox<String> taskDropDown, userNameDropDown;
+    /**
+     * The changeButton is implemented as a button that when
+     * pressed edit the user selected from the arrayLists of tasks
+     * and names.
+     * 
+     * {@code changeButton} is {@code JButton} object that is added
+     * to the panel and when clicked an actionPerformed method is run
+     * which changes the selected task to the user input.
+     */
     private JButton changeButton;
     
     public EditButtonPanel()
@@ -74,7 +90,11 @@ public class EditButtonPanel extends JFrame implements ItemListener
         this.pack();
         this.setVisible(true);
     }
-
+    /**
+     * {@code actionPerformed} method is called which If the user input in the
+     *  textfield is not empty the data in the arraylist will be edited to the
+     *  user input.
+    */
     private class ChangeButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             try
@@ -149,7 +169,11 @@ public class EditButtonPanel extends JFrame implements ItemListener
             dispose();
         }
     }
-
+    /**
+     * {@code itemStateChanged} method is called when the user selects a name from the dropbox 
+     *  to edit it affects the output of the next dropbox once selected in the first and allows 
+     *  for indexing of specific users to be edited.
+    */
     public void itemStateChanged(ItemEvent e) {
         userSelected.setText(userNameDropDown.getSelectedItem() + " selected");
         if (e.getSource() == userNameDropDown){
