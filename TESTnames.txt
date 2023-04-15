@@ -1,3 +1,4 @@
-David Malcolm
-Matthew Williams
-William Matthews
+David Malcolm 50 0
+Matthew Williams 0 100
+William Matthews 0 200
+Jordan Campbell 0 300
