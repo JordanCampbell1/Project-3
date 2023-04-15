@@ -118,6 +118,7 @@ public class AddButtonPanel extends JFrame
                     if (!same){
                         Person peeps = new Person(name,0,P1.getExpectedTime());
                         Tasks.ArrofNames.add(peeps);
+                        PanelListItems.nameDropDownPub.addItem(name);
                         PanelListItems.fill();
                     }
                     //Since the person already exist just add the expected time to finish to the persons total expected time for tasks.
@@ -125,6 +126,8 @@ public class AddButtonPanel extends JFrame
                         for (Person pele : Tasks.ArrofNames){
                             if (pele.getName().equals(name)){
                                 pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()+P1.getExpectedTime());
+                                PanelListItems.fill();
+                                PanelListItems.filler(name);
                             }
                         }
                     }
@@ -136,6 +139,9 @@ public class AddButtonPanel extends JFrame
                     PanelListItems.model.setRowCount(0); //to empty the table of data
                     PanelListItems.showTable();
                     dispose();
+                }
+                else{
+                    new PopUpPanel();
                 }
 
 

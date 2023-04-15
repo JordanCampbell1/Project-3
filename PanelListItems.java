@@ -9,23 +9,27 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-public class PanelListItems extends JPanel{
+public class PanelListItems extends JPanel implements ItemListener{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
     private JCheckBox notifications;
 
-    public static JProgressBar progressBar;
+    public static JProgressBar progressBar,progressPull;
 
     public static DefaultTableModel model = new DefaultTableModel();
+    
+    private JLabel topBar = new JLabel("Overall Progress");
 
     public static JTable table;
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),/**taskedPanel = new JPanel(),*/notiPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(), notiPanel = new JPanel();
     
     public static int totalTask,totalTaskComplete;  
+
+    public static JComboBox<String> nameDropDownPub;
 
     public PanelListItems()
     {
@@ -79,22 +83,40 @@ public class PanelListItems extends JPanel{
         notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
         
+        nameDropDownPub = new JComboBox<>();
+        for (Person p: Tasks.ArrofNames){
+            nameDropDownPub.addItem(p.getName());
+        }
+        nameDropDownPub.addItemListener(this);
+
         //taskedPanel.add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
         fill();
 
-        add(progressBar);
+        progressPull = new JProgressBar();
+        progressPull.setValue(0);
+        progressPull.setStringPainted(true);
+        filler((String)nameDropDownPub.getSelectedItem());
+
+        topBar.setBounds(420,605,150,20);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
-        notiPanel.setBounds(0,600,225,100);
-        progressBar.setBounds(150,620, 350, 25);
-        //taskedPanel.setBounds(225,600,425,100);
+        //notiPanel.setBounds(0,600,225,100);
+        progressBar.setBounds(330,630, 300, 25);
+        nameDropDownPub.setBounds(65,605,150,20);
+        progressPull.setBounds(0,630,300,25);
 
+        //taskedPanel.setBounds(225,600,425,100);
+        
+        add(topBar);
+        add(nameDropDownPub);
+        add(progressPull);
         add(tablePanel);
         add(buttonPanel);
         add(notiPanel);
+        add(progressBar);
 
         //fill(Tasks.ratioOfTasksCompleted());
         
@@ -108,8 +130,14 @@ public class PanelListItems extends JPanel{
             totalTask+=t.getEstTaskTimeLeft() +t.getTaskComplete();
             totalTaskComplete += t.getTaskComplete();
         }
-        progressBar.setMaximum(totalTask);
-        progressBar.setValue(totalTaskComplete); 
+        if (totalTask <= 0){
+            progressBar.setMaximum(1);
+        }
+        else
+            progressBar.setMaximum(totalTask);
+        progressBar.setValue(totalTaskComplete);
+        totalTask = 0;
+        totalTaskComplete = 0; 
         /**try{  
             while(i <= completes){  
                 // fill the menu bar to the defined value using   
@@ -128,14 +156,14 @@ public class PanelListItems extends JPanel{
         **/  
     }  
 
-    private void fill(int ratio)  //for overall progress bar
+    public static void filler(String selectedPerson)  
     {  
-        try{  
-            progressBar.setValue(ratio) ;  
-        }  
-        catch (Exception e) {  
-          System.out.println(e);    
-        }  
+        for (Person peeper: Tasks.ArrofNames){
+            if (peeper.getName().equals(selectedPerson)){
+                progressPull.setMaximum(peeper.getEstTaskTimeLeft() + peeper.getTaskComplete());
+                progressPull.setValue(peeper.getTaskComplete());
+            }
+        }
     }  
 
 
@@ -278,23 +306,12 @@ public class PanelListItems extends JPanel{
             NotificationPanel random = new NotificationPanel();
         }
     }
-/** 
-    public void itemStateChanged(ItemEvent e) {
-        ArrayList<Tasks> numofTask = new ArrayList<>(); 
-        ArrayList<Tasks> numCompleted = new ArrayList<>();
+
+    public void itemStateChanged(ItemEvent e) 
+    {
         if (e.getSource() == nameDropDownPub){
-            for (Tasks t: Tasks.ArrofTasks){
-                if (t.getName().equals((String) nameDropDownPub.getSelectedItem())) {
-                    numofTask.add(t);
-                    if (t.getCompleted() == true){
-                        numCompleted.add(t);
-                    }
-                }
-            }
-            fill(numCompleted.size(),numofTask.size());
+            filler((String)nameDropDownPub.getSelectedItem());
         }
-            numofTask.clear();
-            numCompleted.clear();
+        
     }
-*/
 }
