@@ -137,6 +137,9 @@ public class AddButtonPanel extends JFrame
                     PanelListItems.showTable();
                     dispose();
                 }
+                else{
+                    new PopUpPanel();
+                }
 
 
                 

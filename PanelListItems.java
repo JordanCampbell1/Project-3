@@ -23,7 +23,7 @@ public class PanelListItems extends JPanel{
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),/**taskedPanel = new JPanel(),*/notiPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(), notiPanel = new JPanel();
     
     public static int totalTask,totalTaskComplete;  
 
@@ -79,7 +79,7 @@ public class PanelListItems extends JPanel{
         notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
         
-        //taskedPanel.add(nameDropDown);
+        taskedPanel.add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);

@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +60,7 @@ public class DeleteButtonPanel extends JFrame
 
 
         //fill the rows of the table with data    
-
+        int innercount = 0;
         for(Person person : Tasks.ArrofNames) 
         {
             for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
@@ -67,9 +68,10 @@ public class DeleteButtonPanel extends JFrame
                 if(Tasks.ArrofTasks.get(count).getName().matches(person.getName()))
                 {
                     model.addRow(new Object[0]);
-                    model.setValueAt(false, count, 0);
-                    model.setValueAt(Tasks.ArrofTasks.get(count).getName(), count, 1);
-                    model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), count, 2);
+                    model.setValueAt(false, innercount, 0);
+                    model.setValueAt(Tasks.ArrofTasks.get(count).getName(), innercount, 1);
+                    model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), innercount, 2);
+                    innercount++;
                 }
             }
         }
