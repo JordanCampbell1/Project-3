@@ -137,10 +137,21 @@ public class PanelListItems extends JPanel implements ItemListener{
         **/  
     }  
 
-    private void filler(int ratio)  //for overall progress bar
+    private void filler(int completes,int limit)  
     {  
+        int i = 0;
+        progressBar.setMaximum(limit); 
         try{  
-            progressBar.setValue(ratio) ;  
+            while(i <= completes){  
+                // fill the menu bar to the defined value using   
+                // the setValue( ) method  
+                progressBar.setValue(i) ;  
+   
+                // delay the thread by 100 ms  
+                Thread.sleep(100);  
+                // increasing the progress every time by 1%  
+                i += 1 ;  //i++
+            }  
         }  
         catch (Exception e) {  
           System.out.println(e);    
