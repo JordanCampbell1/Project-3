@@ -9,8 +9,8 @@ import java.awt.event.ItemListener;
 public class EditButtonPanel extends JFrame implements ItemListener
 {
     private JPanel editPanel= new JPanel();
-    private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeStartDate, changeEndDate;
-    private JTextField nameTextField, taskTextField, startDateTextField, endDateTextField;
+    private JLabel userToBeEdited, userSelected, taskSelected,taskToBeEdited, changeName, changeTasks, changeEndDate;
+    private JTextField nameTextField, taskTextField, endDateTextField;
     JComboBox<String> taskDropDown, userNameDropDown;
     private JButton changeButton;
     
@@ -26,8 +26,8 @@ public class EditButtonPanel extends JFrame implements ItemListener
         //ComboBox for the user-name choice for data to be edited
         userToBeEdited = new JLabel("Which user would you like to edit:");
         userNameDropDown = new JComboBox<>();
-        for (String t: Tasks.ArrofNames){
-                userNameDropDown.addItem(t);
+        for (Person t: Tasks.ArrofNames){
+                userNameDropDown.addItem(t.getName());
             }
         userNameDropDown.addItemListener(this);
         userSelected = new JLabel(userNameDropDown.getSelectedItem() +" selected", JLabel.CENTER);
@@ -47,13 +47,11 @@ public class EditButtonPanel extends JFrame implements ItemListener
         taskDropDown.addItemListener(this);
         taskSelected = new JLabel(taskDropDown.getSelectedItem() +" selected",JLabel.CENTER);
         changeTasks = new JLabel("Change Task or leave empty to keep current task: ");
-        changeStartDate =  new JLabel("Change Start of task or leave empty to keep current start: ");
         changeEndDate = new JLabel("Change task expected time or leave empty to keep current expectation: ");
 
         //textfields for options chosen to be changed
         nameTextField = new JTextField(30);
         taskTextField = new JTextField(30);
-        startDateTextField = new JTextField(15);
         endDateTextField = new JTextField(15);
 
         editPanel.add(userToBeEdited);
@@ -66,8 +64,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
         editPanel.add(taskSelected);
         editPanel.add(changeTasks);
         editPanel.add(taskTextField);
-        editPanel.add(changeStartDate);
-        editPanel.add(startDateTextField);
         editPanel.add(changeEndDate);
         editPanel.add(endDateTextField);
         changeButton = new JButton("Change");
@@ -83,58 +79,62 @@ public class EditButtonPanel extends JFrame implements ItemListener
         public void actionPerformed(ActionEvent e) {
             try
             {
-                if (e.getSource() == changeButton)
-                {
-                    if(!(nameTextField.getText().equals("")))
-                    {
-                        for (Tasks t: Tasks.ArrofTasks){
-                            if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
-
-                                t.setName(nameTextField.getText());
-
-                                for(int index = 0; index < Tasks.ArrofNames.size(); index++)//updates name in arrofnames 
-                                {   
-                                    if(Tasks.ArrofNames.get(index).matches((String) userNameDropDown.getSelectedItem()))
-                                    {
-                                        Tasks.ArrofNames.set(index, nameTextField.getText());
+                if (e.getSource() == changeButton){
+                if(Integer.parseInt(endDateTextField.getText()) > 0){
+                    for (Tasks t: Tasks.ArrofTasks){
+                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
+                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem())){
+                                for (Person p : Tasks.ArrofNames){
+                                    if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
+                                        p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() - t.getExpectedTime() +Integer.parseInt(endDateTextField.getText()));
                                     }
                                 }
+                                t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
+                                new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
+                                PanelListItems.fill();     
                             }
-                        }
                     }
-
-                    if(!(taskTextField.getText().equals("")))
-                    {
-                        for (Tasks t: Tasks.ArrofTasks){
-                            if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                                if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                    t.setTaskOutline(taskTextField.getText());
-                        }
-                    }
-
-                    if(!(startDateTextField.getText().equals("")))
-                    {
-                        for (Tasks t: Tasks.ArrofTasks){
-                            if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                                if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                    t.setStartDate(startDateTextField.getText());
-                        }
-                    }
-
-                    if(Integer.parseInt(endDateTextField.getText()) <= 0)
-                    {
-                        for (Tasks t: Tasks.ArrofTasks){
-                            if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                                if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                    t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
-                        }
-                    }
-                
                 }
+            }
 
             }
             catch(ArrayIndexOutOfBoundsException ed){}
             catch(NumberFormatException error){}
+
+            try{
+                if(!(taskTextField.getText().equals("")))
+                {
+                    for (Tasks t: Tasks.ArrofTasks){
+                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
+                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
+                                t.setTaskOutline(taskTextField.getText());
+                                new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
+                    }
+                }
+            }
+            catch(ArrayIndexOutOfBoundsException ed){}
+            catch(NumberFormatException error){}
+
+            try{
+                if(!(nameTextField.getText().equals("")))
+                {
+                    for (Tasks t: Tasks.ArrofTasks){
+                        if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
+                            String [] arrofname = nameTextField.getText().split(" ");
+                            t.setName(arrofname[0] + " " + arrofname[1]);
+                            for (Person p : Tasks.ArrofNames){
+                                if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
+                                    p.setName(arrofname[0] + " " + arrofname[1]);
+                                    new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch(ArrayIndexOutOfBoundsException ed){}
+            catch(NumberFormatException error){}
+
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");
             //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
