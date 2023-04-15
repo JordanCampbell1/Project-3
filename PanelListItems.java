@@ -34,7 +34,7 @@ public class PanelListItems extends JPanel implements ItemListener{
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(), notiPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(), notiPanel = new JPanel();
     
     public static int totalTask,totalTaskComplete;  
 
@@ -93,12 +93,11 @@ public class PanelListItems extends JPanel implements ItemListener{
         notiPanel.add(notifications);
         
         nameDropDownPub = new JComboBox<>();
-        for (Person p: Tasks.ArrofNames){
+        for (Person p: Tasks.ArrofNames){ //udates dropdown with names
             nameDropDownPub.addItem(p.getName());
         }
         nameDropDownPub.addItemListener(this);
 
-        //taskedPanel.add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
@@ -117,7 +116,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         nameDropDownPub.setBounds(65,605,150,20);
         progressPull.setBounds(0,630,300,25);
 
-        //taskedPanel.setBounds(225,600,425,100);
+
         
         add(topBar);
         add(nameDropDownPub);
@@ -126,8 +125,6 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(buttonPanel);
         add(notiPanel);
         add(progressBar);
-
-        //fill(Tasks.ratioOfTasksCompleted());
         
 
     }
@@ -147,33 +144,9 @@ public class PanelListItems extends JPanel implements ItemListener{
         progressBar.setValue(totalTaskComplete);
         totalTask = 0;
         totalTaskComplete = 0; 
-        /**try{  
-            while(i <= completes){  
-                // fill the menu bar to the defined value using   
-                // the setValue( ) method  
-                progressBar.setValue(i) ;  
-   
-                // delay the thread by 100 ms  
-                Thread.sleep(100);  
-                // increasing the progress every time by 1%  
-                i += 1 ;  //i++
-            }  
-        }  
-        catch (Exception e) {  
-          System.out.println(e);    
-        }
-        **/  
-    }
+    }  
 
-    /**
-     * function to dynamically increase progress shown
-     * on the progressbar of a specific person
-     * 
-     * @param selectedPerson is a string of a person seleccted
-     * from the nameDropDownBox used to index through arrofNames 
-     * and show the specific progress of that person.
-     */
-    public static void filler(String selectedPerson)  
+    public static void filler(String selectedPerson)  //fills progress bar based on a person's task time info
     {  
         for (Person peeper: Tasks.ArrofNames){
             if (peeper.getName().equals(selectedPerson)){
@@ -231,7 +204,7 @@ public class PanelListItems extends JPanel implements ItemListener{
                 int estFin = Integer.parseInt(nextLine[3]);
                 boolean completed = Boolean.parseBoolean(nextLine[4]);
                 Tasks t = new Tasks(name,taskName,estFin,completed);
-                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));
+                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));//why do this when startTime 
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
                 new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
