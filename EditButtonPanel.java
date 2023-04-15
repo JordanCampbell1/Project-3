@@ -34,7 +34,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
 
         //allow for the user to change all types of data access
         changeName = new JLabel("Change Name or leave empty to keep current name: ");
-        taskToBeEdited = new JLabel("which task would you like to edit");
+        taskToBeEdited = new JLabel("Which task would you like to edit");
         //Combobox for which task to edit and then proceeds to allow for tasktext field entry
 
         //Specific task for that person
@@ -83,45 +83,54 @@ public class EditButtonPanel extends JFrame implements ItemListener
         public void actionPerformed(ActionEvent e) {
             try
             {
-                if (e.getSource() == changeButton){
-                    if(!(nameTextField.getText().equals("")))
+                if (e.getSource() == changeButton)
                 {
-                    for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
-                            String [] arrofname = nameTextField.getText().split(" ");
-                            t.setName(arrofname[0] + "," + arrofname[1]);
+                    if(!(nameTextField.getText().equals("")))
+                    {
+                        for (Tasks t: Tasks.ArrofTasks){
+                            if (t.getName().equals((String) userNameDropDown.getSelectedItem())){
+
+                                t.setName(nameTextField.getText());
+
+                                for(int index = 0; index < Tasks.ArrofNames.size(); index++)//updates name in arrofnames 
+                                {   
+                                    if(Tasks.ArrofNames.get(index).matches((String) userNameDropDown.getSelectedItem()))
+                                    {
+                                        Tasks.ArrofNames.set(index, nameTextField.getText());
+                                    }
+                                }
+                            }
                         }
                     }
-                }
 
-                if(!(taskTextField.getText().equals("")))
-                {
-                    for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                t.setTaskOutline(taskTextField.getText());
+                    if(!(taskTextField.getText().equals("")))
+                    {
+                        for (Tasks t: Tasks.ArrofTasks){
+                            if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
+                                if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
+                                    t.setTaskOutline(taskTextField.getText());
+                        }
                     }
-                }
 
-                if(!(startDateTextField.getText().equals("")))
-                {
-                    for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                t.setStartDate(startDateTextField.getText());
+                    if(!(startDateTextField.getText().equals("")))
+                    {
+                        for (Tasks t: Tasks.ArrofTasks){
+                            if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
+                                if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
+                                    t.setStartDate(startDateTextField.getText());
+                        }
                     }
-                }
 
-                if(Integer.parseInt(endDateTextField.getText()) <= 0)
-                {
-                    for (Tasks t: Tasks.ArrofTasks){
-                        if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
-                            if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
-                                t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
+                    if(Integer.parseInt(endDateTextField.getText()) <= 0)
+                    {
+                        for (Tasks t: Tasks.ArrofTasks){
+                            if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
+                                if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
+                                    t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
+                        }
                     }
-                }
                 
-            }
+                }
 
             }
             catch(ArrayIndexOutOfBoundsException ed){}

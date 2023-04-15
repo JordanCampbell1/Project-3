@@ -8,11 +8,13 @@ public class PopUpPanel extends JFrame{
 
     private JPanel p = new JPanel();
 
-    private JLabel tLabel = new JLabel("You Have OverDue Tasks");
+    private JLabel tLabel = new JLabel("You Did Not Enter All Of The Data for This Task"); //adjust size of font
 
     public PopUpPanel()
     {
-        setTitle("Issue With Tasks");
+        setTitle("Issue With New Task Entry");
+        setResizable(false);
+        setSize(300, 400);
 
         p.setBackground(Color.RED);
 
