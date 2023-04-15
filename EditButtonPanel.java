@@ -127,6 +127,10 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                 if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
                                     p.setName(arrofname[0] + " " + arrofname[1]);
                                     new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
+                                    PanelListItems.nameDropDownPub.removeAllItems();
+                                    for (Person poro: Tasks.ArrofNames){
+                                        PanelListItems.nameDropDownPub.addItem(poro.getName());
+                                    }
                                 }
                             }
                         }
