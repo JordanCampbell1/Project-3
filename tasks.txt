@@ -1,4 +1,4 @@
-David Malcolm,fainting,01:22,50,false
+David Malcolm,fainting,01:22,50,true
 Matthew Williams,gaming,01:29,100,false
 William Matthews,fading,01:50,200,false
 Jordan Campbell,gaming,02:07,300,false
