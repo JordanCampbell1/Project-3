@@ -172,7 +172,7 @@ public class PanelListItems extends JPanel{
                 t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
-                new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
+                new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
             }
             tscan.close();
         }

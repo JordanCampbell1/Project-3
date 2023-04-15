@@ -107,7 +107,7 @@ public class AddButtonPanel extends JFrame
                 {
                     Tasks P1 = new Tasks(name, taskOutline, ETF);
                     Tasks.ArrofTasks.add(P1);
-                    new PopUpPanel(P1.getName(),P1.getTaskOutline(),P1.getEndTime());
+                    new PopUpPaneler(P1.getName(),P1.getTaskOutline(),P1.getEndTime());
                     for (Person t: Tasks.ArrofNames){
                         //checks if the name is already recorded
                         if (t.getName().equals(name))
