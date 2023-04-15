@@ -34,7 +34,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
 
         //allow for the user to change all types of data access
         changeName = new JLabel("Change Name or leave empty to keep current name: ");
-        taskToBeEdited = new JLabel("which task would you like to edit");
+        taskToBeEdited = new JLabel("Which task would you like to edit");
         //Combobox for which task to edit and then proceeds to allow for tasktext field entry
 
         //Specific task for that person
@@ -90,7 +90,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                     }
                                 }
                                 t.setExpectedTime(Integer.parseInt(endDateTextField.getText()));
-                                new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
+                                new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
                                 PanelListItems.fill();     
                             }
                     }
@@ -108,7 +108,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
                             if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
                                 t.setTaskOutline(taskTextField.getText());
-                                new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
+                                new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
                     }
                 }
             }
@@ -125,7 +125,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                             for (Person p : Tasks.ArrofNames){
                                 if (p.getName().equals((String) userNameDropDown.getSelectedItem())){
                                     p.setName(arrofname[0] + " " + arrofname[1]);
-                                    new PopUpPanel(t.getName(), t.getTaskOutline(), t.getEndTime());
+                                    new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
                                 }
                             }
                         }

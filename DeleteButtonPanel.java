@@ -120,7 +120,7 @@ public class DeleteButtonPanel extends JFrame
             PanelListItems.model.setRowCount(0);//removes data from table
             PanelListItems.showTable();//updates main table
 
-            dispose();
+            dispose(); //closes window and frees memory
             //setVisible(false); //hides the window but still consumes memory
         }
     }
