@@ -24,7 +24,7 @@ public class AddButtonPanel extends JFrame
         setTitle("Adding a Task");
         p.setSize(200,100);
         p.setLayout(new GridLayout(7,1)); 
-        setMinimumSize(p.getSize());
+        //setMinimumSize(p.getSize()); //dont think this is needed
         setResizable(false);
 
         //p.setLayout(null); //to accurately set the componenets on the panel
