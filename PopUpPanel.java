@@ -37,29 +37,6 @@ public class PopUpPanel extends JFrame {
                }
             }
             //Detects if edits were made to task and returns from the instance effectively "deleting" the pop up.
-            for (int i = 0,j=0,k=0,l=0;i<=Tasks.ArrofTasks.size();i++){
-               if (!(Tasks.ArrofTasks.get(i).getName().equals(name))){
-                  j++;
-                  if (j ==Tasks.ArrofTasks.size()){
-                     ((Timer) e.getSource()).stop();
-                     return;
-                  }
-               }
-                  if (Tasks.ArrofTasks.get(i).getTaskOutline().equals(taskName)){
-                     k++;
-                     if (k ==Tasks.ArrofTasks.size()){
-                        ((Timer) e.getSource()).stop();
-                        return;
-                     }
-                  }
-                  if (Tasks.ArrofTasks.get(i).getEndTime().equals(endTime)){
-                     l++;
-                     if (l ==Tasks.ArrofTasks.size()){
-                        ((Timer) e.getSource()).stop();
-                        return;
-                     }
-                  }
-               }
 
             // check if the current time is equal to the popup time
             if (currentTime.equals(LocalTime.parse(endTime))) {

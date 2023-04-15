@@ -7,3 +7,6 @@ working order,zoosa,15:04,5,false
 looking glass,puzzles,16:11,100,false
 checksters lab,checking,18:20,1,false
 Tiffany Morris,Goat,18:55,1,true
+Chad Awesome,tooling,20:08,1,false
+CHeck progreess,tkk,20:13,100,false
+oekso dimaomdso,odkaom,20:14,400,false
