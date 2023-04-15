@@ -1,12 +1,18 @@
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Collections;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+/**
+ * SortTimePanel when initialized creates a frame which
+ * shows the users sorted by the amount of task to be completed.
+ * 
+ * {@code SortTimePanel} extends {@code JFrame}.
+ */
 
 public class SortTimePanel extends JFrame{
 
