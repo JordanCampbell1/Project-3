@@ -59,7 +59,6 @@ public class DeleteButtonPanel extends JFrame
 
 
         //fill the rows of the table with data    
-        int innercount = 0;
         for(Person person : Tasks.ArrofNames) 
         {
             for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
@@ -67,10 +66,10 @@ public class DeleteButtonPanel extends JFrame
                 if(Tasks.ArrofTasks.get(count).getName().matches(person.getName()))
                 {
                     model.addRow(new Object[0]);
-                    model.setValueAt(false, innercount, 0);
-                    model.setValueAt(Tasks.ArrofTasks.get(count).getName(), innercount, 1);
-                    model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), innercount, 2);
-                    innercount++;
+                    model.setValueAt(false, count, 0);
+                    model.setValueAt(Tasks.ArrofTasks.get(count).getName(), count, 1);
+                    model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), count, 2);
+                    
                 }
             }
         }
@@ -110,6 +109,8 @@ public class DeleteButtonPanel extends JFrame
                         {
                             Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
 
+                            same = false;//baseline boolean
+
                             for (Tasks t: Tasks.ArrofTasks){
                                 //checks if another instance of the name is in task
                                 if (t.getName().equals(table.getValueAt(row, 1).toString()))
@@ -123,7 +124,7 @@ public class DeleteButtonPanel extends JFrame
                                     PanelListItems.nameDropDownPub.addItem(p.getName());
                                 }
                                 PanelListItems.fill();
-                                PanelListItems.filler(Tasks.ArrofNames.get(count).getName());
+                                //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //do not think it is needed
                             }
                             //if the name is on another task then just remove the expected time from the person class and adjust the progressbars.
                             else{

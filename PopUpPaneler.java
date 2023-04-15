@@ -15,12 +15,16 @@ public class PopUpPaneler extends JFrame {
    String name,taskName,endTime;
    boolean same=true;
    int count;
-   public PopUpPaneler(String name, String taskName, String endTime) {
+
+   public PopUpPaneler(String name, String taskName, String endTime) 
+   {
       this.name = name;
       this.taskName = taskName;
       this.endTime = endTime;
       setTitle("Incomplete Task");
       setResizable(false);
+
+      
       // create a timer that will check the current time every second
       Timer timer = new Timer(1000, new ActionListener() {
          public void actionPerformed(ActionEvent e) {

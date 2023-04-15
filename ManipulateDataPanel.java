@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class ManipulateDataPanel extends JFrame{ //figure out how to extend from jpanel while updating an object of the class Tasks seamlessly
+public class ManipulateDataPanel extends JFrame
+{ 
 
     private JButton addTaskButton = new JButton("Add Task");
     private JButton editTaskButton = new JButton("Edit Task");
@@ -42,6 +43,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
         public void actionPerformed(ActionEvent e)
         {
             AddButtonPanel something = new AddButtonPanel();
+
+            setVisible(false);
         }
     }
 
@@ -50,6 +53,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
         public void actionPerformed(ActionEvent e)
         {
             EditButtonPanel something = new EditButtonPanel();
+
+            setVisible(false);
         }
     }
 
@@ -58,6 +63,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
         public void actionPerformed(ActionEvent e)
         {
             DeleteButtonPanel something = new DeleteButtonPanel();
+
+            setVisible(false);
         }
     }
 

@@ -4,7 +4,9 @@ public class Person implements Comparable<Person>, Comparator<Person>{
     private String name;
     private int taskComplete;
     private int estTaskTimeLeft;
+
     public Person(){}
+
     public Person (String name, int taskComplete, int estTaskTimeLeft)
     {
         this.name = name;
@@ -55,6 +57,7 @@ public class Person implements Comparable<Person>, Comparator<Person>{
         } 
         return 1;
     }
+    
     public int compare(Person o1, Person o2) {
         return (o2.getEstTaskTimeLeft() - o1.getEstTaskTimeLeft());
 

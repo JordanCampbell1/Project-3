@@ -177,8 +177,7 @@ public class PanelListItems extends JPanel implements ItemListener{
                 String startTime = nextLine[2];
                 int estFin = Integer.parseInt(nextLine[3]);
                 boolean completed = Boolean.parseBoolean(nextLine[4]);
-                Tasks t = new Tasks(name,taskName,estFin,completed);
-                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));//why do this when startTime 
+                Tasks t = new Tasks(name,taskName,startTime,estFin,completed);
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
                 new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
