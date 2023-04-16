@@ -141,7 +141,7 @@ public class AddButtonPanel extends JFrame
                             if (pele.getName().equals(name)){
                                 pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()+P1.getExpectedTime());
                                 PanelListItems.fill();
-                                //PanelListItems.filler(name); //do not see why this should be called since it will be called in itemstatehcanged() 
+                                //PanelListItems.filler(name); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                             }
                         }
                     }

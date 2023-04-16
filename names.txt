@@ -1,3 +1,4 @@
-David Malcolm 50 0
-Matthew Williams 0 100
-Bob Johnson 0 40
+David Malcolm 50 30
+Matthew Williams 100 0
+William Matthews 0 200
+Jordan Campbell 300 0

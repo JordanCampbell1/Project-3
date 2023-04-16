@@ -71,7 +71,7 @@ public class PopUpPaneler extends JFrame {
                         }
                         Tasks.ArrofTasks.remove(j);
                         PanelListItems.fill();
-                        PanelListItems.filler(name);
+                        //PanelListItems.filler(name); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                         PanelListItems.saveNames("names.txt");
                         PanelListItems.saveTasks("tasks.txt");
                         //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)//table.getRowCount(0) does the same thing

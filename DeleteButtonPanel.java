@@ -124,7 +124,7 @@ public class DeleteButtonPanel extends JFrame
                                     PanelListItems.nameDropDownPub.addItem(p.getName());
                                 }
                                 PanelListItems.fill();
-                                //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //do not think it is needed
+                                //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                             }
                             //if the name is on another task then just remove the expected time from the person class and adjust the progressbars.
                             else{
@@ -132,7 +132,7 @@ public class DeleteButtonPanel extends JFrame
                                     if (pele.getName().equals(table.getValueAt(row, 1).toString())){
                                         pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-Tasks.ArrofTasks.get(count).getExpectedTime());
                                         PanelListItems.fill();
-                                        PanelListItems.filler(Tasks.ArrofNames.get(count).getName());
+                                        //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                                     }
                                 }
                             }
