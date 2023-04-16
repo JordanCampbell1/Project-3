@@ -82,6 +82,10 @@ public class PanelListItems extends JPanel implements ItemListener{
         notifications.addActionListener(new NotificationsListener());
         notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
+        
+
+        
+        
          
         
         nameDropDownPub = new JComboBox<>();
