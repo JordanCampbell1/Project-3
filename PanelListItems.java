@@ -8,7 +8,16 @@ import java.io.*;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
-
+/**
+ * PanelListItems when initialized creates a panel which includes
+ * the buttons to sort, manipulate and check a user for completion of a task,
+ * a table displaying the user tasks and progressbars showing the overall 
+ * completion of task and specific user task completion.
+ * 
+ * {@code PanelListItems} extends {@code JPanel} and implements
+ * the ItemListener interface used by the combobox that shows the
+ * progress of a speciific user on the progressbar.
+ */
 public class PanelListItems extends JPanel implements ItemListener{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
@@ -25,7 +34,7 @@ public class PanelListItems extends JPanel implements ItemListener{
 
     private JScrollPane scrollPane;
 
-    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(),taskedPanel = new JPanel(), notiPanel = new JPanel();
+    private JPanel tablePanel = new JPanel(), buttonPanel = new JPanel(), notiPanel = new JPanel();
     
     public static int totalTask,totalTaskComplete;  
 
@@ -89,12 +98,11 @@ public class PanelListItems extends JPanel implements ItemListener{
          
         
         nameDropDownPub = new JComboBox<>();
-        for (Person p: Tasks.ArrofNames){
+        for (Person p: Tasks.ArrofNames){ //udates dropdown with names
             nameDropDownPub.addItem(p.getName());
         }
         nameDropDownPub.addItemListener(this);
 
-        //taskedPanel.add(nameDropDown);
         progressBar = new JProgressBar();
         progressBar.setValue(0); //probably redundant due to the fill method below
         progressBar.setStringPainted(true);
@@ -113,7 +121,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         nameDropDownPub.setBounds(65,605,150,20);
         progressPull.setBounds(0,630,300,25);
 
-        //taskedPanel.setBounds(225,600,425,100);
+
         
         add(topBar);
         add(nameDropDownPub);
@@ -122,8 +130,6 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(buttonPanel);
         add(notiPanel);
         add(progressBar);
-
-        //fill(Tasks.ratioOfTasksCompleted());
         
 
     }
@@ -143,25 +149,9 @@ public class PanelListItems extends JPanel implements ItemListener{
         progressBar.setValue(totalTaskComplete);
         totalTask = 0;
         totalTaskComplete = 0; 
-        /**try{  
-            while(i <= completes){  
-                // fill the menu bar to the defined value using   
-                // the setValue( ) method  
-                progressBar.setValue(i) ;  
-   
-                // delay the thread by 100 ms  
-                Thread.sleep(100);  
-                // increasing the progress every time by 1%  
-                i += 1 ;  //i++
-            }  
-        }  
-        catch (Exception e) {  
-          System.out.println(e);    
-        }
-        **/  
     }  
 
-    public static void filler(String selectedPerson)  
+    public static void filler(String selectedPerson)  //fills progress bar based on a person's task time info
     {  
         for (Person peeper: Tasks.ArrofNames){
             if (peeper.getName().equals(selectedPerson)){
@@ -172,7 +162,15 @@ public class PanelListItems extends JPanel implements ItemListener{
     }  
 
 
-
+/**
+ * {@code loadNames} takes the string name of the textfile and
+ * initializes a file object using the string to load the names attributes
+ * from the text file and iniitialize a person object to add to the
+ * arrofNames.  
+ *  
+ * @param nfile is a string of the name of the textfile used which
+ * has a list of the names of the users.
+ */
     public void loadNames(String nfile){
         try{
             Scanner nscan = null;
@@ -190,6 +188,15 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch(IOException ioe){}
     }
 
+/**
+ * {@code loadTasks} takes the string name of the textfile and
+ * initializes a file object using the string to load the tasks attributes
+ * from the text file and iniitialize a tasks object to add to the
+ * arrofTasks.  
+ *  
+ * @param tfile is a string of the name of the textfile used which
+ * has a list of the attributes of the tasks.
+ */
     public void loadTasks(String tfile){
         Scanner tscan = null;
         try{
@@ -202,7 +209,7 @@ public class PanelListItems extends JPanel implements ItemListener{
                 int estFin = Integer.parseInt(nextLine[3]);
                 boolean completed = Boolean.parseBoolean(nextLine[4]);
                 Tasks t = new Tasks(name,taskName,estFin,completed);
-                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));
+                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));//why do this when startTime 
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
                 new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
@@ -212,6 +219,14 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch (IOException e) {}
     }
 
+/**
+ * {@code saveTasks} takes the string name of the textfile and
+ * initializes a file object using the string to save the tasks attributes
+ * to the text file.
+ *  
+ * @param tfile is a string of the name of the textfile used which
+ * has a list of the attributes of the tasks.
+ */
     public static void saveTasks(String tfile){
 
         try{
@@ -225,7 +240,14 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch (IOException e) {}
 
     }
-
+/**
+ * {@code saveNames} takes the string name of the textfile and
+ * initializes a file object using the string to save the person attributes
+ * to the text file.
+ *  
+ * @param nfile is a string of the name of the textfile used which
+ * has a list of the attributes of the person.
+ */
     public static void saveNames(String nfile){
         try{
             File nameSaver = new File(nfile);
@@ -245,8 +267,15 @@ public class PanelListItems extends JPanel implements ItemListener{
             addToTable(person.getName());
         }
     }
-
-    private static void addToTable(String person) //adds a person's task to the table if they have a task attached to them in the text file
+    /**
+     * {@code addToTable} adds a person's task to the table if they
+     *  have a task attached to them in the text file. 
+     * 
+     * @param person is a string of a users name that is used
+     * to index through the list of tasks and add the matching
+     * task to the table to display the task attributes.
+     */
+    private static void addToTable(String person) 
     {
         for(Tasks s : Tasks.ArrofTasks)
         {

@@ -6,7 +6,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * ManipulateDataPanel when initialized creates a frame which includes
+ * three buttons that when pressed lead to other panels that change the
+ * data of the program.
+ * 
+ * {@code ManipulateDataPanel} extends {@code JFrame} and has buttonlistener
+ * classes that implement the ActionListener interface used by the three buttons.
+ */
 public class ManipulateDataPanel extends JFrame{ //figure out how to extend from jpanel while updating an object of the class Tasks seamlessly
 
     private JButton addTaskButton = new JButton("Add Task");

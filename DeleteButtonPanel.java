@@ -8,11 +8,25 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-
+/**
+ * AddButtonPanel when initialized creates a frame which includes
+ * the names and tasks of users and a delete button for the removal
+ * of those tasks and names from the arrayList if checked.
+ * 
+ * {@code DeleteButtonPanel} extends {@code JFrame} and implements
+ * the ActionListener interface used by the delete button.
+ */
 public class DeleteButtonPanel extends JFrame
 {
     private DefaultTableModel model;
     private JTable table;
+    /**
+     * The deleteButton is implemented as a button that when
+     * pressed deletes the user checked from the arrayLists of tasks.
+     * 
+     * {@code deleteButton} is {@code JButton} object that is added
+     * to the panel and implements its action when clicked.
+     */
     private JButton deleteButton;
     private boolean same;
 
@@ -92,7 +106,11 @@ public class DeleteButtonPanel extends JFrame
     }
     
 
-    //if the checked data in the table matches the data in the arraylist then it will delete it from the arraylist and close the window
+    /**
+     * {@code actionPerformed} method is called which If the checked data in the
+     *  table matches the data in the arraylist then it will delete it from the
+     *  arraylist and close the window.
+    */
     private class ButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)

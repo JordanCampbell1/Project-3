@@ -5,7 +5,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class TaskCheckerPanel extends JFrame implements ItemListener {
+/**
+ * TaskCheckerPanel when initialized creates a frame which includes
+ * 2 comboboxes whichallow the user to select a user and a task
+ * which was completed to check it for completion.
+ * 
+ * {@code TaskCheckerPanel} extends {@code JFrame} and implements
+ * ItemListener interface which is used by the ComboBoxes to select
+ * which users and task of user should be checked.
+ */
+
+ public class TaskCheckerPanel extends JFrame implements ItemListener {
     private JPanel taskPanel = new JPanel();
     private JLabel pickName,pickTask,selectedUser,selectedTask;
     private JComboBox<String> nameDropDown, taskDropDown;

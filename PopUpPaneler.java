@@ -9,12 +9,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
+/**
+ * PopUpPaneler when initialized creates a frame which informs
+ * the user they did not complete their task.
+ * 
+ * {@code PopUpPaneler} extends {@code JFrame}.
+ */
 public class PopUpPaneler extends JFrame {
    JPanel popOut = new JPanel();
    String name,taskName,endTime;
    boolean same=true;
    int count;
+   /**
+    * PopUpPaneler constructor for class.
+    * @param name is the name of the person.
+    * @param taskName is the name of the task.
+    * @param endTime is the time when the task should be finished by.
+    */
    public PopUpPaneler(String name, String taskName, String endTime) {
       this.name = name;
       this.taskName = taskName;
@@ -87,15 +98,32 @@ public class PopUpPaneler extends JFrame {
       timer.start();
    }
 
+   /**
+    * Getter method for the name of the person.
+    * @return the name of the person.
+    */
    public String getName(){
       return name;
    }
+   /**
+    * Getter method for the name of the task.
+    * @return the task name.
+    */
    public String getTaskName(){
       return taskName;
    }
+   /**
+    * Setter method for the name.
+    * @param name is the new name to be set.
+    */
    public void setName(String name){
       this.name = name;
    }
+
+   /**
+    * Setter method for the task name
+    * @param taskName is the new task name to be set.
+    */
    public void setTaskName(String taskName){
       this.taskName = taskName;
    }

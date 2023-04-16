@@ -10,6 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * PopUpPanel when initialized creates a frame which includes
+ * text informing the user of theri mistakes.
+ * 
+ * {@code PopUpPanel} extends {@code JFrame}.
+ */
 public class PopUpPanel extends JFrame{
 
     private JPanel p = new JPanel();
