@@ -1,5 +1,4 @@
 Jack Grealish,fainting,01:22,50,false
-lorris deez,pumpum,01:29,69,false
 William Matthews,fading,01:50,200,false
 Jordan Campbell,gaming,02:07,300,false
 jordan george,fdff,12:32,23,false
