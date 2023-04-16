@@ -72,21 +72,56 @@ public class DeleteButtonPanel extends JFrame
         model.addColumn("Task Outline");
 
 
-        //fill the rows of the table with data    
-        for(Person person : Tasks.ArrofNames) 
+        //fill the rows of the table with data   
+        
+        try
         {
-            for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
+            int innercount = 0;//prints data correctly if there is a scenario where a task with a name is not next to each other 
+            //in short - ensures that each row is populated from each person's task(s)
+            for(Person person : Tasks.ArrofNames) 
             {
-                if(Tasks.ArrofTasks.get(count).getName().matches(person.getName()))
+                for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
                 {
-                    model.addRow(new Object[0]);
-                    model.setValueAt(false, count, 0);
-                    model.setValueAt(Tasks.ArrofTasks.get(count).getName(), count, 1);
-                    model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), count, 2);
-                    
+                    if(Tasks.ArrofTasks.get(count).getName().matches(person.getName()))
+                    {
+                        model.addRow(new Object[0]);
+                        model.setValueAt(false, innercount, 0);
+                        model.setValueAt(Tasks.ArrofTasks.get(count).getName(), innercount, 1);
+                        model.setValueAt(Tasks.ArrofTasks.get(count).getTaskOutline(), innercount, 2);
+                        
+                        innercount++;
+                    }
                 }
             }
+        }   
+        catch(IndexOutOfBoundsException e){
+
+            for(Person p : Tasks.ArrofNames)
+            {
+                System.out.println("Person #: " + p.getName());
+            }
+
+            for(Tasks T: Tasks.ArrofTasks)
+            {
+                System.out.println("Task #: " + T.getName());
+            }
         }
+        catch(Exception t){
+
+            for(Person p : Tasks.ArrofNames)
+            {
+                System.out.println("Person #: " + p);
+            }
+
+            for(Tasks T: Tasks.ArrofTasks)
+            {
+                System.out.println("Task #: " + T);
+            }
+
+
+            
+        }
+        
             
         
 

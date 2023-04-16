@@ -26,7 +26,7 @@ public class Tasks //implements Comparable<Tasks>
      * @param taskOutline name of task
      * @param ETF is the expected time for the person to finish task.
      */
-    public Tasks(String name, String startTime,String taskOutline, int ETF)
+    public Tasks(String name, String taskOutline, String startTime,int ETF)
     {
         this.name = name;
         this.taskOutline = taskOutline;
