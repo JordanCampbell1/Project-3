@@ -44,7 +44,7 @@ public class AddButtonPanel extends JFrame
         nameTextField.setBounds(0,75,75,75);
         taskOutlineTextField = new JTextField(50);
         taskOutlineTextField.setBounds(0,225,75,75);
-        ETFTextField = new JTextField(5);
+        ETFTextField = new JTextField(10);
 
         startTimeField = new JTextField(8);
 

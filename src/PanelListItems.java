@@ -9,7 +9,8 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-public class PanelListItems extends JPanel implements ItemListener{
+public class PanelListItems extends JPanel implements ItemListener
+{
 
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
