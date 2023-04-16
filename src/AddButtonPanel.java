@@ -1,6 +1,8 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -87,6 +89,8 @@ public class AddButtonPanel extends JFrame
                 {
                     name = nameTextField.getText();
                 }
+
+                System.out.println("NAME: " + nameTextField.getText().equals(""));
     
                 String taskOutline = "";
     
@@ -94,6 +98,7 @@ public class AddButtonPanel extends JFrame
                 {
                     taskOutline = taskOutlineTextField.getText();
                 }
+                System.out.println("TASKOUTLINE: " + taskOutlineTextField.getText().equals(""));
 
                 String startTime = "";
     
@@ -101,14 +106,22 @@ public class AddButtonPanel extends JFrame
                 {
                     startTime = startTimeField.getText();
                 }
+
+                System.out.println("starttime: " + startTimeField.getText().equals(""));
     
     
-                int ETF = 0;
+                int ETF = 9;
+                
     
                 if(Integer.parseInt(ETFTextField.getText()) > 0)
                 {
-                    ETF = Integer.parseInt(ETFTextField.getText());
+                    ETF = Integer.parseInt(ETFTextField.getText());                   
                 }
+                
+                System.out.println("ETF: " +  (String) ETFTextField.getText());
+                //System.out.println("ETF: " + (Integer.parseInt(ETFTextField.getText()) > 0) );
+                //nothing is printed from ETFtectfield for some reason
+                
 
 
                 //if data is entered then it will be added to the arraylist

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ public class PopUpPaneler extends JFrame {
       this.name = name;
       this.taskName = taskName;
       this.endTime = endTime;
-      setTitle("Incomplete Task");
+      setTitle("Overdue Task(s)");
       setResizable(false);
 
       
@@ -47,8 +48,11 @@ public class PopUpPaneler extends JFrame {
                // create a panel to display
                popOut.setSize(300,150);
                popOut.setLayout(new GridLayout());
-               popOut.add(new JLabel("Task not Complete", JLabel.CENTER));
                setMinimumSize(popOut.getSize());
+
+               popOut.add(new JLabel("One or More Task(s) are Overdue", JLabel.CENTER));
+               popOut.setBackground(Color.red);
+               
                add(popOut);
                pack();
                //setLocation(b);

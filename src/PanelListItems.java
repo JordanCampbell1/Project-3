@@ -35,7 +35,7 @@ public class PanelListItems extends JPanel implements ItemListener{
     {
         super(null); //establishes a new layout for the GUI to use
 
-        setBounds(0,0,650,700);
+        setBounds(0,0,650,900);
 
         String[] columnNames=  {"First Name",
                 "Last Name", 
@@ -51,9 +51,9 @@ public class PanelListItems extends JPanel implements ItemListener{
         loadTasks("tasks.txt");
         showTable(); //list of data items to be put in the table in the main panel
 
-        table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
+        table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 + 50));
         table.setFillsViewportHeight(true);
-        tablePanel.setLayout(new GridLayout());
+        tablePanel.setLayout(new GridLayout()); //new GridLayout()
         scrollPane = new JScrollPane(table);
 
         tablePanel.add(scrollPane);
@@ -80,7 +80,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
 
         notifications.addActionListener(new NotificationsListener());
-        notiPanel.setLayout(new GridLayout());
+        notiPanel.setLayout(null);
         notiPanel.add(notifications);
         
         nameDropDownPub = new JComboBox<>();
@@ -102,7 +102,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         topBar.setBounds(420,605,150,20);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
-        //notiPanel.setBounds(0,600,225,100);
+        notiPanel.setBounds(0,700,225,100);
         progressBar.setBounds(330,630, 300, 25);
         nameDropDownPub.setBounds(65,605,150,20);
         progressPull.setBounds(0,630,300,25);

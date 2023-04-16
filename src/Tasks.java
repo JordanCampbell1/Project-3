@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
+//import java.time.temporal.ChronoUnit;
 
 
 
@@ -95,47 +95,5 @@ public class Tasks //implements Comparable<Tasks>
         this.ETF = ETF;
     }
 
-    public static int ratioOfAllTasksCompleted()
-    {
-        if(ArrofTasks.size() == 0)
-        {
-            return 0;
-        }
-
-        int count = 0;
-
-        for(Tasks t : ArrofTasks)
-        {
-            if(t.getCompleted() == true)
-            {
-                count++;
-            }
-        }
-
-        return (int) count * 100 / ArrofTasks.size(); 
-    }
-   
-    //almost useless code
-    public static int ratioOfTasksCompleted(String namep)
-    {
-        int completed = 0;
-        int tasksTotal = 0;
-
-        for(Tasks t : ArrofTasks)
-        {
-            if(namep.matches(t.getName()))
-            {   
-                if(t.getCompleted() == true)
-                {
-                    completed++;
-                }
-
-                tasksTotal++;
-            }            
-        }
-
-        return (int) completed * 100 / tasksTotal; 
-    }
-   
     
 }   
