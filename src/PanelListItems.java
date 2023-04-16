@@ -5,8 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
+//import java.time.LocalTime;
+//import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 /**
  * PanelListItems when initialized creates a panel which includes
@@ -44,7 +44,7 @@ public class PanelListItems extends JPanel implements ItemListener{
     {
         super(null); //establishes a new layout for the GUI to use
 
-        setBounds(0,0,650,700);
+        setBounds(0,0,650,900);
 
         String[] columnNames=  {"First Name",
                 "Last Name", 
@@ -60,9 +60,9 @@ public class PanelListItems extends JPanel implements ItemListener{
         loadTasks("tasks.txt");
         showTable(); //list of data items to be put in the table in the main panel
 
-        table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 +50));
+        table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 + 50));
         table.setFillsViewportHeight(true);
-        tablePanel.setLayout(new GridLayout());
+        tablePanel.setLayout(new GridLayout()); //new GridLayout()
         scrollPane = new JScrollPane(table);
 
         tablePanel.add(scrollPane);
@@ -89,7 +89,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
 
         notifications.addActionListener(new NotificationsListener());
-        notiPanel.setLayout(new GridLayout());
+        notiPanel.setLayout(null);
         notiPanel.add(notifications);
         
         nameDropDownPub = new JComboBox<>();
@@ -111,7 +111,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         topBar.setBounds(420,605,150,20);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
-        //notiPanel.setBounds(0,600,225,100);
+        notiPanel.setBounds(0,700,225,100);
         progressBar.setBounds(330,630, 300, 25);
         nameDropDownPub.setBounds(65,605,150,20);
         progressPull.setBounds(0,630,300,25);
@@ -203,8 +203,7 @@ public class PanelListItems extends JPanel implements ItemListener{
                 String startTime = nextLine[2];
                 int estFin = Integer.parseInt(nextLine[3]);
                 boolean completed = Boolean.parseBoolean(nextLine[4]);
-                Tasks t = new Tasks(name,taskName,estFin,completed);
-                t.setStartTime(LocalTime.parse(startTime).truncatedTo(ChronoUnit.MINUTES));//why do this when startTime 
+                Tasks t = new Tasks(name,taskName,startTime,estFin,completed);
                 t.setEndTime();
                 Tasks.ArrofTasks.add(t);
                 new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());

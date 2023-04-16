@@ -1,8 +1,13 @@
 import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.Font;
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 
 /**
  * PopUpPanel when initialized creates a frame which includes
@@ -25,6 +30,10 @@ public class PopUpPanel extends JFrame{
         p.setBackground(Color.RED);
 
         p.add(tLabel);
+        tLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        setLocationRelativeTo(null); // Center the frame on the screen
+
+        PopUpPanel.playSound("mixkit-arcade-retro-game-over-213.wav");
 
         getContentPane().add(p);
 
@@ -33,4 +42,17 @@ public class PopUpPanel extends JFrame{
         setVisible(true);
     }
     
+    private static void playSound(String filePath) 
+    {
+        try {
+            File soundFile = new File(filePath);
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(soundFile));
+            clip.start();
+        } catch (Exception e) {
+            System.err.println("Error playing sound: " + e.getMessage());
+        }
+    }
+
+
 }

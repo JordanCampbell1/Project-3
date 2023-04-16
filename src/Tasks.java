@@ -1,19 +1,18 @@
 import java.util.ArrayList;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
+//import java.time.temporal.ChronoUnit;
 
 
 
 public class Tasks //implements Comparable<Tasks>
 {
     public static ArrayList<Tasks> ArrofTasks = new ArrayList<Tasks>();
-
     public static ArrayList<Person> ArrofNames = new ArrayList<Person>(); //adjust the program to implement the arraylist names in it to allow for 2 dependent lists
+    
     private String name, taskOutline,endTime;
     private boolean completed;
-    LocalTime startTime;
-
-    private int ETF; //Expected time to finish the tasks in days
+    private LocalTime startTime;
+    private int ETF; //Expected time to finish the tasks in minutes
 
     /**
      * Default constructor for Tasks class
@@ -23,14 +22,15 @@ public class Tasks //implements Comparable<Tasks>
     /**
      * Constructor for Tasks class
      * @param name name of the person associated with task.
+     * @param startTime start time in Hours and Minutes in the format HH:MM
      * @param taskOutline name of task
      * @param ETF is the expected time for the person to finish task.
      */
-    public Tasks(String name, String taskOutline, int ETF)
+    public Tasks(String name, String startTime,String taskOutline, int ETF)
     {
         this.name = name;
         this.taskOutline = taskOutline;
-        this.startTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+        this.startTime = LocalTime.parse(startTime);
         this.ETF = ETF;
         setEndTime();
         this.completed = false;
@@ -40,14 +40,18 @@ public class Tasks //implements Comparable<Tasks>
      * tasks is loaded to determine if it has been completed
      * @param name name of the person associated with task.
      * @param taskOutline name of task
+     * @param startTime start time in Hours and Minutes in the format HH:MM
      * @param ETF is an expected time for the person to finish task
      * @param completed is the determinator if the task has been finished.
      */
-    public Tasks(String name, String taskOutline, int ETF, boolean completed)
+    
+    public Tasks(String name, String taskOutline, String startTime, int ETF, boolean completed)
     {
         this.name = name;
         this.taskOutline = taskOutline;
+        this.startTime = LocalTime.parse(startTime);
         this.ETF = ETF;
+        setEndTime();
         this.completed = completed;
     }
     /**
@@ -119,9 +123,10 @@ public class Tasks //implements Comparable<Tasks>
      * setter method for the start time.
      * @param startTime is the new starttime.
      */
-    public void setStartTime(LocalTime startTime)
+    
+    public void setStartTime(String startTime)
     {
-        this.startTime = startTime;
+        this.startTime = LocalTime.parse(startTime);
     }
     /**
      * setter method for completed.
@@ -147,47 +152,5 @@ public class Tasks //implements Comparable<Tasks>
         this.ETF = ETF;
     }
 
-    public static int ratioOfAllTasksCompleted()
-    {
-        if(ArrofTasks.size() == 0)
-        {
-            return 0;
-        }
-
-        int count = 0;
-
-        for(Tasks t : ArrofTasks)
-        {
-            if(t.getCompleted() == true)
-            {
-                count++;
-            }
-        }
-
-        return (int) count * 100 / ArrofTasks.size(); 
-    }
-   
-    //almost useless code
-    public static int ratioOfTasksCompleted(String namep)
-    {
-        int completed = 0;
-        int tasksTotal = 0;
-
-        for(Tasks t : ArrofTasks)
-        {
-            if(namep.matches(t.getName()))
-            {   
-                if(t.getCompleted() == true)
-                {
-                    completed++;
-                }
-
-                tasksTotal++;
-            }            
-        }
-
-        return (int) completed * 100 / tasksTotal; 
-    }
-   
     
 }   

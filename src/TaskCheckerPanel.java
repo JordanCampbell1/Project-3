@@ -19,11 +19,15 @@ import java.awt.event.ItemListener;
     private JPanel taskPanel = new JPanel();
     private JLabel pickName,pickTask,selectedUser,selectedTask;
     private JComboBox<String> nameDropDown, taskDropDown;
-    private JButton checkButton;
-    public TaskCheckerPanel(){
+    private JButton checkButton, uncheckButton;
+
+
+    public TaskCheckerPanel()
+    {
         setTitle("Complete Tasks");
-        taskPanel.setSize(500,300);
-        taskPanel.setLayout(new GridLayout(8,1,1,3));
+        //setSize(500,300);
+        taskPanel.setSize(500,350);
+        taskPanel.setLayout(new GridLayout(9,1,1,3));
         setResizable(false);
         setLayout(null);
 
@@ -54,9 +58,14 @@ import java.awt.event.ItemListener;
         taskPanel.add(pickTask);
         taskPanel.add(taskDropDown);
         taskPanel.add(selectedTask);
+
         checkButton = new JButton("Check");
         checkButton.addActionListener(new CheckButtonListener());
         taskPanel.add(checkButton);
+        uncheckButton = new JButton("Uncheck");
+        uncheckButton.addActionListener(new UncheckButtonListener());
+        taskPanel.add(uncheckButton);
+
         add(taskPanel);
         setMinimumSize(taskPanel.getSize());
         pack();
@@ -75,7 +84,7 @@ import java.awt.event.ItemListener;
                                 p.setTaskComplete(p.getTaskComplete()+t.getExpectedTime());
                                 p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() - t.getExpectedTime());
                                 PanelListItems.fill();
-                                PanelListItems.filler(p.getName());
+                                //PanelListItems.filler(p.getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                             }
                         }
                     }                        
@@ -84,12 +93,52 @@ import java.awt.event.ItemListener;
             PanelListItems.saveNames("names.txt");
             PanelListItems.saveTasks("tasks.txt");
             //updates the table to include the newly checked task by removing and replacing all rows of the table.
-            for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
-                PanelListItems.model.removeRow(i);
+            //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+            //    PanelListItems.model.removeRow(i);
+            PanelListItems.model.setRowCount(0);//removes data from table
             PanelListItems.showTable();
             dispose();
         }
     }
+
+    private class UncheckButtonListener implements ActionListener{
+
+        public void actionPerformed(ActionEvent e) {
+            for (Tasks t : Tasks.ArrofTasks)
+            {
+                if (t.getName().equals((String) nameDropDown.getSelectedItem()))
+                {
+                    if (t.getTaskOutline().equals((String) taskDropDown.getSelectedItem()) && t.getCompleted()==true)
+                    {
+                        t.setCompleted(false);
+
+                        for (Person p : Tasks.ArrofNames)
+                        {
+                            if(p.getName().equals(t.getName()))
+                            {
+                                p.setTaskComplete(p.getTaskComplete()-t.getExpectedTime());
+                                p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() + t.getExpectedTime());
+                                PanelListItems.fill();
+                                //PanelListItems.filler(p.getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                            }
+                        }
+                    } 
+                }                       
+            }
+            //saves the updated completed tasks to text files.
+            PanelListItems.saveNames("names.txt");
+            PanelListItems.saveTasks("tasks.txt");
+            //updates the table to include the newly checked task by removing and replacing all rows of the table.
+            //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)
+            //    PanelListItems.model.removeRow(i);
+            PanelListItems.model.setRowCount(0);//removes data from table
+            PanelListItems.showTable();
+            dispose();
+        }
+    }
+
+
+
     // combobox selection affects the display in the second combobox and displays text of the selected user.
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == nameDropDown){

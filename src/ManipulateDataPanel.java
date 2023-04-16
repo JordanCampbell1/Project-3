@@ -49,6 +49,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
         public void actionPerformed(ActionEvent e)
         {
             AddButtonPanel something = new AddButtonPanel();
+
+            setVisible(false);
         }
     }
 
@@ -57,6 +59,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
         public void actionPerformed(ActionEvent e)
         {
             EditButtonPanel something = new EditButtonPanel();
+
+            setVisible(false);
         }
     }
 
@@ -65,6 +69,8 @@ public class ManipulateDataPanel extends JFrame{ //figure out how to extend from
         public void actionPerformed(ActionEvent e)
         {
             DeleteButtonPanel something = new DeleteButtonPanel();
+
+            setVisible(false);
         }
     }
 

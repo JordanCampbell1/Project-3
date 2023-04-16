@@ -1,6 +1,8 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,9 +18,9 @@ import javax.swing.JTextField;
  */
 public class AddButtonPanel extends JFrame
 {
-    private JLabel namelLabel, taskOutlinelLabel, ETFJLabel;
+    private JLabel namelLabel, taskOutlinelLabel, ETFJLabel, startDateLabel;
 
-    private JTextField nameTextField, taskOutlineTextField, ETFTextField;
+    private JTextField nameTextField, taskOutlineTextField, ETFTextField, startTimeField;
     /**
      * The saveButton is implemented as a button that when
      * pressed saves the user input to the arrayLists of tasks.
@@ -46,11 +48,16 @@ public class AddButtonPanel extends JFrame
         taskOutlinelLabel.setBounds(0,150,75,75);
         ETFJLabel = new JLabel("Estimated Duration (in mins)");
 
+        startDateLabel = new JLabel("Start Time of Task (in HH:MM) (24-Hour Time)");
+
         nameTextField = new JTextField(30);
         nameTextField.setBounds(0,75,75,75);
         taskOutlineTextField = new JTextField(50);
         taskOutlineTextField.setBounds(0,225,75,75);
-        ETFTextField = new JTextField(5);
+        ETFTextField = new JTextField(10);
+
+        startTimeField = new JTextField(8);
+
 
 
         //may need to adjust the size and locations of these components
@@ -60,6 +67,8 @@ public class AddButtonPanel extends JFrame
         p.add(taskOutlineTextField);
         p.add(ETFJLabel);
         p.add(ETFTextField);
+        p.add(startDateLabel);
+        p.add(startTimeField);
 
 
         saveButton.addActionListener(new SaveButtonListener());
@@ -81,7 +90,7 @@ public class AddButtonPanel extends JFrame
      */
     private class SaveButtonListener implements ActionListener{
 
-        public void actionPerformed(ActionEvent e) //may need while loop to check half-filled tasks as to prevent half-filled info to go into the database (new frame and panel)
+        public void actionPerformed(ActionEvent e) 
         {
             Boolean same = false;
 
@@ -93,6 +102,8 @@ public class AddButtonPanel extends JFrame
                 {
                     name = nameTextField.getText();
                 }
+
+                System.out.println("NAME: " + nameTextField.getText().equals(""));
     
                 String taskOutline = "";
     
@@ -100,25 +111,43 @@ public class AddButtonPanel extends JFrame
                 {
                     taskOutline = taskOutlineTextField.getText();
                 }
+                System.out.println("TASKOUTLINE: " + taskOutlineTextField.getText().equals(""));
+
+                String startTime = "";
+    
+                if(!(startTimeField.getText().equals("")))
+                {
+                    startTime = startTimeField.getText();
+                }
+
+                System.out.println("starttime: " + startTimeField.getText().equals(""));
     
     
-                int ETF = 0;
+                int ETF = 9;
+                
     
                 if(Integer.parseInt(ETFTextField.getText()) > 0)
                 {
-                    ETF = Integer.parseInt(ETFTextField.getText());
+                    ETF = Integer.parseInt(ETFTextField.getText());                   
                 }
+                
+                System.out.println("ETF: " +  (String) ETFTextField.getText());
+                //System.out.println("ETF: " + (Integer.parseInt(ETFTextField.getText()) > 0) );
+                //nothing is printed from ETFtectfield for some reason
+                
 
 
                 //if data is entered then it will be added to the arraylist
-                //maybe a more efficient of way of doing this
-                if((!(nameTextField.getText().equals("")))&&
-                (!(taskOutlineTextField.getText().equals("")))&&
-                (Integer.parseInt(ETFTextField.getText()) > 0))
+                if((!(name.equals("")))&&
+                (!(taskOutline.equals("")))&&
+                (!(startTime.equals(""))) &&
+                (ETF > 0))
                 {
-                    Tasks P1 = new Tasks(name, taskOutline, ETF);
+                    Tasks P1 = new Tasks(name, taskOutline, startTime, ETF);
                     Tasks.ArrofTasks.add(P1);
+
                     new PopUpPaneler(P1.getName(),P1.getTaskOutline(),P1.getEndTime());
+
                     for (Person t: Tasks.ArrofNames){
                         //checks if the name is already recorded
                         if (t.getName().equals(name))
@@ -138,7 +167,7 @@ public class AddButtonPanel extends JFrame
                             if (pele.getName().equals(name)){
                                 pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()+P1.getExpectedTime());
                                 PanelListItems.fill();
-                                PanelListItems.filler(name);
+                                //PanelListItems.filler(name); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                             }
                         }
                     }
