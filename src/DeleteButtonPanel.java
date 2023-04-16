@@ -155,44 +155,50 @@ public class DeleteButtonPanel extends JFrame
 
                 if(checked == true)
                 {
-                    for(int count = 0; count < Tasks.ArrofTasks.size(); count++)
+                    try
                     {
-                        if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
-                        && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
+
+                    
+                        for(int count = 0; count < Tasks.ArrofTasks.size(); count++)//checks the data in the row with a checked checkbox
                         {
-                            Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
+                            if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
+                            && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
+                            {
+                                
 
-                            same = false;//baseline boolean
+                                same = false;//baseline boolean
 
-                            for (Tasks t: Tasks.ArrofTasks){
-                                //checks if another instance of the name is in task
-                                if (t.getName().equals(table.getValueAt(row, 1).toString()))
-                                    same = true;
-                            }
-                            //if the name is unique/no other task have that name then remove the name from the array.
-                            if (!(same)){
-                                Tasks.ArrofNames.remove(count); //remove name at the same time
-                                PanelListItems.nameDropDownPub.removeAllItems();
-                                for (Person p: Tasks.ArrofNames){
-                                    PanelListItems.nameDropDownPub.addItem(p.getName());
+                                for (Tasks t: Tasks.ArrofTasks){
+                                    //checks if another instance of the name is in task
+                                    if (t.getName().equals(table.getValueAt(row, 1).toString()))
+                                        same = true;
                                 }
-                                PanelListItems.fill();
-                                //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
-                            }
-                            //if the name is on another task then just remove the expected time from the person class and adjust the progressbars.
-                            else{
-                                for (Person pele : Tasks.ArrofNames){
-                                    if (pele.getName().equals(table.getValueAt(row, 1).toString())){
-                                        pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-Tasks.ArrofTasks.get(count).getExpectedTime());
-                                        PanelListItems.fill();
-                                        //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                //if the name is unique/no other task have that name then remove the name from the array.
+                                if (!(same)){
+                                    Tasks.ArrofNames.remove(count); //remove name at the same time
+                                    PanelListItems.nameDropDownPub.removeAllItems();
+                                    for (Person p: Tasks.ArrofNames){
+                                        PanelListItems.nameDropDownPub.addItem(p.getName());
+                                    }
+                                    PanelListItems.fill();
+                                    //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                }
+                                //if the name is on another task then just remove the expected time from the person class and adjust the progressbars.
+                                else{
+                                    for (Person pele : Tasks.ArrofNames){
+                                        if (pele.getName().equals(table.getValueAt(row, 1).toString())){
+                                            pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-Tasks.ArrofTasks.get(count).getExpectedTime());
+                                            PanelListItems.fill();
+                                            //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                        }
                                     }
                                 }
+                                
+                                Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                             }
-                            
+                        }
                     }
-                }
-                    
+                    catch(IndexOutOfBoundsException tt){}
                 }
             }
             PanelListItems.saveTasks("tasks.txt"); //overwrite file
