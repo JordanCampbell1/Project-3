@@ -140,6 +140,8 @@ public class DeleteButtonPanel extends JFrame
                             && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
                             {
                                 same = false;//baseline boolean
+                                Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
+                                
 
                                 for (Tasks t: Tasks.ArrofTasks){
                                     //checks if another instance of the name is in task
@@ -168,7 +170,6 @@ public class DeleteButtonPanel extends JFrame
                                     }
                                 }
                                 
-                                Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                             }
                         }
                     }
