@@ -96,7 +96,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
         changeButton.addActionListener(new ChangeButtonListener());
         editPanel.add(changeButton);
 
-
         getContentPane().add(editPanel);
         this.setMinimumSize(editPanel.getSize());
         this.pack();
