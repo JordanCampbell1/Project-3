@@ -17,7 +17,7 @@ public class NotificationPanel extends JFrame{
     private JPanel p = new JPanel();
     private JLabel messageLabel = new JLabel("You Have Overdue Task(s)");
    
-    public NotificationPanel(String music){}
+    public NotificationPanel(String music){} //if we do not need the window but we need the sound
 
     public NotificationPanel() 
     {
