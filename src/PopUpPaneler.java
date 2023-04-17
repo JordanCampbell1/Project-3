@@ -20,7 +20,8 @@ public class PopUpPaneler extends JFrame {
    JPanel popOut = new JPanel();
    String name,taskName,endTime;
    boolean same=true;
-   int count,missing=0;
+   int count, oldExpectedTime;
+   Tasks telling;
    /**
     * PopUpPaneler constructor for class.
     * @param name is the name of the person.
@@ -34,7 +35,14 @@ public class PopUpPaneler extends JFrame {
       setTitle("Overdue Task(s)");
       setResizable(false);
 
-      
+      for (Tasks pt:Tasks.ArrofTasks){
+         if (pt.getName().equals(name)){
+            if (pt.getTaskOutline().equals(taskName)){
+               telling = pt;
+               oldExpectedTime = pt.getExpectedTime();
+            }
+         }
+      }
       // create a timer that will check the current time every second
       Timer timer = new Timer(1000, new ActionListener() {
          public void actionPerformed(ActionEvent e) {
@@ -52,20 +60,14 @@ public class PopUpPaneler extends JFrame {
             }
             //Detects if edits were made to task and returns from the instance effectively "deleting" the pop up.
             for (Tasks leer : Tasks.ArrofTasks){
-               if (leer.getName().equals(name)){
-                  missing++;
-               }
-               if (leer.getTaskOutline().equals(taskName)){
-                  missing++;
-               }
-               if (leer.getEndTime().equals(endTime)){
-                  missing++;
-               }
-            }
-
-            if (missing==0){
-               ((Timer) e.getSource()).stop();
-               return;
+               if (leer.equals(telling))
+                  if (leer.getName().equals(name) && leer.getTaskOutline().equals(taskName) && leer.getEndTime().equals(endTime)) {
+                  // all properties are the same, do nothing
+              } else {
+                  // at least one property has changed
+                  ((Timer) e.getSource()).stop();
+                  return;
+              }
             }
             
             // check if the current time is equal to the popup time
@@ -85,37 +87,47 @@ public class PopUpPaneler extends JFrame {
                setVisible(true);
                for(int j =0;j<Tasks.ArrofTasks.size();j++){
                   if (Tasks.ArrofTasks.get(j).getName().equals(name)){
-                     if (Tasks.ArrofTasks.get(j).getTaskOutline().equals(taskName)){
+                     if (endTime.equals(Tasks.ArrofTasks.get(j).getEndTime())){
                         for(Tasks p : Tasks.ArrofTasks){
                            if (p.getName().equals(name)){
                               count++;
                            }
-                           if (count < 2){
-                              for(int i =0;i<Tasks.ArrofNames.size();i++){
-                                 if (Tasks.ArrofNames.get(i).getName().equals(name)){
-                                    Tasks.ArrofNames.remove(i);
-                                    PanelListItems.nameDropDownPub.removeAllItems();
-                                    for (Person picka: Tasks.ArrofNames){
-                                        PanelListItems.nameDropDownPub.addItem(picka.getName());
+                        }
+                        if (Tasks.ArrofTasks.get(j).getTaskOutline().equals(taskName)){
+                              if (count < 2){
+                                 for(int i =0;i<Tasks.ArrofNames.size();i++){
+                                    if (Tasks.ArrofNames.get(i).getName().equals(name)){
+                                       if (endTime.equals(Tasks.ArrofTasks.get(j).getEndTime())){
+                                          Tasks.ArrofNames.remove(i);
+                                       }
+                                       PanelListItems.nameDropDownPub.removeAllItems();
+                                       for (Person picka: Tasks.ArrofNames){
+                                           PanelListItems.nameDropDownPub.addItem(picka.getName());
+                                       }
                                     }
                                  }
                               }
+                              else{
+                                 for (Person pele : Tasks.ArrofNames){
+                                    if (pele.getName().equals(name)){
+                                        pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-oldExpectedTime);
+                                    }
+                              }
                            }
-                           else{
-
                            }
+                           
+                           Tasks.ArrofTasks.remove(j);
+                           PanelListItems.fill();
+                           //PanelListItems.filler(name); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                           PanelListItems.saveNames("names.txt");
+                           PanelListItems.saveTasks("tasks.txt");
+                           //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)//table.getRowCount(0) does the same thing
+                              //PanelListItems.model.removeRow(i);
+                           PanelListItems.model.setRowCount(0); //to empty the table of data
+                           PanelListItems.showTable();
                         }
-                        Tasks.ArrofTasks.remove(j);
-                        PanelListItems.fill();
-                        //PanelListItems.filler(name); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
-                        PanelListItems.saveNames("names.txt");
-                        PanelListItems.saveTasks("tasks.txt");
-                        //for (int i=PanelListItems.table.getRowCount()-1;i>=0;i--)//table.getRowCount(0) does the same thing
-                           //PanelListItems.model.removeRow(i);
-                        PanelListItems.model.setRowCount(0); //to empty the table of data
-                        PanelListItems.showTable();
                      }
-                  }
+                     
                }
                // stop the timer after the panel is displayed
                ((Timer) e.getSource()).stop();
