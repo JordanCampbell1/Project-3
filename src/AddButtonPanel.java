@@ -35,7 +35,7 @@ public class AddButtonPanel extends JFrame
     {
         setTitle("Adding a Task");
         p.setSize(200,100);
-        p.setLayout(new GridLayout(7,1)); 
+        p.setLayout(new GridLayout(9,1)); 
         setMinimumSize(p.getSize());
         setResizable(false);
 
@@ -48,13 +48,13 @@ public class AddButtonPanel extends JFrame
         taskOutlinelLabel.setBounds(0,150,75,75);
         ETFJLabel = new JLabel("Estimated Duration (in mins)");
 
-        startDateLabel = new JLabel("Start Time of Task (in HH:MM) (24-Hour Time)");
+        startDateLabel = new JLabel("Start Time (in HH:MM) (24-Hour)");
 
         nameTextField = new JTextField(30);
         nameTextField.setBounds(0,75,75,75);
-        taskOutlineTextField = new JTextField(50);
+        taskOutlineTextField = new JTextField(30);
         taskOutlineTextField.setBounds(0,225,75,75);
-        ETFTextField = new JTextField(10);
+        ETFTextField = new JTextField(5);
 
         startTimeField = new JTextField(8);
 
@@ -167,7 +167,8 @@ public class AddButtonPanel extends JFrame
                             if (pele.getName().equals(name)){
                                 pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()+P1.getExpectedTime());
                                 PanelListItems.fill();
-                                //PanelListItems.filler(name); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                if (PanelListItems.nameDropDownPub.getSelectedItem().equals(name))
+                                    PanelListItems.filler(name); 
                             }
                         }
                     }

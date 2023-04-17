@@ -16,7 +16,7 @@ public class Project3 extends JFrame
 
         PanelListItems mainPanel = new PanelListItems();
         
-        mainFrame.setSize(650,700);
+        mainFrame.setSize(650,750);
 
         mainFrame.getContentPane().add(mainPanel); 
         
