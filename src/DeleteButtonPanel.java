@@ -94,33 +94,8 @@ public class DeleteButtonPanel extends JFrame
                 }
             }
         }   
-        catch(IndexOutOfBoundsException e){
-
-            for(Person p : Tasks.ArrofNames)
-            {
-                System.out.println("Person #: " + p.getName());
-            }
-
-            for(Tasks T: Tasks.ArrofTasks)
-            {
-                System.out.println("Task #: " + T.getName());
-            }
-        }
-        catch(Exception t){
-
-            for(Person p : Tasks.ArrofNames)
-            {
-                System.out.println("Person #: " + p);
-            }
-
-            for(Tasks T: Tasks.ArrofTasks)
-            {
-                System.out.println("Task #: " + T);
-            }
-
-
-            
-        }
+        catch(IndexOutOfBoundsException e){ System.out.println(e.getStackTrace());}
+        catch(Exception t){System.out.println(t.getStackTrace()); }
         
             
         
