@@ -164,8 +164,6 @@ public class DeleteButtonPanel extends JFrame
                             if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
                             && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
                             {
-                                
-
                                 same = false;//baseline boolean
 
                                 for (Tasks t: Tasks.ArrofTasks){

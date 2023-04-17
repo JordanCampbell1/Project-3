@@ -78,7 +78,7 @@ public class AddButtonPanel extends JFrame
         //p.add(closeButton);
 
         getContentPane().add(p);
-
+        
         pack();
 
         setVisible(true);
@@ -131,7 +131,7 @@ public class AddButtonPanel extends JFrame
                     ETF = Integer.parseInt(ETFTextField.getText());                   
                 }
                 
-                System.out.println("ETF: " +  (String) ETFTextField.getText());
+                //System.out.println("ETF: " +  getsimple ETFTextField.getText());
                 //System.out.println("ETF: " + (Integer.parseInt(ETFTextField.getText()) > 0) );
                 //nothing is printed from ETFtectfield for some reason
                 
