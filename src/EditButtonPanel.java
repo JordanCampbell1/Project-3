@@ -33,7 +33,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
     public EditButtonPanel()
     {
         this.setTitle("Edit Data");
-        editPanel.setSize(480,550);
+        editPanel.setSize(500,550);
         this.setLayout(null);
         this.setResizable(false);
         editPanel.setLayout(new GridLayout(16,1,1,5));
@@ -71,7 +71,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
         //textfields for options chosen to be changed
         nameTextField = new JTextField(30);
         taskTextField = new JTextField(30);
-        expectedTimeTextField = new JTextField(15);
+        expectedTimeTextField = new JTextField(80);
 
         changeStartTimTextField = new JTextField(10);
 
