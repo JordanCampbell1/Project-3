@@ -64,6 +64,7 @@ public class PopUpPaneler extends JFrame {
                
                add(popOut);
                pack();
+               new NotificationPanel("mixkit-interface-option-select-2573.wav").playSound("mixkit-interface-option-select-2573.wav");
                //setLocation(b);
                setVisible(true);
                for(int j =0;j<Tasks.ArrofTasks.size();j++){
@@ -83,6 +84,9 @@ public class PopUpPaneler extends JFrame {
                                     }
                                  }
                               }
+                           }
+                           else{
+
                            }
                         }
                         Tasks.ArrofTasks.remove(j);
