@@ -35,11 +35,7 @@ public class AddButtonPanel extends JFrame
     {
         setTitle("Adding a Task");
         p.setSize(200,100);
-<<<<<<< HEAD
-        p.setLayout(new GridLayout(5,1)); 
-=======
         p.setLayout(new GridLayout(9,1)); 
->>>>>>> 1f93791650226000dbe5c2d78e22a1ae5f4a8b4e
         setMinimumSize(p.getSize());
         setResizable(false);
 
