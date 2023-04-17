@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 import javax.swing.JFrame;
 
 /**
@@ -14,9 +16,14 @@ public class Project3 extends JFrame
 
         mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        if(PanelListItems.boolNOTIFICATION == true) //only runs if the user enabled notifications
+        {
+            NotificationPanel p = new NotificationPanel();
+        }
+       
         PanelListItems mainPanel = new PanelListItems();
         
-        mainFrame.setSize(650,700);
+        mainFrame.setSize(650,750);
 
         mainFrame.getContentPane().add(mainPanel); 
         

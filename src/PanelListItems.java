@@ -47,7 +47,7 @@ public class PanelListItems extends JPanel implements ItemListener{
     {
         super(null); //establishes a new layout for the GUI to use
 
-        setBounds(0,0,650,900);
+        setBounds(0,0,650,750);
 
         String[] columnNames=  {"First Name",
                 "Last Name", 
@@ -89,11 +89,14 @@ public class PanelListItems extends JPanel implements ItemListener{
         buttonPanel.add(sortTimeTaken);
         buttonPanel.add(sortTaskCompleted);
 
-
+        
         notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
-
         notifications.addActionListener(new NotificationsListener());
+<<<<<<< HEAD
         notiPanel.setLayout(new GridLayout());//null
+=======
+        notiPanel.setLayout(new GridLayout());
+>>>>>>> 1f93791650226000dbe5c2d78e22a1ae5f4a8b4e
         notiPanel.add(notifications);
         
         nameDropDownPub = new JComboBox<>();
@@ -115,7 +118,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         topBar.setBounds(420,605,150,20);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
-        notiPanel.setBounds(0,700,225,100);
+        notiPanel.setBounds(0, 630, 200, 100);
         progressBar.setBounds(330,630, 300, 25);
         nameDropDownPub.setBounds(65,605,150,20);
         progressPull.setBounds(0,630,300,25);
@@ -127,8 +130,8 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(progressPull);
         add(tablePanel);
         add(buttonPanel);
-        add(notiPanel);
         add(progressBar);
+        add(notiPanel);
         
 
     }

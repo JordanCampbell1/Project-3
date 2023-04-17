@@ -187,7 +187,8 @@ public class DeleteButtonPanel extends JFrame
                                         if (pele.getName().equals(table.getValueAt(row, 1).toString())){
                                             pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-Tasks.ArrofTasks.get(count).getExpectedTime());
                                             PanelListItems.fill();
-                                            //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                            if (PanelListItems.nameDropDownPub.getSelectedItem().equals(pele.getName()))
+                                                PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); 
                                         }
                                     }
                                 }
