@@ -23,7 +23,7 @@ public class Project3 extends JFrame
             NotificationPanel p = new NotificationPanel();
         }
         
-        mainFrame.setSize(650,750);
+        mainFrame.setSize(650,650);
 
         mainFrame.getContentPane().add(mainPanel); 
         

@@ -198,7 +198,6 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                     p.setName(nameTextField.getText());
 
                                     new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
-
                                     PanelListItems.nameDropDownPub.removeAllItems();
                                     
                                     for (Person poro: Tasks.ArrofNames){

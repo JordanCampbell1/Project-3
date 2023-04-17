@@ -160,6 +160,8 @@ public class AddButtonPanel extends JFrame
                         Tasks.ArrofNames.add(peeps);
                         PanelListItems.nameDropDownPub.addItem(name);
                         PanelListItems.fill();
+                        if (PanelListItems.nameDropDownPub.getSelectedItem().equals(name))
+                            PanelListItems.filler(name); 
                     }
                     //Since the person already exist just add the expected time to finish to the persons total expected time for tasks.
                     else{

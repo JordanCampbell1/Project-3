@@ -16,6 +16,8 @@ public class NotificationPanel extends JFrame{
 
     private JPanel p = new JPanel();
     private JLabel messageLabel = new JLabel("You Have Overdue Task(s)");
+   
+    public NotificationPanel(String music){}
 
     public NotificationPanel() 
     {
@@ -57,7 +59,7 @@ public class NotificationPanel extends JFrame{
         
     }
 
-    private void playSound(String soundFilePath) {
+    public void playSound(String soundFilePath) {
         try 
         {
             File soundfile = new File(soundFilePath);

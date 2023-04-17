@@ -28,7 +28,7 @@ public class DeleteButtonPanel extends JFrame
      * to the panel and implements its action when clicked.
      */
     private JButton deleteButton;
-    private boolean same;
+    private boolean same=false;
 
     public DeleteButtonPanel()
     {
@@ -139,6 +139,12 @@ public class DeleteButtonPanel extends JFrame
                             if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
                             && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
                             {
+                                int completedTime = 0;
+                                int oldExpectedTime = Tasks.ArrofTasks.get(count).getExpectedTime();
+                                if (Tasks.ArrofTasks.get(count).getCompleted()){
+                                    completedTime = Tasks.ArrofTasks.get(count).getExpectedTime();
+                                    oldExpectedTime = 0;
+                                }
                                 same = false;//baseline boolean
                                 Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                                 
@@ -150,19 +156,25 @@ public class DeleteButtonPanel extends JFrame
                                 }
                                 //if the name is unique/no other task have that name then remove the name from the array.
                                 if (!(same)){
-                                    Tasks.ArrofNames.remove(count); //remove name at the same time
+                                    for (int i=0;i<Tasks.ArrofNames.size();i++){
+                                        if (Tasks.ArrofNames.get(i).getName().equals(table.getValueAt(row, 1).toString())){
+                                            Tasks.ArrofNames.remove(i);
+                                        }
+                                    }
                                     PanelListItems.nameDropDownPub.removeAllItems();
                                     for (Person p: Tasks.ArrofNames){
                                         PanelListItems.nameDropDownPub.addItem(p.getName());
                                     }
                                     PanelListItems.fill();
-                                    //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                    if (PanelListItems.nameDropDownPub.getSelectedItem().equals(Tasks.ArrofNames.get(count).getName()))
+                                        PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                                 }
                                 //if the name is on another task then just remove the expected time from the person class and adjust the progressbars.
                                 else{
                                     for (Person pele : Tasks.ArrofNames){
                                         if (pele.getName().equals(table.getValueAt(row, 1).toString())){
-                                            pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-Tasks.ArrofTasks.get(count).getExpectedTime());
+                                            pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-oldExpectedTime);
+                                            pele.setTaskComplete(pele.getTaskComplete() - completedTime);
                                             PanelListItems.fill();
                                             if (PanelListItems.nameDropDownPub.getSelectedItem().equals(pele.getName()))
                                                 PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); 

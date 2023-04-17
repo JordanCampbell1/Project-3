@@ -21,9 +21,9 @@ public class SortTaskCompletedPanel extends JFrame{
     private JScrollPane scrollPaner;
     public SortTaskCompletedPanel()
     {
-        setTitle("Persons with Completed Tasks");
+        setTitle("Top Users");
         setResizable(false);
-        sortedTablePanel.setSize(850,100); //only affects the size when setminimum() is not using getpreferreedsize as an argument
+        sortedTablePanel.setSize(650,100); //only affects the size when setminimum() is not using getpreferreedsize as an argument
         sortedTablePanel.setLayout(new GridLayout());
 
 
