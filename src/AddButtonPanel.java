@@ -103,7 +103,7 @@ public class AddButtonPanel extends JFrame
                     name = nameTextField.getText();
                 }
 
-                System.out.println("NAME: " + nameTextField.getText().equals(""));
+                //System.out.println("NAME: " + nameTextField.getText().equals(""));
     
                 String taskOutline = "";
     
@@ -111,7 +111,7 @@ public class AddButtonPanel extends JFrame
                 {
                     taskOutline = taskOutlineTextField.getText();
                 }
-                System.out.println("TASKOUTLINE: " + taskOutlineTextField.getText().equals(""));
+                //System.out.println("TASKOUTLINE: " + taskOutlineTextField.getText().equals(""));
 
                 String startTime = "";
     
@@ -120,10 +120,10 @@ public class AddButtonPanel extends JFrame
                     startTime = startTimeField.getText();
                 }
 
-                System.out.println("starttime: " + startTimeField.getText().equals(""));
+                //System.out.println("starttime: " + startTimeField.getText().equals(""));
     
     
-                int ETF = 9;
+                int ETF = 0;
                 
     
                 if(Integer.parseInt(ETFTextField.getText()) > 0)

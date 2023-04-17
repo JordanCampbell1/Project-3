@@ -1,5 +1,6 @@
 
 
+import java.awt.Color;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,8 @@ public class NotificationPanel extends JFrame{
         setResizable(false);
         setSize(200, 100);
 
+        p.setBackground(Color.red);
+
         p.add(messageLabel);
 
         getContentPane().add(p);
@@ -46,6 +49,8 @@ public class NotificationPanel extends JFrame{
                 {
                     playSound("mixkit-interface-option-select-2573.wav");
                     setVisible(true);
+
+                    break;//prevents repeated sounds and screens from multiple overdue tasks
                 }
 
             }
