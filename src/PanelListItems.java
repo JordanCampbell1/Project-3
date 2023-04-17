@@ -129,7 +129,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(progressBar);
         add(notifications);
         
-        loadBool("bool.txt");
+        loadBool("bool.txt"); //this is placed here since it requires notifications checkbox to exist for it to work
 
     }
 
