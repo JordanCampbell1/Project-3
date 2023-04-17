@@ -153,6 +153,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                             if (t.getTaskOutline().equals(taskDropDown.getSelectedItem()))
                             {
                                 t.setTaskOutline(taskTextField.getText());
+                                new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
                             }
                         }
                     }
@@ -196,7 +197,7 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                 {
                                     p.setName(nameTextField.getText());
 
-
+                                    new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
                                     PanelListItems.nameDropDownPub.removeAllItems();
                                     
                                     for (Person poro: Tasks.ArrofNames){

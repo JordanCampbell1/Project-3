@@ -20,7 +20,7 @@ public class PopUpPaneler extends JFrame {
    JPanel popOut = new JPanel();
    String name,taskName,endTime;
    boolean same=true;
-   int count;
+   int count,missing=0;
    /**
     * PopUpPaneler constructor for class.
     * @param name is the name of the person.
@@ -51,7 +51,23 @@ public class PopUpPaneler extends JFrame {
                }
             }
             //Detects if edits were made to task and returns from the instance effectively "deleting" the pop up.
+            for (Tasks leer : Tasks.ArrofTasks){
+               if (leer.getName().equals(name)){
+                  missing++;
+               }
+               if (leer.getTaskOutline().equals(taskName)){
+                  missing++;
+               }
+               if (leer.getEndTime().equals(endTime)){
+                  missing++;
+               }
+            }
 
+            if (missing==0){
+               ((Timer) e.getSource()).stop();
+               return;
+            }
+            
             // check if the current time is equal to the popup time
             if (currentTime.equals(LocalTime.parse(endTime))) {
                // create a panel to display
