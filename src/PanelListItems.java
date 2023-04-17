@@ -85,11 +85,10 @@ public class PanelListItems extends JPanel implements ItemListener{
         buttonPanel.add(sortTimeTaken);
         buttonPanel.add(sortTaskCompleted);
 
-
+        
         notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
-
         notifications.addActionListener(new NotificationsListener());
-        notiPanel.setLayout(null);
+        notiPanel.setLayout(new GridLayout());
         notiPanel.add(notifications);
         
         nameDropDownPub = new JComboBox<>();
@@ -111,7 +110,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         topBar.setBounds(420,605,150,20);
         tablePanel.setBounds(0,0, 650, 500);
         buttonPanel.setBounds(0,500,650,100);
-        notiPanel.setBounds(0,700,225,100);
+        notiPanel.setBounds(0, 720, 100, 100);
         progressBar.setBounds(330,630, 300, 25);
         nameDropDownPub.setBounds(65,605,150,20);
         progressPull.setBounds(0,630,300,25);
@@ -123,7 +122,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(progressPull);
         add(tablePanel);
         add(buttonPanel);
-        add(notiPanel);
+        add(notifications);
         add(progressBar);
         
 

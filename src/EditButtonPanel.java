@@ -132,7 +132,8 @@ public class EditButtonPanel extends JFrame implements ItemListener
                                     t.setEndTime();
                                     new PopUpPaneler(t.getName(), t.getTaskOutline(), t.getEndTime());
                                     PanelListItems.fill();
-                                    //PanelListItems.filler(t.getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info      
+                                    if (PanelListItems.nameDropDownPub.getSelectedItem().equals(t.getName()))
+                                        PanelListItems.filler(t.getName());    
                                 }
                             }
                         }
