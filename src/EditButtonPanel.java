@@ -189,7 +189,23 @@ public class EditButtonPanel extends JFrame implements ItemListener
                     for (Tasks t: Tasks.ArrofTasks){
                         if (t.getName().equals((String) userNameDropDown.getSelectedItem()))
                         {
-                            t.setName(nameTextField.getText());
+                            boolean nameExists = false;
+                            for (Person p2 : Tasks.ArrofNames) {
+                                if (p2.getName().equals(nameTextField.getText())){
+                                    nameExists = true;
+                                    break;
+                                }
+                            }
+                            if (nameExists){
+                                break;
+                            }
+                            for(Tasks t2: Tasks.ArrofTasks)
+                            {
+                                if (t2.getName().equals((String) userNameDropDown.getSelectedItem()))
+                                {
+                                    t2.setName(nameTextField.getText());
+                                }
+                            }
 
                             for (Person p : Tasks.ArrofNames)
                             {
