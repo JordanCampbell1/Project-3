@@ -119,7 +119,8 @@ import java.awt.event.ItemListener;
                                 p.setTaskComplete(p.getTaskComplete()-t.getExpectedTime());
                                 p.setEstTaskTimeLeft(p.getEstTaskTimeLeft() + t.getExpectedTime());
                                 PanelListItems.fill();
-                                //PanelListItems.filler(p.getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                if (PanelListItems.nameDropDownPub.getSelectedItem().equals(t.getName()))
+                                    PanelListItems.filler(t.getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                             }
                         }
                     } 

@@ -28,7 +28,7 @@ public class DeleteButtonPanel extends JFrame
      * to the panel and implements its action when clicked.
      */
     private JButton deleteButton;
-    private boolean same;
+    private boolean same=false;
 
     public DeleteButtonPanel()
     {
@@ -164,8 +164,9 @@ public class DeleteButtonPanel extends JFrame
                             if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
                             && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
                             {
+                                int oldExpectedTime = Tasks.ArrofTasks.get(count).getExpectedTime();
                                 same = false;//baseline boolean
-
+                                Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                                 for (Tasks t: Tasks.ArrofTasks){
                                     //checks if another instance of the name is in task
                                     if (t.getName().equals(table.getValueAt(row, 1).toString()))
@@ -185,15 +186,13 @@ public class DeleteButtonPanel extends JFrame
                                 else{
                                     for (Person pele : Tasks.ArrofNames){
                                         if (pele.getName().equals(table.getValueAt(row, 1).toString())){
-                                            pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-Tasks.ArrofTasks.get(count).getExpectedTime());
+                                            pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-oldExpectedTime);
                                             PanelListItems.fill();
                                             if (PanelListItems.nameDropDownPub.getSelectedItem().equals(pele.getName()))
                                                 PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); 
                                         }
                                     }
                                 }
-                                
-                                Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                             }
                         }
                     }
