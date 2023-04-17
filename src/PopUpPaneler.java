@@ -77,7 +77,10 @@ public class PopUpPaneler extends JFrame {
                               for(int i =0;i<Tasks.ArrofNames.size();i++){
                                  if (Tasks.ArrofNames.get(i).getName().equals(name)){
                                     Tasks.ArrofNames.remove(i);
-                                    PanelListItems.nameDropDownPub.remove(i);
+                                    PanelListItems.nameDropDownPub.removeAllItems();
+                                    for (Person picka: Tasks.ArrofNames){
+                                        PanelListItems.nameDropDownPub.addItem(picka.getName());
+                                    }
                                  }
                               }
                            }
