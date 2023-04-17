@@ -6,6 +6,7 @@ import javax.swing.tree.ExpandVetoException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.text.ParseException;
 //import java.time.LocalTime;
 //import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
@@ -61,7 +62,6 @@ public class PanelListItems extends JPanel implements ItemListener{
         table = new JTable(model);
         loadNames("names.txt");
         loadTasks("tasks.txt");
-        loadBool("bool.txt");
         showTable(); //list of data items to be put in the table in the main panel
 
         table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 + 50));
@@ -129,6 +129,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         add(progressBar);
         add(notifications);
         
+        loadBool("bool.txt");
 
     }
 
@@ -223,6 +224,11 @@ public class PanelListItems extends JPanel implements ItemListener{
             nscan = new Scanner(new File(nfile));
           
             boolNOTIFICATION = Boolean.parseBoolean(nscan.nextLine());
+
+            if(boolNOTIFICATION == true) //for when the notification was chcked in the past //perfecting code
+            {
+                this.notifications.setSelected(true);
+            }
         
             nscan.close();
         }

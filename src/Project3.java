@@ -15,13 +15,13 @@ public class Project3 extends JFrame
         JFrame mainFrame = new JFrame("Welcome to the Task Management System");
 
         mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       
+        PanelListItems mainPanel = new PanelListItems();
 
         if(PanelListItems.boolNOTIFICATION == true) //only runs if the user enabled notifications
         {
             NotificationPanel p = new NotificationPanel();
         }
-       
-        PanelListItems mainPanel = new PanelListItems();
         
         mainFrame.setSize(650,750);
 
