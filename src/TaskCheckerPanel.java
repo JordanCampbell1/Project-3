@@ -27,7 +27,7 @@ import java.awt.event.ItemListener;
         setTitle("Complete Tasks");
         //setSize(500,300);
         taskPanel.setSize(500,350);
-        taskPanel.setLayout(new GridLayout(9,1,1,3));
+        taskPanel.setLayout(new GridLayout(8,1,1,3));
         setResizable(false);
         setLayout(null);
 

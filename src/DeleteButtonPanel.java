@@ -156,7 +156,11 @@ public class DeleteButtonPanel extends JFrame
                                 }
                                 //if the name is unique/no other task have that name then remove the name from the array.
                                 if (!(same)){
-                                    Tasks.ArrofNames.remove(count); //remove name at the same time
+                                    for (int i=0;i<Tasks.ArrofNames.size();i++){
+                                        if (Tasks.ArrofNames.get(i).getName().equals(table.getValueAt(row, 1).toString())){
+                                            Tasks.ArrofNames.remove(i);
+                                        }
+                                    }
                                     PanelListItems.nameDropDownPub.removeAllItems();
                                     for (Person p: Tasks.ArrofNames){
                                         PanelListItems.nameDropDownPub.addItem(p.getName());

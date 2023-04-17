@@ -20,10 +20,10 @@ public class SortTimePanel extends JFrame{
     private DefaultTableModel models = new DefaultTableModel();
     private JScrollPane scrollPaner;
     public SortTimePanel(){
-        setTitle("Persons with the Longest Time from their Assigned Tasks");
+        setTitle("Procastinators");
         setResizable(false);
 
-        sortedTablePanel.setSize(850,100);
+        sortedTablePanel.setSize(650,100);
         sortedTablePanel.setLayout(new GridLayout());
 
         String [] columnNames ={"First Name","Last Name","Task Hours Completed", "Est Task Time Left"};
