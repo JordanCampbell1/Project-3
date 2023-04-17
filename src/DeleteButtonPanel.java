@@ -139,7 +139,12 @@ public class DeleteButtonPanel extends JFrame
                             if(table.getValueAt(row, 1).toString().matches(Tasks.ArrofTasks.get(count).getName())
                             && table.getValueAt(row, 2).toString().matches(Tasks.ArrofTasks.get(count).getTaskOutline()))
                             {
+                                int completedTime = 0;
                                 int oldExpectedTime = Tasks.ArrofTasks.get(count).getExpectedTime();
+                                if (Tasks.ArrofTasks.get(count).getCompleted()){
+                                    completedTime = Tasks.ArrofTasks.get(count).getExpectedTime();
+                                    oldExpectedTime = 0;
+                                }
                                 same = false;//baseline boolean
                                 Tasks.ArrofTasks.remove(count); //deletes the task that was checked by the user
                                 
@@ -157,13 +162,15 @@ public class DeleteButtonPanel extends JFrame
                                         PanelListItems.nameDropDownPub.addItem(p.getName());
                                     }
                                     PanelListItems.fill();
-                                    //PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
+                                    if (PanelListItems.nameDropDownPub.getSelectedItem().equals(Tasks.ArrofNames.get(count).getName()))
+                                        PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); //it would overwrite the progress of whatever is selected in the dropdown menu ie. gies wrong info 
                                 }
                                 //if the name is on another task then just remove the expected time from the person class and adjust the progressbars.
                                 else{
                                     for (Person pele : Tasks.ArrofNames){
                                         if (pele.getName().equals(table.getValueAt(row, 1).toString())){
                                             pele.setEstTaskTimeLeft(pele.getEstTaskTimeLeft()-oldExpectedTime);
+                                            pele.setTaskComplete(pele.getTaskComplete() - completedTime);
                                             PanelListItems.fill();
                                             if (PanelListItems.nameDropDownPub.getSelectedItem().equals(pele.getName()))
                                                 PanelListItems.filler(Tasks.ArrofNames.get(count).getName()); 
