@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.ExpandVetoException;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,6 +24,8 @@ public class PanelListItems extends JPanel implements ItemListener{
     private JButton manipulateData, sortTimeTaken, sortTaskCompleted, TaskChecker;
 
     private JCheckBox notifications;
+
+    public static boolean boolNOTIFICATION;
 
     public static JProgressBar progressBar,progressPull;
 
@@ -58,6 +61,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         table = new JTable(model);
         loadNames("names.txt");
         loadTasks("tasks.txt");
+        loadBool("bool.txt");
         showTable(); //list of data items to be put in the table in the main panel
 
         table.setPreferredScrollableViewportSize(new Dimension(500, Tasks.ArrofTasks.size()*15 + 50));
@@ -89,7 +93,7 @@ public class PanelListItems extends JPanel implements ItemListener{
         notifications = new JCheckBox("Enable Notifications"); //"Enable Notifications for Overdue Tasks"
 
         notifications.addActionListener(new NotificationsListener());
-        notiPanel.setLayout(null);
+        notiPanel.setLayout(new GridLayout());//null
         notiPanel.add(notifications);
         
         nameDropDownPub = new JComboBox<>();
@@ -213,6 +217,20 @@ public class PanelListItems extends JPanel implements ItemListener{
         catch (IOException e) {}
     }
 
+    public void loadBool(String nfile)
+    {
+        Scanner nscan = null;
+        try{
+            nscan = new Scanner(new File(nfile));
+          
+            boolNOTIFICATION = Boolean.parseBoolean(nscan.nextLine());
+        
+            nscan.close();
+        }
+        catch(IOException e){ System.out.println("Exception: " + e.getStackTrace());}
+        
+    }
+
 /**
  * {@code saveTasks} takes the string name of the textfile and
  * initializes a file object using the string to save the tasks attributes
@@ -252,6 +270,16 @@ public class PanelListItems extends JPanel implements ItemListener{
             saveToName.close();
         }
         catch (IOException e) {}
+    }
+
+    public void saveBool(String nfile)
+    {
+        try{
+            PrintWriter savWriter = new PrintWriter(new File(nfile));
+            savWriter.println(boolNOTIFICATION);
+            savWriter.close();
+        }
+        catch(IOException o){}
     }
 
     public static void showTable() //adds all existing persons', that are in the text file, tasks to the table
@@ -331,7 +359,21 @@ public class PanelListItems extends JPanel implements ItemListener{
     {
         public void actionPerformed(ActionEvent e)
         {
-            NotificationPanel random = new NotificationPanel();
+            if(notifications.isSelected() == true)
+            {
+                boolNOTIFICATION = true;
+
+                saveBool("bool.txt");
+
+                NotificationPanel random = new NotificationPanel();
+            }
+            else
+            {
+                boolNOTIFICATION = false;
+
+                saveBool("bool.txt");
+            }
+            
         }
     }
 

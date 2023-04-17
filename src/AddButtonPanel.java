@@ -35,7 +35,7 @@ public class AddButtonPanel extends JFrame
     {
         setTitle("Adding a Task");
         p.setSize(200,100);
-        p.setLayout(new GridLayout(7,1)); 
+        p.setLayout(new GridLayout(5,1)); 
         setMinimumSize(p.getSize());
         setResizable(false);
 
@@ -78,7 +78,7 @@ public class AddButtonPanel extends JFrame
         //p.add(closeButton);
 
         getContentPane().add(p);
-
+        
         pack();
 
         setVisible(true);
@@ -131,7 +131,7 @@ public class AddButtonPanel extends JFrame
                     ETF = Integer.parseInt(ETFTextField.getText());                   
                 }
                 
-                System.out.println("ETF: " +  (String) ETFTextField.getText());
+                //System.out.println("ETF: " +  getsimple ETFTextField.getText());
                 //System.out.println("ETF: " + (Integer.parseInt(ETFTextField.getText()) > 0) );
                 //nothing is printed from ETFtectfield for some reason
                 

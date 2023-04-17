@@ -9,19 +9,22 @@ public class NotificationPanel extends JFrame{
     private JPanel p = new JPanel();
     private JLabel messageLabel = new JLabel("New task created!");
 
-    public NotificationPanel() {
+    public NotificationPanel() 
+    {
+        
+
         setTitle("Enable Notification");
         setResizable(false);
         setSize(200, 100);
 
         p.add(messageLabel);
 
+        playSound("mixkit-interface-option-select-2573.wav");
+
         getContentPane().add(p);
 
         setLocationRelativeTo(null);
         setVisible(true);
-
-        playSound("mixkit-interface-option-select-2573.wav");
     }
 
     private void playSound(String soundFilePath) {
